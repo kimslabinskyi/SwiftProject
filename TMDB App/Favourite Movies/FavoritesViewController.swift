@@ -17,8 +17,15 @@ class FavoritesViewController: UIViewController{
 
     }
     
+    
+    //
+    
     @IBOutlet weak var collectionView: UICollectionView!
-        // let tableViewNames = ["Favourite Movies", "Favourite TV Shows"]
+        
+    
+    
+    
+    
     
     func loadImageUsingAlamofire(from url: URL, completion: @escaping (UIImage?) -> Void) {
         AF.request(url).responseData { response in
