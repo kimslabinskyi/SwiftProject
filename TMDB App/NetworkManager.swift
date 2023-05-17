@@ -12,6 +12,9 @@ import Alamofire
 
 class NetworkManager {
     
+    //Another test commit
+    
+    
     
     var sessionID: String? {
         willSet {
