@@ -12,8 +12,6 @@ class DetailFavouritesMovies: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-        
         
         
     }

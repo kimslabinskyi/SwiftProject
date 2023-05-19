@@ -2,7 +2,7 @@
 //  NetworkManager.swift
 //  TMDB App
 //
-//  Created by Kim on 27.04.2023 😎
+//  Created by Kim on 27.04.2023 😎🙌
 //
 
 import Foundation
