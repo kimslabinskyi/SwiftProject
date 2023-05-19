@@ -2,7 +2,7 @@
 //  NetworkManager.swift
 //  TMDB App
 //
-//  Created by KIm on 27.04.2023.
+//  Created by Kim on 27.04.2023 😎
 //
 
 import Foundation
@@ -21,7 +21,7 @@ class NetworkManager {
     var requestToken: String?
     let apiKey = "15ec7b54d43e199ced41a6e461173cee"
     var accountInfo: AccountInfo?
-    var favouriteMoviesDetailInformation: FavouriteMoviesInfo?
+        // var favouriteMoviesDetailInformation: FavouriteMoviesInfo?
     
     private init() {
         

@@ -12,5 +12,7 @@ class CollectionsViewController: UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
 
+    
+        
     }
 }

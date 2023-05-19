@@ -10,15 +10,42 @@ import Alamofire
 
 class FavoritesViewController: UIViewController{
 
+
+    
+    var countOfMovies: Int?
+    var labelOfMovies: String?
+    //static let
+
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+    
     override func viewDidLoad(){
         super.viewDidLoad()
 
         collectionView.showsHorizontalScrollIndicator = false
 
+        
+            
+        NetworkManager.shared.getFavoriteMovies { [weak self] movieResponse in
+                    guard let self = self else { return }
+                    
+                    if let movieResponse = movieResponse {
+                        self.countOfMovies = movieResponse.results.count
+                        self.labelOfMovies = movieResponse.results[0].originalTitle
+                        self.collectionView.reloadData()
+                    }
+                }
+
+        
+
+        
+        
     }
     
     
-    //
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
         
@@ -45,7 +72,7 @@ class FavoritesViewController: UIViewController{
 
 extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+        countOfMovies ?? 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -56,6 +83,9 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
         loadImageUsingAlamofire(from: url) { image in
                cell.movieImageView.image = image
            }
+        
+        let randomArray = ["First", "Second", "Third"]
+        cell.movieLabel.text = randomArray[indexPath.row]
         
         
         return cell
@@ -145,4 +175,6 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate{
     }
 }
 */
+
+
 
