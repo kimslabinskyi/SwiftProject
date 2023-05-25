@@ -8,8 +8,6 @@
 import Foundation
 import Alamofire
 
-    //1
-
 class NetworkManager {
     
     var isRestartNeeded: Bool {
