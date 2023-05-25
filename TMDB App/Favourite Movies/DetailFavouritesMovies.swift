@@ -9,11 +9,13 @@ import UIKit
 
 class DetailFavouritesMovies: UIViewController {
     
+    @IBOutlet weak var titleLabel: UILabel!
+    var detailedMovie: Movie?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+        titleLabel.text = detailedMovie?.title        
     }
 }
 

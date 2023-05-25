@@ -27,6 +27,7 @@
 		3B7E8C262A0A4D54008396D8 /* FavouriteMoviesInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7E8C252A0A4D54008396D8 /* FavouriteMoviesInfo.swift */; };
 		3B7E8C2A2A0C3611008396D8 /* DetailFavouritesMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7E8C292A0C3611008396D8 /* DetailFavouritesMovies.swift */; };
 		3B7E8C2E2A0F67BB008396D8 /* MoviesInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7E8C2D2A0F67BB008396D8 /* MoviesInfo.swift */; };
+		A560C7E42A1F86EE00B91411 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A560C7E32A1F86EE00B91411 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		3B7E8C252A0A4D54008396D8 /* FavouriteMoviesInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteMoviesInfo.swift; sourceTree = "<group>"; };
 		3B7E8C292A0C3611008396D8 /* DetailFavouritesMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFavouritesMovies.swift; sourceTree = "<group>"; };
 		3B7E8C2D2A0F67BB008396D8 /* MoviesInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesInfo.swift; sourceTree = "<group>"; };
+		A560C7E32A1F86EE00B91411 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				3B66FECC29FAD14000D26C76 /* AppDelegate.swift */,
 				3B66FECE29FAD14000D26C76 /* SceneDelegate.swift */,
 				3B66FEE029FAD1E300D26C76 /* NetworkManager.swift */,
+				A560C7E32A1F86EE00B91411 /* Constants.swift */,
 				3B66FED229FAD14000D26C76 /* Main.storyboard */,
 				3B66FED529FAD14300D26C76 /* Assets.xcassets */,
 				3B66FED729FAD14300D26C76 /* LaunchScreen.storyboard */,
@@ -234,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B66D7212A002F4A008EEA8A /* AccountInfoViewController.swift in Sources */,
+				A560C7E42A1F86EE00B91411 /* Constants.swift in Sources */,
 				3B66FEE129FAD1E300D26C76 /* NetworkManager.swift in Sources */,
 				3B66D71F2A002F02008EEA8A /* FavoritesViewController.swift in Sources */,
 				3B77BEDB2A10CC12001F4E9F /* MoviesCollectionViewCell.swift in Sources */,

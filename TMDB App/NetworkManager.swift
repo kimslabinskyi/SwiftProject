@@ -150,8 +150,7 @@ class NetworkManager {
     
     func getFavoriteMovies(_ completion: @escaping (MovieResponse?) -> ()){
         
-        let parameters: [String: String] = ["account_id": String(accountInfo!.id)]
-        
+        let parameters: [String: String] = ["account_id": String(accountInfo!.id)]        
         
         let httpString = "https://api.themoviedb.org/3/account/" + String(accountInfo!.id) + "/favorite/movies?api_key="
         let bodyString = apiKey + "&session_id=" + sessionID! + "&language=en-US&sort_by=created_at.asc&page=1"

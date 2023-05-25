@@ -154,18 +154,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Шо дивишся? кабан" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcx-ym-eqx">
-                                <rect key="frame" x="83" y="375" width="257" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Шо дивишся? кабан" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcx-ym-eqx">
+                                <rect key="frame" x="20" y="133" width="353" height="33.666666666666657"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FH6-Ib-qKt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rcx-ym-eqx" firstAttribute="leading" secondItem="FH6-Ib-qKt" secondAttribute="leading" constant="20" id="4dq-Lp-OoV"/>
+                            <constraint firstItem="rcx-ym-eqx" firstAttribute="top" secondItem="FH6-Ib-qKt" secondAttribute="top" constant="30" id="Rha-BT-e2G"/>
+                            <constraint firstItem="FH6-Ib-qKt" firstAttribute="trailing" secondItem="rcx-ym-eqx" secondAttribute="trailing" constant="20" id="mPW-VP-OmG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Y6W-cc-Y5H"/>
+                    <connections>
+                        <outlet property="titleLabel" destination="rcx-ym-eqx" id="eO9-Y2-Man"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="syD-d6-AMM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

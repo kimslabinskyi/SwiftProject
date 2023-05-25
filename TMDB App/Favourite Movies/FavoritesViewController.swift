@@ -13,6 +13,7 @@ class FavoritesViewController: UIViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     
     var dataSource: [Movie] = []
+    var selectedMovie: Movie?
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -39,6 +40,14 @@ class FavoritesViewController: UIViewController{
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == SegueId.detailMovieInfoSegue,
+        let destinationVc = segue.destination as? DetailFavouritesMovies else {
+            return
+        }
+        destinationVc.detailedMovie = selectedMovie       
+    }
 }
 
 
@@ -64,7 +73,8 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailMovieInfoSegue", sender: nil)
+        selectedMovie = dataSource[indexPath.row]
+        performSegue(withIdentifier: SegueId.detailMovieInfoSegue, sender: nil)
     }
 }
 
