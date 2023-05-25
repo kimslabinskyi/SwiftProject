@@ -19,3 +19,11 @@ struct SegueId {
     
     static let  detailMovieInfoSegue = "DetailMovieInfoSegue"
 }
+
+
+struct Defaults {
+    private init() {}
+    
+    static let savedRequestToken = "RequestTokenSaved"
+    static let savedSessionId = "SessionIdSaved"
+}

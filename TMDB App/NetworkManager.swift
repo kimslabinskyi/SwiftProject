@@ -12,29 +12,43 @@ import Alamofire
 
 class NetworkManager {
     
-    //Another test commit
+    var isRestartNeeded: Bool {
+        requestToken == nil || sessionID == nil
+    }
     
-    
-    
-    var sessionID: String? {
-        willSet {
-            print("Val: \(sessionID)")
+    private var requestToken: String? {
+        get {
+            UserDefaults.standard.value(forKey:Defaults.savedRequestToken) as? String
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Defaults.savedRequestToken)
         }
     }
-    var requestToken: String?
-    let apiKey = "15ec7b54d43e199ced41a6e461173cee"
-    var accountInfo: AccountInfo?
-        // var favouriteMoviesDetailInformation: FavouriteMoviesInfo?
-    
-    private init() {
-        
+    private var sessionID: String? {
+        get {
+            UserDefaults.standard.value(forKey:Defaults.savedSessionId) as? String
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Defaults.savedSessionId)
+        }
     }
+
+    private let apiKey = "15ec7b54d43e199ced41a6e461173cee"
+    var accountInfo: AccountInfo?
+    
+    private init() { }
     
     static let shared = NetworkManager()
     
+    func validateURLRequestWithRedirectLink(_ link: String) -> URLRequest? {
+        guard let token = requestToken else {
+            return nil
+        }
+        return URLRequest(url: URL(string: "https://www.themoviedb.org/authenticate/\(token)?redirect_to=\(link)")!)
+    }
     
     func getRequestToken(_ callback: @escaping (Bool) -> () ) {
-        //
+      
         let url = "https://api.themoviedb.org/3/authentication/token/new?api_key=15ec7b54d43e199ced41a6e461173cee"
         
         AF.request(url).responseDecodable(of: RequestTokenResponse.self) {
@@ -80,13 +94,10 @@ class NetworkManager {
     }
     
     //MARK: Creating a session_id
-    
-    
-    
-    func getSessionID(_ completion: @escaping (Bool) -> () ){
+    func getSessionID(_ completion: @escaping (Bool) -> () ){        
         
+        print("REQUEST TOKEN -> \(requestToken!)")
         
-        print("REQEST TOKEN -> \(requestToken!)")
         AF.request("https://api.themoviedb.org/3/authentication/session/new?api_key=15ec7b54d43e199ced41a6e461173cee", method: .post, parameters: ["request_token":NetworkManager.shared.requestToken!], encoding: JSONEncoding.default)
             .responseJSON { response in
                 //                self.sessionID = response.result
@@ -169,12 +180,7 @@ class NetworkManager {
                     completion(jsonMovieResponse)
                     return
                 }
-                completion(nil)
-                
-                
-                
-                
-                
+                completion(nil) 
                 
             case .failure(_):
                 print("Error with *favourite movies*")
