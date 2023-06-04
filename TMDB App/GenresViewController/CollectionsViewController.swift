@@ -13,31 +13,33 @@ class GenresViewController: UIViewController {
     let apiKey = "15ec7b54d43e199ced41a6e461173cee"
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var dataSource: [Movie] = []
-    var selectedMovie: Movie?
+    var dataSource: [TrendingMovie] = []
+    var selectedMovie: TrendingMovie?
     
     override func viewDidLoad(){
         super.viewDidLoad()
         print("333")
         collectionView.showsHorizontalScrollIndicator = false
         
-        NetworkManager.shared.getFavoriteMovies { [weak self] movieResponse in
-            guard let self = self else { return }
-            
-            if let movieResponse = movieResponse {
-                self.dataSource = movieResponse.results
-                self.collectionView.reloadData()
-            }
-        }
+//        NetworkManager.shared.getFavoriteMovies { [weak self] movieResponse in
+//            guard let self = self else { return }
+//
+//            if let movieResponse = movieResponse {
+//                self.dataSource = movieResponse.results
+//                self.collectionView.reloadData()
+//            }
+//        }
         
-        //        NetworkManager.shared.getTrendingMovies { response in
-        //            if let trendingMoviesResponse = response {
-        //                // Действия с полученным `trendingMoviesResponse`
-        //                print(trendingMoviesResponse)
-        //            } else {
-        //                // Обработка ошибки, если не удалось получить `TrendingMoviesResponse`
-        //                print("Не удалось получить данные о популярных фильмах")
-        //            }
+                NetworkManager.shared.getTrendingMovies { [weak self] movieResponse in
+                    guard let self = self else { return }
+        
+                    print("MOVIE RESOPONSE = \(movieResponse)")
+                    print("self.dataSource = \(self.dataSource)")
+                    if let movieResponse = movieResponse {
+                        //self.dataSource = movieResponse.results
+                        self.collectionView.reloadData()
+                    }
+                }
         
         
                 }
@@ -82,17 +84,6 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingCell", for: indexPath) as! TrendingMoviesCollectionViewCell
         
-//        cell.trendingImage.image = #imageLiteral(resourceName: "Screenshot 2023-05-25 at 20.32.27.png")
-//        let posterName = dataSource[indexPath.row].posterPath ?? ""
-//        if let url = URL(string: "https://www.themoviedb.org/t/p/original/\(posterName)") {
-//            loadImageUsingAlamofire(from: url) { image in
-//                cell.TrendingImage.image = image
-//            }
-//        }else {
-//            cell.TrendingImage.image = UIImage(named: "AppIcon")
-//        }
-        
-        
         let posterName = dataSource[indexPath.row].posterPath ?? ""
         if let url = URL(string: "https://www.themoviedb.org/t/p/original/\(posterName)") {
             loadImageUsingAlamofire(from: url) { image in
@@ -101,6 +92,8 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }else {
             cell.trendingImage.image = UIImage(named: "AppIcon")
         }
+        
+     
         return cell
     }
     

@@ -11,7 +11,7 @@ class DetailTrendingMovieViewController: UIViewController {
 
     
 //    var detailedTrendingMovie: TrendingMovie?
-    var detailedMovie: Movie?
+    var detailedMovie: TrendingMovie?
 
     override func viewDidLoad() {
         super.viewDidLoad()

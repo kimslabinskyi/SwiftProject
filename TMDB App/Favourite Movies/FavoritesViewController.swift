@@ -22,12 +22,18 @@ class FavoritesViewController: UIViewController{
         
         NetworkManager.shared.getFavoriteMovies { [weak self] movieResponse in
             guard let self = self else { return }
+
+            print("MOVIE RESOPONSE = \(movieResponse)")
+
             
             if let movieResponse = movieResponse {
                 self.dataSource = movieResponse.results
                 self.collectionView.reloadData()
             }
         }
+    
+        
+        
     }
     
     func loadImageUsingAlamofire(from url: URL, completion: @escaping (UIImage?) -> Void) {
