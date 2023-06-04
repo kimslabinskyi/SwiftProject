@@ -17,7 +17,9 @@ struct SegueId {
     
     private init() {}
     
-    static let  detailMovieInfoSegue = "DetailMovieInfoSegue"
+    static let  detailFavouriteMovieInfoSegue = "DetailFavouriteMovieInfoSegue"
+    
+    static let detailTrendingMovieSegue = "DetailTrendingMovieSegue"
 }
 
 

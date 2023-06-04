@@ -42,7 +42,7 @@ class FavoritesViewController: UIViewController{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == SegueId.detailMovieInfoSegue,
+        guard segue.identifier == SegueId.detailFavouriteMovieInfoSegue,
         let destinationVc = segue.destination as? DetailFavouritesMovies else {
             return
         }
@@ -74,7 +74,7 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedMovie = dataSource[indexPath.row]
-        performSegue(withIdentifier: SegueId.detailMovieInfoSegue, sender: nil)
+        performSegue(withIdentifier: SegueId.detailFavouriteMovieInfoSegue, sender: nil)
     }
 }
 

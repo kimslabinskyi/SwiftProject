@@ -30,7 +30,7 @@ class NetworkManager {
             UserDefaults.standard.set(newValue, forKey: Defaults.savedSessionId)
         }
     }
-
+    
     private let apiKey = "15ec7b54d43e199ced41a6e461173cee"
     var accountInfo: AccountInfo?
     
@@ -46,7 +46,7 @@ class NetworkManager {
     }
     
     func getRequestToken(_ callback: @escaping (Bool) -> () ) {
-      
+        
         let url = "https://api.themoviedb.org/3/authentication/token/new?api_key=15ec7b54d43e199ced41a6e461173cee"
         
         AF.request(url).responseDecodable(of: RequestTokenResponse.self) {
@@ -92,7 +92,7 @@ class NetworkManager {
     }
     
     //MARK: Creating a session_id
-    func getSessionID(_ completion: @escaping (Bool) -> () ){        
+    func getSessionID(_ completion: @escaping (Bool) -> () ){
         
         print("REQUEST TOKEN -> \(requestToken!)")
         
@@ -159,7 +159,7 @@ class NetworkManager {
     
     func getFavoriteMovies(_ completion: @escaping (MovieResponse?) -> ()){
         
-        let parameters: [String: String] = ["account_id": String(accountInfo!.id)]        
+        let parameters: [String: String] = ["account_id": String(accountInfo!.id)]
         
         let httpString = "https://api.themoviedb.org/3/account/" + String(accountInfo!.id) + "/favorite/movies?api_key="
         let bodyString = apiKey + "&session_id=" + sessionID! + "&language=en-US&sort_by=created_at.asc&page=1"
@@ -178,7 +178,7 @@ class NetworkManager {
                     completion(jsonMovieResponse)
                     return
                 }
-                completion(nil) 
+                completion(nil)
                 
             case .failure(_):
                 print("Error with *favourite movies*")
@@ -189,6 +189,38 @@ class NetworkManager {
     }
     
     
+    
+    
+    func getTrendingMovies(_ completion: @escaping (TrendingMoviesResponse?) -> ()){
+        
+        let baseUrl = "https://api.themoviedb.org/3"
+        let endpoint = "/trending/movie/week"
+        
+        AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": 1]).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                
+                print("TrendingMovies = \(value)")
+                let decoder = JSONDecoder()
+                
+                if let jsonMovieResponse = try? decoder.decode(TrendingMoviesResponse.self, from: response.data!){
+                    print("success")
+                    completion(jsonMovieResponse)
+                    return
+                    
+                }
+                completion(nil)
+                
+                
+                
+        
+            case .failure(_):
+                print("Error with *trending movies*")
+                completion(nil)
+            }
+            
+        }
+    }
     
 }
 
