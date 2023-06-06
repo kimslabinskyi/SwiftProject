@@ -15,6 +15,8 @@ class GenresViewController: UIViewController {
     
     var dataSource: [TrendingMovie] = []
     var selectedMovie: TrendingMovie?
+    private var movies: TrendingMoviesResponse?
+
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -30,21 +32,34 @@ class GenresViewController: UIViewController {
 //            }
 //        }
         
-                NetworkManager.shared.getTrendingMovies { [weak self] movieResponse in
-                    guard let self = self else { return }
+//                NetworkManager.shared.getTrendingMovies { [weak self] movieResponse in
+//                    guard let self = self else { return }
+//
+//                    print("MOVIE RESOPONSE = \(movieResponse)")
+//                    print("self.dataSource = \(self.dataSource)")
+//                    if let movieResponse = movieResponse {
+//                        self.dataSource = movieResponse.results
+//                        self.collectionView.reloadData()
+//                    }
+//                }
+        fetchTrendingMovies()
         
-                    print("MOVIE RESOPONSE = \(movieResponse)")
-                    print("self.dataSource = \(self.dataSource)")
-                    if let movieResponse = movieResponse {
-                        //self.dataSource = movieResponse.results
-                        self.collectionView.reloadData()
-                    }
                 }
         
-        
+    private func fetchTrendingMovies() {
+            NetworkManager.shared.getTrendingMovies {
+                [weak self] trendingMoviesResponse in
+                guard let self = self else { return }
+                
+
+                if let movies = trendingMoviesResponse {
+                    self.dataSource = movies.results
+                    self.collectionView.reloadData()
+                } else {
+                    print("Failed to fetch trending movies")
                 }
-        
-        
+            }
+    }
     
         
         func loadImageUsingAlamofire(from url: URL, completion: @escaping (UIImage?) -> Void) {

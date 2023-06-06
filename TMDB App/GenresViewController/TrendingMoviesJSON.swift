@@ -32,7 +32,7 @@ struct TrendingMovie: Codable {
     let voteAverage: Double?
     let voteCount: Int
     let title: String
-    let video: String
+    let video: Bool
     let releaseDate: String
 
     enum CodingKeys: String, CodingKey {
