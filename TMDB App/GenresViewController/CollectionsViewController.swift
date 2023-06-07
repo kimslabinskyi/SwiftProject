@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 
+
 class GenresViewController: UIViewController {
     
     let apiKey = "15ec7b54d43e199ced41a6e461173cee"
@@ -16,99 +17,78 @@ class GenresViewController: UIViewController {
     var dataSource: [TrendingMovie] = []
     var selectedMovie: TrendingMovie?
     private var movies: TrendingMoviesResponse?
-
+    
     
     override func viewDidLoad(){
         super.viewDidLoad()
         print("333")
         collectionView.showsHorizontalScrollIndicator = false
         
-//        NetworkManager.shared.getFavoriteMovies { [weak self] movieResponse in
-//            guard let self = self else { return }
-//
-//            if let movieResponse = movieResponse {
-//                self.dataSource = movieResponse.results
-//                self.collectionView.reloadData()
-//            }
-//        }
+        //        NetworkManager.shared.getFavoriteMovies { [weak self] movieResponse in
+        //            guard let self = self else { return }
+        //
+        //            if let movieResponse = movieResponse {
+        //                self.dataSource = movieResponse.results
+        //                self.collectionView.reloadData()
+        //            }
+        //        }
         
-//                NetworkManager.shared.getTrendingMovies { [weak self] movieResponse in
-//                    guard let self = self else { return }
-//
-//                    print("MOVIE RESOPONSE = \(movieResponse)")
-//                    print("self.dataSource = \(self.dataSource)")
-//                    if let movieResponse = movieResponse {
-//                        self.dataSource = movieResponse.results
-//                        self.collectionView.reloadData()
-//                    }
-//                }
+        //                NetworkManager.shared.getTrendingMovies { [weak self] movieResponse in
+        //                    guard let self = self else { return }
+        //
+        //                    print("MOVIE RESOPONSE = \(movieResponse)")
+        //                    print("self.dataSource = \(self.dataSource)")
+        //                    if let movieResponse = movieResponse {
+        //                        self.dataSource = movieResponse.results
+        //                        self.collectionView.reloadData()
+        //                    }
+        //                }
         fetchTrendingMovies()
         
-                }
-        
-    private func fetchTrendingMovies() {
-            NetworkManager.shared.getTrendingMovies {
-                [weak self] trendingMoviesResponse in
-                guard let self = self else { return }
-                
-
-                if let movies = trendingMoviesResponse {
-                    self.dataSource = movies.results
-                    self.collectionView.reloadData()
-                } else {
-                    print("Failed to fetch trending movies")
-                }
-            }
     }
     
-        
-        func loadImageUsingAlamofire(from url: URL, completion: @escaping (UIImage?) -> Void) {
-            AF.request(url).responseData { response in
-                if let data = response.data {
-                    let image = UIImage(data: data)
-                    completion(image)
-                } else {
-                    completion(nil)
-                }
-            }
-        }
-        
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            guard segue.identifier == SegueId.detailTrendingMovieSegue,
-                  let destinationVc = segue.destination as? DetailTrendingMovieViewController else {
-                return
-            }
-            //        destinationVc.detailedTrendingMovie = selectedMovie
-            destinationVc.detailedMovie = selectedMovie
+    private func fetchTrendingMovies() {
+        NetworkManager.shared.getTrendingMovies {
+            [weak self] trendingMoviesResponse in
+            guard let self = self else { return }            
             
+            if let movies = trendingMoviesResponse {
+                self.dataSource = movies.results
+                self.collectionView.reloadData()
+            } else {
+                print("Failed to fetch trending movies")
+            }
         }
-        
-        
-        
     }
-
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == SegueId.detailTrendingMovieSegue,
+              let destinationVc = segue.destination as? DetailTrendingMovieViewController else {
+            return
+        }
+        //        destinationVc.detailedTrendingMovie = selectedMovie
+        destinationVc.detailedMovie = selectedMovie
+    }
+}
 
 extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         dataSource.count
-
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingCell", for: indexPath) as! TrendingMoviesCollectionViewCell
         
-        let posterName = dataSource[indexPath.row].posterPath ?? ""
-        if let url = URL(string: "https://www.themoviedb.org/t/p/original/\(posterName)") {
-            loadImageUsingAlamofire(from: url) { image in
-                cell.trendingImage.image = image
-            }
-        }else {
-            cell.trendingImage.image = UIImage(named: "AppIcon")
-        }
+        let posterName = dataSource[indexPath.row].posterPath
         
-     
+        //Image need to be set when it seen by user - cache on collectionView level is working otherwise
+        cell.trendingImage.image = nil
+        
+        ImageManager.getImageForPosterName(posterName, completion: { image in
+            cell.trendingImage.image = image ?? UIImage(named: "AppIcon")
+        })
+        
         return cell
     }
     
