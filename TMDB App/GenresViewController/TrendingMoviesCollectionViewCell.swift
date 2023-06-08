@@ -10,8 +10,9 @@ import UIKit
 class TrendingMoviesCollectionViewCell: UICollectionViewCell {
     
     
+    @IBOutlet var spiner: UIActivityIndicatorView!
     @IBOutlet weak var trendingImage: UIImageView!
-    
-    
+
+       
     
 }

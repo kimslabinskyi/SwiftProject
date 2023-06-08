@@ -35,5 +35,33 @@ class ImageManager {
             //Error
             completion(nil)
         })
-    }    
+    }
+    
+    class func getImageForFavouritesName(_ posterName: String, completion: @escaping (UIImage?) -> Void) {
+
+        guard let url = URL(string: "https://www.themoviedb.org/t/p/original/\(posterName)")
+        else {
+            completion(nil)
+            return
+        }
+        let urlRequest = URLRequest(url: url)
+        
+        imageDownloader.download(urlRequest, completion: { response in
+            
+            if case .success(let image) =
+                response.result {
+                completion(image)
+                return
+            }
+            completion(nil)
+        })
+        
+        
+        
+        
+        
+        
+    }
+    
+    
 }

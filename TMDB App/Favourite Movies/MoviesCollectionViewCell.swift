@@ -12,7 +12,8 @@ import Alamofire
 class MoviesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var movieImageView: UIImageView!
-    
+    @IBOutlet var spiner: UIActivityIndicatorView!
+
     @IBOutlet weak var movieLabel: UILabel!
     
     

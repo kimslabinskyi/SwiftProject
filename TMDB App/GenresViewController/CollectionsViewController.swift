@@ -14,6 +14,9 @@ class GenresViewController: UIViewController {
     let apiKey = "15ec7b54d43e199ced41a6e461173cee"
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
+    
+    
     var dataSource: [TrendingMovie] = []
     var selectedMovie: TrendingMovie?
     private var movies: TrendingMoviesResponse?
@@ -22,27 +25,13 @@ class GenresViewController: UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         print("333")
+
         collectionView.showsHorizontalScrollIndicator = false
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        imageView.contentMode = .scaleAspectFit
+        imageView.isLoading = true
+        imageView.image = (UIImage(named: "Screenshot 2023-04-10 at 11.34.02"))
         
-        //        NetworkManager.shared.getFavoriteMovies { [weak self] movieResponse in
-        //            guard let self = self else { return }
-        //
-        //            if let movieResponse = movieResponse {
-        //                self.dataSource = movieResponse.results
-        //                self.collectionView.reloadData()
-        //            }
-        //        }
-        
-        //                NetworkManager.shared.getTrendingMovies { [weak self] movieResponse in
-        //                    guard let self = self else { return }
-        //
-        //                    print("MOVIE RESOPONSE = \(movieResponse)")
-        //                    print("self.dataSource = \(self.dataSource)")
-        //                    if let movieResponse = movieResponse {
-        //                        self.dataSource = movieResponse.results
-        //                        self.collectionView.reloadData()
-        //                    }
-        //                }
         fetchTrendingMovies()
         
     }
@@ -79,7 +68,7 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingCell", for: indexPath) as! TrendingMoviesCollectionViewCell
-        
+        cell.spiner.startAnimating()
         let posterName = dataSource[indexPath.row].posterPath
         
         //Image need to be set when it seen by user - cache on collectionView level is working otherwise
@@ -94,7 +83,7 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedMovie = dataSource[indexPath.row]
-        performSegue(withIdentifier: SegueId.detailFavouriteMovieInfoSegue, sender: nil)
+        performSegue(withIdentifier: SegueId.detailTrendingMovieSegue, sender: nil)
     }
 }
 

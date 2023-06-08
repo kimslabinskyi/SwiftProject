@@ -65,15 +65,16 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MoviesCollectionViewCell
-        
+        cell.spiner.startAnimating()
         let posterName = dataSource[indexPath.row].posterPath ?? ""
-        if let url = URL(string: "https://www.themoviedb.org/t/p/original/\(posterName)") {
-            loadImageUsingAlamofire(from: url) { image in
-                cell.movieImageView.image = image
-            }
-        }else {
-            cell.movieImageView.image = UIImage(named: "AppIcon")
-        }
+        
+        cell.movieImageView.image = nil
+
+        ImageManager.getImageForFavouritesName(posterName, completion: { image in
+            cell.movieImageView.image = image ??
+            UIImage(named: "AppIcon")
+        })
+        
         cell.movieLabel.text = dataSource[indexPath.row].title
         return cell
     }
@@ -87,8 +88,8 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
 extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = 200
-        let height = 230
+        let width = 160
+        let height = 270
         return CGSize(width: width, height: height)
     }
     
