@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B29CBF42A330A9400466E72 /* TopRatedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29CBF32A330A9400466E72 /* TopRatedCollectionViewCell.swift */; };
+		3B29CBF72A330C4C00466E72 /* TopRatedMoviesJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29CBF62A330C4C00466E72 /* TopRatedMoviesJSON.swift */; };
 		3B66D71F2A002F02008EEA8A /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66D71E2A002F02008EEA8A /* FavoritesViewController.swift */; };
 		3B66D7212A002F4A008EEA8A /* AccountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66D7202A002F4A008EEA8A /* AccountInfoViewController.swift */; };
 		3B66FECD29FAD14000D26C76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66FECC29FAD14000D26C76 /* AppDelegate.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B29CBF32A330A9400466E72 /* TopRatedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedCollectionViewCell.swift; sourceTree = "<group>"; };
+		3B29CBF62A330C4C00466E72 /* TopRatedMoviesJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesJSON.swift; sourceTree = "<group>"; };
 		3B66D71E2A002F02008EEA8A /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		3B66D7202A002F4A008EEA8A /* AccountInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoViewController.swift; sourceTree = "<group>"; };
 		3B66FEC929FAD14000D26C76 /* TMDB App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMDB App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +81,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B29CBF52A330A9B00466E72 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3BCD56A02A28C54500495460 /* TrendingMoviesCollectionViewCell.swift */,
+				3B29CBF32A330A9400466E72 /* TopRatedCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		3B29CBF82A330C5900466E72 /* Codable structures */ = {
+			isa = PBXGroup;
+			children = (
+				3BCD569C2A27D10100495460 /* TrendingMoviesJSON.swift */,
+				3B29CBF62A330C4C00466E72 /* TopRatedMoviesJSON.swift */,
+			);
+			path = "Codable structures";
+			sourceTree = "<group>";
+		};
 		3B66FEC029FAD14000D26C76 = {
 			isa = PBXGroup;
 			children = (
@@ -192,8 +214,8 @@
 			children = (
 				3B66FEE329FAD27D00D26C76 /* CollectionsViewController.swift */,
 				3BCD569E2A28C2B300495460 /* DetailTrendingMovieViewController.swift */,
-				3BCD569C2A27D10100495460 /* TrendingMoviesJSON.swift */,
-				3BCD56A02A28C54500495460 /* TrendingMoviesCollectionViewCell.swift */,
+				3B29CBF82A330C5900466E72 /* Codable structures */,
+				3B29CBF52A330A9B00466E72 /* Cells */,
 			);
 			path = GenresViewController;
 			sourceTree = "<group>";
@@ -278,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B66D7212A002F4A008EEA8A /* AccountInfoViewController.swift in Sources */,
+				3B29CBF72A330C4C00466E72 /* TopRatedMoviesJSON.swift in Sources */,
 				A560C7E42A1F86EE00B91411 /* Constants.swift in Sources */,
 				3B66FEE129FAD1E300D26C76 /* NetworkManager.swift in Sources */,
 				3B66D71F2A002F02008EEA8A /* FavoritesViewController.swift in Sources */,
@@ -289,6 +312,7 @@
 				3B66FEE429FAD27D00D26C76 /* CollectionsViewController.swift in Sources */,
 				3BCD569F2A28C2B300495460 /* DetailTrendingMovieViewController.swift in Sources */,
 				3BB4DDA72A3106F9003FACA5 /* UIImageManager.swift in Sources */,
+				3B29CBF42A330A9400466E72 /* TopRatedCollectionViewCell.swift in Sources */,
 				A560C83D2A30B8C100B91411 /* ImageManager.swift in Sources */,
 				3B66FEE629FAD28C00D26C76 /* SearchViewController.swift in Sources */,
 				3B66FED129FAD14000D26C76 /* WKWebViewController.swift in Sources */,

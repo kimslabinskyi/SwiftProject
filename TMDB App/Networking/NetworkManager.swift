@@ -200,7 +200,7 @@ class NetworkManager {
             switch response.result {
             case .success(let value):
                 
-                print("TrendingMovies = \(value)")
+               // print("TrendingMovies = \(value)")
                 let decoder = JSONDecoder()
                 
                 if let jsonMovieResponse = try? decoder.decode(TrendingMoviesResponse.self, from: response.data!){
@@ -220,6 +220,40 @@ class NetworkManager {
             }
             
         }
+    }
+    
+    
+    func getTopRatedMovies(_ completion: @escaping (TopRatedMoviesResponse?) -> ()){
+        let baseUrl = "https://api.themoviedb.org/3"
+        let endpoint = "/movie/top_rated"
+        completion(nil)
+        
+        AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": 1]).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                
+                print("TopRatedMovies = \(value)")
+                let decoder = JSONDecoder()
+                
+                if let jsonMovieResponse = try? decoder.decode(TopRatedMoviesResponse.self, from: response.data!){
+                    print("success")
+                    completion(jsonMovieResponse)
+                    return
+                    
+                }
+                completion(nil)
+                
+                
+                
+        
+            case .failure(_):
+                print("Error with *trending movies*")
+                completion(nil)
+            }
+            
+        }
+
+        
     }
     
 }
