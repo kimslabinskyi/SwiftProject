@@ -195,31 +195,30 @@ class NetworkManager {
         
         let baseUrl = "https://api.themoviedb.org/3"
         let endpoint = "/trending/movie/week"
-        
-        AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": 1]).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                
-               // print("TrendingMovies = \(value)")
-                let decoder = JSONDecoder()
-                
-                if let jsonMovieResponse = try? decoder.decode(TrendingMoviesResponse.self, from: response.data!){
-                    print("success")
-                    completion(jsonMovieResponse)
-                    return
+            AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": 1]).responseJSON { response in
+                switch response.result {
+                case .success(let value):
                     
+                    // print("TrendingMovies = \(value)")
+                    let decoder = JSONDecoder()
+                    
+                    if let jsonMovieResponse = try? decoder.decode(TrendingMoviesResponse.self, from: response.data!){
+                        print("success")
+                        completion(jsonMovieResponse)
+                        return
+                        
+                    }
+                    completion(nil)
+                    
+                    
+                    
+                    
+                case .failure(_):
+                    print("Error with *trending movies*")
+                    completion(nil)
                 }
-                completion(nil)
                 
-                
-                
-        
-            case .failure(_):
-                print("Error with *trending movies*")
-                completion(nil)
             }
-            
-        }
     }
     
     
@@ -255,6 +254,112 @@ class NetworkManager {
 
         
     }
+    
+    func getUpcomingMovies(_ completion: @escaping (UpcomingMoviesResponse?) -> ()){
+        let baseUrl = "https://api.themoviedb.org/3"
+        let endpoint = "/movie/upcoming"
+        completion(nil)
+        
+        AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": 1]).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                
+                print("Upcoming Movies = \(value)")
+                let decoder = JSONDecoder()
+                
+                if let jsonMovieResponse = try? decoder.decode(UpcomingMoviesResponse.self, from: response.data!){
+                    print("success")
+                    completion(jsonMovieResponse)
+                    return
+                    
+                }
+                completion(nil)
+                
+                
+                
+        
+            case .failure(_):
+                print("Error with *upcoming movies*")
+                completion(nil)
+            }
+            
+        }
+        
+        
+    }
+    
+    
+    func getDailyTrendingMovies(_ completion: @escaping (DailyTrendingMoviesResponse?) -> ()){
+        let baseUrl = "https://api.themoviedb.org/3"
+        let endpoint = "/movie/upcoming"
+        completion(nil)
+        
+        AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": 1]).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                
+                print("Upcoming Movies = \(value)")
+                let decoder = JSONDecoder()
+                
+                if let jsonMovieResponse = try? decoder.decode(DailyTrendingMoviesResponse.self, from: response.data!){
+                    print("success")
+                    completion(jsonMovieResponse)
+                    return
+                    
+                }
+                completion(nil)
+                
+                
+                
+        
+            case .failure(_):
+                print("Error with *daily movies*")
+                completion(nil)
+            }
+            
+        }
+        
+        
+    }
+    
+    
+//    func getDailyTrendingMovies(completion: @escaping ([DailyTrendingMoviesResponse]?) -> Void){
+//        let baseUrl = "https://api.themoviedb.org/3"
+//           let endpoint = "/trending/movie/day"
+//
+//           let dateFormatter = DateFormatter()
+//           dateFormatter.dateFormat = "yyyy-MM-dd"
+//           let currentDate = dateFormatter.string(from: Date())
+//
+//           AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "date": currentDate, "page": 1]).responseJSON { response in
+//               switch response.result {
+//               case .success(let value):
+//
+//                   let decoder = JSONDecoder()
+//
+//
+////                   if let data = response.data, let movieResponse = try? decoder.decode(DailyTrendingMoviesResponse.self, from: data) {
+////                       let movies = movieResponse.results
+////                       completion(movies)
+////
+////                   } else {
+////                       completion(nil)
+////                   }
+//                   if let jsonMovieResponse = try? decoder.decode(DailyTrendingMoviesResponse.self, from: response.data!){
+//                       print("success")
+//                       completion(jsonMovieResponse)
+//                       return
+//
+//                   }
+//                   completion(nil)
+//
+//               case .failure(let error):
+//                   print("Error: \(error)")
+//                   completion(nil)
+//               }
+//           }
+//    }
+    
     
 }
 

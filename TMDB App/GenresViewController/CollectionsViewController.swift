@@ -12,48 +12,103 @@ import Alamofire
 class GenresViewController: UIViewController {
     
     let apiKey = "15ec7b54d43e199ced41a6e461173cee"
-    @IBOutlet weak var trendingCollectionView: UICollectionView!
+    @IBOutlet weak var dualCollectionView: UICollectionView!
     
+        //@IBOutlet weak var trendingCollectionView: UICollectionView!
+    
+    //@IBOutlet weak var dailyTrendingCollectionView: UICollectionView!
+
     
     @IBOutlet weak var topRatedCollectionView: UICollectionView!
+    
+    @IBOutlet weak var upcomingCollectionView: UICollectionView!
+    
+    @IBOutlet weak var segmentedControll: UISegmentedControl!
     
     
     var dataSourceTrendingMovies: [TrendingMovie] = []
     var dataSourceTopRatedMovies: [TopRatedMovie] = []
+    var dataSourceUpcomingMovies: [UpcomingMovie] = []
+    var dataSourceDailyTrendingMovies: [DailyTrendingMovie] = []
+    
     var selectedTrendingMovie: TrendingMovie?
     var selectedTopRatedMovie: TopRatedMovie?
-    private var movies: TrendingMoviesResponse?
+    var selectedUpcomingMovie: UpcomingMovie?
+    var selectedDailyTrendingMovie: DailyTrendingMovie?
+   // private var movies: TrendingMoviesResponse?
+    
+    let trendingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let dailyTrendingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    var tempCollectionView: UICollectionView?
+    
+    @IBAction func segmentControllAction(_ sender: UISegmentedControl){
+        switch segmentedControll.selectedSegmentIndex{
+        case 0: print("SEGMENT = 0")
+//            dualCollectionView = trendingCollectionView
+//            dualCollectionView.reloadData()
+            tempCollectionView = trendingCollectionView
+                    trendingCollectionView.isHidden = false
+                    dailyTrendingCollectionView.isHidden = true
+            tempCollectionView?.reloadData()
+            dualCollectionView.reloadData()
+
+        case 1:
+            print("SEGMENT = 1")
+//            dualCollectionView = dailyTrendingCollectionView
+//            dualCollectionView.reloadData()
+            tempCollectionView = dailyTrendingCollectionView
+                   trendingCollectionView.isHidden = true
+                   dailyTrendingCollectionView.isHidden = false
+            tempCollectionView?.reloadData()
+            dualCollectionView.reloadData()
+        default:
+            print("Error with UISegmentedControl")
+        }
+    }
+    
     
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        print("333")
         
-        trendingCollectionView.showsHorizontalScrollIndicator = false
+    
+
+        // Регистрация классов ячеек для trendingCollectionView и dailyTrendingCollectionView
+        trendingCollectionView.register(TrendingMoviesCollectionViewCell.self, forCellWithReuseIdentifier: "TrendingCell")
+        dailyTrendingCollectionView.register(DayTrendingCollectionViewCell.self, forCellWithReuseIdentifier: "DayTrendingCell")
+
+        
+        
+        dualCollectionView.showsHorizontalScrollIndicator = false
+        topRatedCollectionView.showsHorizontalScrollIndicator = false
+        upcomingCollectionView.showsHorizontalScrollIndicator = false
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imageView.contentMode = .scaleAspectFit
         imageView.isLoading = true
-        imageView.image = (UIImage(named: "Screenshot 2023-04-10 at 11.34.02"))
+        imageView.image = (UIImage(named: "AppIcon"))
         
         fetchTrendingMovies()
         fetchTopRatedMovies()
-        
-        
+        fetchUpcomingMovies()
+        fetchDailyTrendingMovies()
     }
     
     private func fetchTrendingMovies() {
         NetworkManager.shared.getTrendingMovies {
+            
             [weak self] trendingMoviesResponse in
             guard let self = self else { return }
             
             if let movies = trendingMoviesResponse {
                 self.dataSourceTrendingMovies = movies.results
-                self.trendingCollectionView.reloadData()
+                self.dualCollectionView.reloadData()
             } else {
                 print("Failed to fetch trending movies")
             }
         }
     }
+    
+    
     
     private func fetchTopRatedMovies() {
         NetworkManager.shared.getTopRatedMovies {
@@ -64,7 +119,35 @@ class GenresViewController: UIViewController {
                 self.dataSourceTopRatedMovies = movies.results
                 self.topRatedCollectionView.reloadData()
             } else {
-                print("Failed to fetch trending movies")
+                print("Failed to fetch top rated movies")
+            }
+        }
+    }
+    
+    private func fetchUpcomingMovies() {
+        NetworkManager.shared.getUpcomingMovies {
+            [weak self] UpcomingMoviesResponse in
+            guard let self = self else { return }
+            
+            if let movies = UpcomingMoviesResponse {
+                self.dataSourceUpcomingMovies = movies.results
+                self.upcomingCollectionView.reloadData()
+            } else {
+                print("Failed to fetch upcoming movies")
+            }
+        }
+    }
+    
+    func fetchDailyTrendingMovies(){
+        NetworkManager.shared.getDailyTrendingMovies{
+            [weak self] DailyTrendingMoviesResponse in
+            guard let self = self else { return }
+            
+            if let movies = DailyTrendingMoviesResponse {
+                self.dataSourceDailyTrendingMovies = movies.results
+                self.dailyTrendingCollectionView.reloadData()
+            } else {
+                print("Failed to fetch daily trending movies")
             }
         }
     }
@@ -77,6 +160,7 @@ class GenresViewController: UIViewController {
         //        destinationVc.detailedTrendingMovie = selectedMovie
         destinationVc.detailedMovie = selectedTrendingMovie
     }
+    
 }
 
 extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -86,11 +170,21 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if collectionView == trendingCollectionView {
+        if collectionView == dualCollectionView {
+            
+            if dualCollectionView == trendingCollectionView{
+                print("TRENDING")
+            } else if dualCollectionView == dailyTrendingCollectionView{
+                print("DAILY")
+            }
             return dataSourceTrendingMovies.count
+            
+            
         } else if collectionView == topRatedCollectionView {
             return dataSourceTopRatedMovies.count
             
+        } else if collectionView == upcomingCollectionView {
+            return dataSourceUpcomingMovies.count
         }
         return 0
     }
@@ -99,17 +193,20 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    if collectionView == trendingCollectionView{
+    if collectionView == dualCollectionView{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingCell", for: indexPath) as! TrendingMoviesCollectionViewCell
         cell.spiner.startAnimating()
         let posterName = dataSourceTrendingMovies[indexPath.row].posterPath
         
-        //Image need to be set when it seen by user - cache on collectionView level is working otherwise
         cell.trendingImage.image = nil
         
         ImageManager.getImageForPosterName(posterName, completion: { image in
             cell.trendingImage.image = image ?? UIImage(named: "AppIcon")
         })
+        
+        func makePrint(){
+            print("Success")
+        }
         
         return cell
         
@@ -123,6 +220,25 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
         
         ImageManager.getImageForPosterName(posterName, completion: { image in
             cell.topRatedImage.image = image ?? UIImage(named: "AppIcon")
+        })
+        
+        return cell
+        
+    } else if collectionView == dailyTrendingCollectionView {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DailyTrendingCell", for: indexPath) as! DayTrendingCollectionViewCell
+        // Конфигурация ячейки DayTrendingCollectionViewCell
+        print("code: 4")
+        return cell
+    } else if collectionView == upcomingCollectionView{
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingCell", for: indexPath) as! UpcomingMoviesCollectionViewCell
+        cell.spiner.startAnimating()
+        let posterName = dataSourceUpcomingMovies[indexPath.row].posterPath
+        
+        //Image need to be set when it seen by user - cache on collectionView level is working otherwise
+        cell.upcomingImage.image = nil
+        
+        ImageManager.getImageForPosterName(posterName, completion: { image in
+            cell.upcomingImage.image = image ?? UIImage(named: "AppIcon")
         })
         
         return cell
@@ -142,7 +258,10 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
         } else if collectionView == topRatedCollectionView{
             selectedTopRatedMovie = dataSourceTopRatedMovies[indexPath.row]
                 performSegue(withIdentifier: SegueId.detailTrendingMovieSegue, sender: nil)
-            }
+        } else if collectionView == upcomingCollectionView{
+            selectedUpcomingMovie = dataSourceUpcomingMovies[indexPath.row]
+            performSegue(withIdentifier: SegueId.detailTrendingMovieSegue, sender: nil)
+        }
     }
 }
 
