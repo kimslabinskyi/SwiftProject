@@ -8,15 +8,13 @@
 import UIKit
 import Alamofire
 
+protocol GenresViewControllerDelegate: AnyObject {
+    func didSelectMovie(_ movie: String)
+}
 
-class GenresViewController: UIViewController {
+class GenresViewController: UIViewController, GenresViewControllerDelegate {
     
-    let apiKey = "15ec7b54d43e199ced41a6e461173cee"
     @IBOutlet weak var dualCollectionView: UICollectionView!
-    
-        //@IBOutlet weak var trendingCollectionView: UICollectionView!
-    
-    //@IBOutlet weak var dailyTrendingCollectionView: UICollectionView!
 
     
     @IBOutlet weak var topRatedCollectionView: UICollectionView!
@@ -25,6 +23,9 @@ class GenresViewController: UIViewController {
     
     @IBOutlet weak var segmentedControll: UISegmentedControl!
     
+    let apiKey = "15ec7b54d43e199ced41a6e461173cee"
+    var mainDetailMovie: String?
+    weak var delegate: GenresViewControllerDelegate?
     
     var dataSourceTrendingMovies: [TrendingMovie] = []
     var dataSourceTopRatedMovies: [TopRatedMovie] = []
@@ -35,11 +36,14 @@ class GenresViewController: UIViewController {
     var selectedTopRatedMovie: TopRatedMovie?
     var selectedUpcomingMovie: UpcomingMovie?
     var selectedDailyTrendingMovie: DailyTrendingMovie?
-   // private var movies: TrendingMoviesResponse?
     
     let trendingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let dailyTrendingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     var tempCollectionView: UICollectionView?
+    
+    
+    
+    
     
     @IBAction func segmentControllAction(_ sender: UISegmentedControl){
         switch segmentedControll.selectedSegmentIndex{
@@ -71,7 +75,8 @@ class GenresViewController: UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         
-    
+        delegate?.didSelectMovie("trendingMovie")
+
 
         // Регистрация классов ячеек для trendingCollectionView и dailyTrendingCollectionView
         trendingCollectionView.register(TrendingMoviesCollectionViewCell.self, forCellWithReuseIdentifier: "TrendingCell")
@@ -153,20 +158,42 @@ class GenresViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == SegueId.detailTrendingMovieSegue,
-              let destinationVc = segue.destination as? DetailTrendingMovieViewController else {
-            return
+
+        if segue.identifier == "DetailTrendingMovieSegue" {
+            if let destinationVC = segue.destination as? DetailTrendingMovieViewController {
+
+                destinationVC.detailedMovie = selectedTrendingMovie
+                            destinationVC.someProperty = "Some value"
+                }
+
+        } else {
+            print("Identifier is not correct!")
         }
-        //        destinationVc.detailedTrendingMovie = selectedMovie
-        destinationVc.detailedMovie = selectedTrendingMovie
+
+
+//        guard segue.identifier == SegueId.detailTrendingMovieSegue,
+//              let destinationVc = segue.destination as? DetailTrendingMovieViewController else {
+//            return
+//        }
+//        //        destinationVc.detailedTrendingMovie = selectedMovie
+//        destinationVc.detailedMovie = selectedTrendingMovie
     }
+    
+    func didSelectMovie(_ movie: String) {
+        delegate?.didSelectMovie(movie)
+    }
+    
+//    func navigateToDetailViewController() {
+//        let detailVC = DetailTrendingMovieViewController()
+//        detailVC.delegate = self
+//        navigationController?.pushViewController(detailVC, animated: true)
+//    }
+
+    
     
 }
 
 extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSource{
-    
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -189,7 +216,6 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return 0
     }
     
-
 
 func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
@@ -252,15 +278,21 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if collectionView == trendingCollectionView{
+        if collectionView == dualCollectionView{
+            delegate?.didSelectMovie("trendingMovie")
+            mainDetailMovie = "trendingMovie"
+            
             selectedTrendingMovie = dataSourceTrendingMovies[indexPath.row]
-            performSegue(withIdentifier: SegueId.detailTrendingMovieSegue, sender: nil)
+            //navigateToDetailViewController()
+                // performSegue(withIdentifier: SegueId.detailTrendingMovieSegue, sender: nil)
         } else if collectionView == topRatedCollectionView{
+            mainDetailMovie = "topRatedMovie"
             selectedTopRatedMovie = dataSourceTopRatedMovies[indexPath.row]
-                performSegue(withIdentifier: SegueId.detailTrendingMovieSegue, sender: nil)
+                performSegue(withIdentifier: SegueId.detailTopRatedMovieSegue, sender: nil)
         } else if collectionView == upcomingCollectionView{
+            mainDetailMovie = "upcomingMovie"
             selectedUpcomingMovie = dataSourceUpcomingMovies[indexPath.row]
-            performSegue(withIdentifier: SegueId.detailTrendingMovieSegue, sender: nil)
+            performSegue(withIdentifier: SegueId.detailUpcomingMovieSegue, sender: nil)
         }
     }
 }
