@@ -166,8 +166,19 @@ class GenresViewController: UIViewController, GenresViewControllerDelegate {
                             destinationVC.someProperty = "Some value"
                 }
 
-        } else {
-            print("Identifier is not correct!")
+        } else if segue.identifier == "DetailTopRatedMovieSegue"{
+            if let destinationVC = segue.destination as? DetailTrendingMovieViewController {
+
+                destinationVC.detailedMovie = selectedTrendingMovie
+                destinationVC.someProperty = "TopRated"
+                }
+            
+        } else if segue.identifier == "DetailUpcomingMovieSegue" {
+            if let destinationVC = segue.destination as? DetailTrendingMovieViewController {
+                
+                destinationVC.detailedMovie = selectedTrendingMovie
+                destinationVC.someProperty = "Upcoming"
+            }
         }
 
 
@@ -284,7 +295,7 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
             
             selectedTrendingMovie = dataSourceTrendingMovies[indexPath.row]
             //navigateToDetailViewController()
-                // performSegue(withIdentifier: SegueId.detailTrendingMovieSegue, sender: nil)
+                 performSegue(withIdentifier: SegueId.detailTrendingMovieSegue, sender: nil)
         } else if collectionView == topRatedCollectionView{
             mainDetailMovie = "topRatedMovie"
             selectedTopRatedMovie = dataSourceTopRatedMovies[indexPath.row]

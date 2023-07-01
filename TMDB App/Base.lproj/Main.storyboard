@@ -714,7 +714,6 @@
                                                         <connections>
                                                             <outlet property="spiner" destination="pwk-au-gZa" id="5Yh-eL-hWX"/>
                                                             <outlet property="trendingImage" destination="NbV-FE-7zE" id="Ic9-2c-9nf"/>
-                                                            <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailTrendingMovieSegue" id="pCi-jt-MAR"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DailyTrendingCell" id="O3R-tZ-a1b" customClass="TrendingMoviesCollectionViewCell" customModule="TMDB_App" customModuleProvider="target">
@@ -780,7 +779,6 @@
                                                         <connections>
                                                             <outlet property="spiner" destination="ecr-aa-6DH" id="OT8-k4-yH1"/>
                                                             <outlet property="topRatedImage" destination="mjD-79-HNg" id="tJW-nq-Frp"/>
-                                                            <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailTopRatedMovieSegue" id="BAg-PN-S96"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>
@@ -909,6 +907,9 @@
                         <outlet property="segmentedControll" destination="Z0M-Jd-c4B" id="CXp-Np-I0f"/>
                         <outlet property="topRatedCollectionView" destination="TLr-rY-hOT" id="wHn-U2-XeB"/>
                         <outlet property="upcomingCollectionView" destination="TCD-qM-Obn" id="80M-0U-GoP"/>
+                        <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailTrendingMovieSegue" id="laH-fJ-N41"/>
+                        <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailTopRatedMovieSegue" id="3ax-3c-kOt"/>
+                        <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailUpcomingMovieSegue" id="Bce-3a-RUY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVC-9D-JyO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -917,7 +918,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BAg-PN-S96"/>
+        <segue reference="Bce-3a-RUY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gearshape" catalog="system" width="128" height="123"/>
