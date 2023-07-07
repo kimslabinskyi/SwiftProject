@@ -8,6 +8,11 @@
 import UIKit
 import Alamofire
 
+protocol DetailGenresMovie {
+    var showTitle: String { get }
+    var showOverview: String { get }
+}
+
 class DetailGenresViewController: UIViewController {
     
     var delegate: String?
