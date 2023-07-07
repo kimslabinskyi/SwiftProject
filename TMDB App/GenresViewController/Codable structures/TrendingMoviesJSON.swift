@@ -46,8 +46,16 @@ struct TrendingMovie: Codable {
         , voteCount = "vote_count"
         , releaseDate = "release_date"
         , video, id, adult, popularity, title, overview
+    }
+}
 
-
+extension TrendingMovie: DetailGenresMovie {
+    
+    var showOverview: String {
+        overview
+    }
+    var showTitle: String {
+        title
     }
 }
 
