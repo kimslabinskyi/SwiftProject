@@ -167,7 +167,7 @@ class GenresViewController: UIViewController {
         } else if segue.identifier == "DetailTopRatedMovieSegue"{
             if let destinationVC = segue.destination as? DetailGenresViewController {
 
-                destinationVC.detailedTrendingMovie = selectedTrendingMovie
+                destinationVC.detailedTopRatedMovie = selectedTopRatedMovie
                 destinationVC.delegate = "TopRated"
                 }
             

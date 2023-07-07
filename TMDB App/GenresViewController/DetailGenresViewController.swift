@@ -107,7 +107,6 @@ class DetailGenresViewController: UIViewController {
         
     }
     
-    
     func loadImageUsingAlamofire(from url: URL, completion: @escaping (UIImage?) -> Void) {
         AF.request(url).responseData { response in
             if let data = response.data {
