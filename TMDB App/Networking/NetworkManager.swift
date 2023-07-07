@@ -246,7 +246,7 @@ class NetworkManager {
                 
         
             case .failure(_):
-                print("Error with *trending movies*")
+                print("Error with *top rated movies*")
                 completion(nil)
             }
             

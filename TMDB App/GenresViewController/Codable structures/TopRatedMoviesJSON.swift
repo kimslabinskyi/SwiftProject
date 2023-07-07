@@ -10,10 +10,12 @@ import UIKit
 
 struct TopRatedMoviesResponse: Codable {
     let page: Int
+    let totalPages: Int
+    let totalResults: Int
     let results: [TopRatedMovie]
     
     private enum CodingKeys: String, CodingKey {
-        case page, results
+        case page, totalPages = "total_pages", totalResults = "total_results", results
     }
 }
 

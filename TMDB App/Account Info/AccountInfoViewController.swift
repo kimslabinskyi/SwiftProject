@@ -15,7 +15,7 @@ class AccountInfoViewController: UIViewController{
     //MARK: Variables
   //  var userName: String?
   //  var sessionID: String?
-    var tableViewNames = ["Movie Watch List", "TV Shows Watchlist", "Rated TV Movies", "Rated TV Shows", "Rated TV Episodes"]
+    var tableViewNames = ["Account info", "Movie Watch List", "TV Shows Watchlist", "Rated TV Movies", "Rated TV Shows", "Rated TV Episodes"]
     
     //MARK: UI
     

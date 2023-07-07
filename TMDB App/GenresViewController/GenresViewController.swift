@@ -8,11 +8,8 @@
 import UIKit
 import Alamofire
 
-protocol GenresViewControllerDelegate: AnyObject {
-    func didSelectMovie(_ movie: String)
-}
 
-class GenresViewController: UIViewController, GenresViewControllerDelegate {
+class GenresViewController: UIViewController {
     
     @IBOutlet weak var dualCollectionView: UICollectionView!
 
@@ -25,7 +22,6 @@ class GenresViewController: UIViewController, GenresViewControllerDelegate {
     
     let apiKey = "15ec7b54d43e199ced41a6e461173cee"
     var mainDetailMovie: String?
-    weak var delegate: GenresViewControllerDelegate?
     
     var dataSourceTrendingMovies: [TrendingMovie] = []
     var dataSourceTopRatedMovies: [TopRatedMovie] = []
@@ -75,7 +71,6 @@ class GenresViewController: UIViewController, GenresViewControllerDelegate {
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        delegate?.didSelectMovie("trendingMovie")
 
 
         // Регистрация классов ячеек для trendingCollectionView и dailyTrendingCollectionView
@@ -97,6 +92,9 @@ class GenresViewController: UIViewController, GenresViewControllerDelegate {
         fetchUpcomingMovies()
         fetchDailyTrendingMovies()
     }
+    
+    
+    //MARK: Fetch Movies
     
     private func fetchTrendingMovies() {
         NetworkManager.shared.getTrendingMovies {
@@ -160,24 +158,24 @@ class GenresViewController: UIViewController, GenresViewControllerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "DetailTrendingMovieSegue" {
-            if let destinationVC = segue.destination as? DetailTrendingMovieViewController {
+            if let destinationVC = segue.destination as? DetailGenresViewController {
 
-                destinationVC.detailedMovie = selectedTrendingMovie
-                            destinationVC.someProperty = "Some value"
+                destinationVC.detailedTrendingMovie = selectedTrendingMovie
+                            destinationVC.delegate = "Trending"
                 }
 
         } else if segue.identifier == "DetailTopRatedMovieSegue"{
-            if let destinationVC = segue.destination as? DetailTrendingMovieViewController {
+            if let destinationVC = segue.destination as? DetailGenresViewController {
 
-                destinationVC.detailedMovie = selectedTrendingMovie
-                destinationVC.someProperty = "TopRated"
+                destinationVC.detailedTrendingMovie = selectedTrendingMovie
+                destinationVC.delegate = "TopRated"
                 }
             
         } else if segue.identifier == "DetailUpcomingMovieSegue" {
-            if let destinationVC = segue.destination as? DetailTrendingMovieViewController {
+            if let destinationVC = segue.destination as? DetailGenresViewController {
                 
-                destinationVC.detailedMovie = selectedTrendingMovie
-                destinationVC.someProperty = "Upcoming"
+                destinationVC.detailedTrendingMovie = selectedTrendingMovie
+                destinationVC.delegate = "Upcoming"
             }
         }
 
@@ -190,15 +188,8 @@ class GenresViewController: UIViewController, GenresViewControllerDelegate {
 //        destinationVc.detailedMovie = selectedTrendingMovie
     }
     
-    func didSelectMovie(_ movie: String) {
-        delegate?.didSelectMovie(movie)
-    }
     
-//    func navigateToDetailViewController() {
-//        let detailVC = DetailTrendingMovieViewController()
-//        detailVC.delegate = self
-//        navigationController?.pushViewController(detailVC, animated: true)
-//    }
+
 
     
     
@@ -290,7 +281,6 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == dualCollectionView{
-            delegate?.didSelectMovie("trendingMovie")
             mainDetailMovie = "trendingMovie"
             
             selectedTrendingMovie = dataSourceTrendingMovies[indexPath.row]
