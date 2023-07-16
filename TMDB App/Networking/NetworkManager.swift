@@ -311,13 +311,42 @@ class NetworkManager {
                 
                 
                 
-        
+                
             case .failure(_):
                 print("Error with *daily movies*")
                 completion(nil)
             }
             
         }
+    }
+        
+        func markAsFavourite(movieId: Int){
+            print("Session_id = \(sessionID!)")
+            print("accountInfo?.id = \(accountInfo!.id)")
+            print("apiKey = \(apiKey)")
+            
+           
+            let url = "https://api.themoviedb.org/3/account/\(accountInfo!.id)/favorite"
+            let parameters: Parameters = [
+                    "media_type": "movie",
+                    "media_id": movieId,
+                    "favorite": true
+                ]
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(String(describing: sessionID))",
+                "api_key": apiKey
+                ]
+            AF.request(url, method: .post, parameters: parameters, headers: headers)
+                   .validate()
+                   .responseJSON { response in
+                       switch response.result {
+                       case .success:
+                           print("Movie marked as favorite successfully!")
+                       case .failure(let error):
+                           print("Failed to mark movie as favorite: \(error)")
+                       }
+                   }
+        
         
         
     }

@@ -160,22 +160,22 @@ class GenresViewController: UIViewController {
         if segue.identifier == "DetailTrendingMovieSegue" {
             if let destinationVC = segue.destination as? DetailGenresViewController {
 
-                destinationVC.detailedTrendingMovie = selectedTrendingMovie
-                            destinationVC.delegate = "Trending"
+                destinationVC.detailedMovie = selectedTrendingMovie
+                            
                 }
 
         } else if segue.identifier == "DetailTopRatedMovieSegue"{
             if let destinationVC = segue.destination as? DetailGenresViewController {
 
-                destinationVC.detailedTopRatedMovie = selectedTopRatedMovie
-                destinationVC.delegate = "TopRated"
+                destinationVC.detailedMovie = selectedTopRatedMovie
+                
                 }
             
         } else if segue.identifier == "DetailUpcomingMovieSegue" {
             if let destinationVC = segue.destination as? DetailGenresViewController {
                 
-                destinationVC.detailedTrendingMovie = selectedTrendingMovie
-                destinationVC.delegate = "Upcoming"
+                // destinationVC.detailedTrendingMovie = selectedTrendingMovie
+                destinationVC.detailedMovie = selectedUpcomingMovie
             }
         }
 
@@ -227,6 +227,8 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
         let posterName = dataSourceTrendingMovies[indexPath.row].posterPath
         
         cell.trendingImage.image = nil
+        cell.trendingLabel.text = dataSourceTrendingMovies[indexPath.row].originalTitle
+        print("dataSourceTrendingMovies = \(dataSourceTrendingMovies[indexPath.row].title)")
         
         ImageManager.getImageForPosterName(posterName, completion: { image in
             cell.trendingImage.image = image ?? UIImage(named: "AppIcon")
@@ -245,6 +247,7 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
         
         //Image need to be set when it seen by user - cache on collectionView level is working otherwise
         cell.topRatedImage.image = nil
+        cell.topRatedLabel.text = dataSourceTopRatedMovies[indexPath.row].title
         
         ImageManager.getImageForPosterName(posterName, completion: { image in
             cell.topRatedImage.image = image ?? UIImage(named: "AppIcon")
@@ -264,6 +267,7 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
         
         //Image need to be set when it seen by user - cache on collectionView level is working otherwise
         cell.upcomingImage.image = nil
+        cell.upcomingLabel.text = dataSourceUpcomingMovies[indexPath.row].title
         
         ImageManager.getImageForPosterName(posterName, completion: { image in
             cell.upcomingImage.image = image ?? UIImage(named: "AppIcon")
@@ -302,7 +306,7 @@ extension GenresViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = 160
-        let height = 260
+        let height = 315
         return CGSize(width: width, height: height)
     }
     

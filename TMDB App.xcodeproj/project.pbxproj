@@ -32,6 +32,7 @@
 		3B7E8C2E2A0F67BB008396D8 /* MoviesInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7E8C2D2A0F67BB008396D8 /* MoviesInfo.swift */; };
 		3BB31E492A38F31D0071D4EF /* DayTrendingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB31E482A38F31D0071D4EF /* DayTrendingCollectionViewCell.swift */; };
 		3BB31E4B2A3CEFAC0071D4EF /* DailyTrendingMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB31E4A2A3CEFAC0071D4EF /* DailyTrendingMoviesResponse.swift */; };
+		3BB31E4D2A59AD6F0071D4EF /* imageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB31E4C2A59AD6E0071D4EF /* imageLoader.swift */; };
 		3BB4DDA72A3106F9003FACA5 /* UIImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB4DDA62A3106F9003FACA5 /* UIImageManager.swift */; };
 		3BCD569D2A27D10100495460 /* TrendingMoviesJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD569C2A27D10100495460 /* TrendingMoviesJSON.swift */; };
 		3BCD569F2A28C2B300495460 /* DetailGenresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD569E2A28C2B300495460 /* DetailGenresViewController.swift */; };
@@ -68,6 +69,7 @@
 		3B7E8C2D2A0F67BB008396D8 /* MoviesInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesInfo.swift; sourceTree = "<group>"; };
 		3BB31E482A38F31D0071D4EF /* DayTrendingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTrendingCollectionViewCell.swift; sourceTree = "<group>"; };
 		3BB31E4A2A3CEFAC0071D4EF /* DailyTrendingMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTrendingMoviesResponse.swift; sourceTree = "<group>"; };
+		3BB31E4C2A59AD6E0071D4EF /* imageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageLoader.swift; sourceTree = "<group>"; };
 		3BB4DDA62A3106F9003FACA5 /* UIImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageManager.swift; sourceTree = "<group>"; };
 		3BCD569C2A27D10100495460 /* TrendingMoviesJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMoviesJSON.swift; sourceTree = "<group>"; };
 		3BCD569E2A28C2B300495460 /* DetailGenresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGenresViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				3B66FEED29FAD3DC00D26C76 /* JSON */,
 				3BBC3A9D2A079F7900FB0111 /* ActivityController */,
 				3BB4DDA82A310708003FACA5 /* UIImageManager */,
+				3BB31E4E2A59AD750071D4EF /* imageLoader */,
 			);
 			path = "TMDB App";
 			sourceTree = "<group>";
@@ -193,6 +196,14 @@
 				3B74BE002A051E0500D6561A /* AccountInfo.swift */,
 			);
 			path = "Account Info";
+			sourceTree = "<group>";
+		};
+		3BB31E4E2A59AD750071D4EF /* imageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				3BB31E4C2A59AD6E0071D4EF /* imageLoader.swift */,
+			);
+			path = imageLoader;
 			sourceTree = "<group>";
 		};
 		3BB4DDA52A30CF11003FACA5 /* Networking */ = {
@@ -313,6 +324,7 @@
 			files = (
 				3BB31E492A38F31D0071D4EF /* DayTrendingCollectionViewCell.swift in Sources */,
 				3B66D7212A002F4A008EEA8A /* AccountInfoViewController.swift in Sources */,
+				3BB31E4D2A59AD6F0071D4EF /* imageLoader.swift in Sources */,
 				3B29CBF72A330C4C00466E72 /* TopRatedMoviesJSON.swift in Sources */,
 				A560C7E42A1F86EE00B91411 /* Constants.swift in Sources */,
 				3B66FEE129FAD1E300D26C76 /* NetworkManager.swift in Sources */,

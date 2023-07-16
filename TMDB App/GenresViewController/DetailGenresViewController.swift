@@ -8,14 +8,29 @@
 import UIKit
 import Alamofire
 
-protocol DetailGenresMovie {
-    var showTitle: String { get }
-    var showOverview: String { get }
+enum MovieType {
+    case top
+    case trending
+    case upcoming
+}
+
+protocol DetailGenresMovieProtocol {
+    var type: MovieType { get }
+    var title: String { get }
+    var overview: String { get }
+    var voteAverageDouble: Double? { get }
+    var voteCountInt: Int? { get }
+    var imageURL: URL? { get }
+    var releaseDateString: String? { get }
+    var genresIDS: [Int]? { get }
+    var moviesIDS: Int { get }
 }
 
 class DetailGenresViewController: UIViewController {
     
     var delegate: String?
+    
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var backdrop: UIImageView!
@@ -25,92 +40,89 @@ class DetailGenresViewController: UIViewController {
     @IBOutlet weak var voteAverageLabel: UILabel!
     
     @IBOutlet weak var voteCountLabel: UILabel!
+    
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    
+    @IBAction func addToFavouritesButton(_ sender: Any) {
+        NetworkManager.shared.markAsFavourite(movieId: detailedMovie?.moviesIDS ?? 0 )
+            print(detailedMovie?.moviesIDS ?? 78)
+        
+        
+    }
+    
+    
     //var genres: GenresViewController!
     var mainDetailMovie: String?
-  
-        //MARK: Detailed Movies
-    var detailedTrendingMovie: TrendingMovie?
-    var detailedTopRatedMovie: TopRatedMovie?
-    var detailedUpcomingMove: UpcomingMovie?
+    
+    var detailedMovie: DetailGenresMovieProtocol?
+   let genres =
+    [28: "Action" ,
+     12: "Adventure",
+     16: "Animation",
+     35: "Comedy",
+     80: "Crime",
+     99: "Documentary",
+     18: "Drama",
+     10751: "Family",
+     14: "Fantasy",
+     36: "History",
+     27: "Horror",
+     10402: "Music",
+     9638: "Mystery",
+     10749: "Romance",
+     878: "Science Fiction",
+     10770: "TV Movie",
+     53: "Triller",
+     10752: "War",
+     37: "Western" ]
+    var genresInfo = [String]()
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("delegate = \(delegate)")
-        if delegate == "Trending"{
-            setTrendingMovie()
-        } else if delegate == "TopRated"{
-            setTopRatedMovie()
-        } else if delegate == "Upcoming"{
-
-        } else {
-            print("Not correct information")
-
+        
+        setUp()
+        print("Array of genres = \(detailedMovie?.genresIDS)")
+        
+    }
+    
+    func setUp() {
+        let voteAverage: String = String(format: "%.1f", detailedMovie?.voteAverageDouble ?? 0.01)
+        let voteCount: String = String(detailedMovie?.voteCountInt ?? 0)
+        let movieIDS = detailedMovie?.genresIDS
+        
+        titleLabel.text = detailedMovie?.title
+        descriptionOfMovie.text = detailedMovie?.overview
+        voteAverageLabel.text = voteAverage
+        voteCountLabel.text = voteCount
+        releaseDateLabel.text = detailedMovie?.releaseDateString
+        
+        for genreId in movieIDS! {
+            if let genreName = genres[genreId] {
+                genresInfo.append(genreName)
+            }
         }
         
+        //        if let voteCount = detailedTrendingMovie?.voteCount {
+        //            voteCountLabel.text = String(voteCount)
+        //        } else {
+        //            print("Error: cannot find vote count")
+        //        }
         
         
-    }
-    
-    func setTrendingMovie(){
-            titleLabel.text = detailedTrendingMovie?.title
-        descriptionOfMovie.text = detailedTrendingMovie?.overview
-            let voteAverageString = String(format: "%.1f", detailedTrendingMovie?.voteAverage ?? "")
-            
-            if let voteAverage = detailedTrendingMovie?.voteAverage {
-                voteAverageLabel.text = String(voteAverage)
-            } else {
-                print("Error: cannot find vote average")
-            }
-            
-            
-            if let voteCount = detailedTrendingMovie?.voteCount {
-                voteCountLabel.text = String(voteCount)
-            } else {
-                print("Error: cannot find vote count")
-            }
-            
-            
-            let backdropName = detailedTrendingMovie?.backdropPath ?? ""
-            if let url = URL(string: "https://www.themoviedb.org/t/p/w780\(backdropName)") {
-                loadImageUsingAlamofire(from: url) { image in
-                    self.backdrop.image = image
-                }
-            } else {
-                backdrop.image = UIImage(named: "AppIcon")
-            }
         
+        if let url = detailedMovie?.imageURL {
+            
+            loadImageUsingAlamofire(from: url) { image in
+                self.backdrop.image = image
+            }
+        } else {
+            backdrop.image = UIImage(named: "AppIcon")
+        }
     }
     
     
-    func setTopRatedMovie(){
-            titleLabel.text = detailedTopRatedMovie?.title
-        descriptionOfMovie.text = detailedTopRatedMovie?.overview
-            let voteAverageString = String(format: "%.1f", detailedTopRatedMovie?.voteAverage ?? "")
-            
-            if let voteAverage = detailedTopRatedMovie?.voteAverage {
-                voteAverageLabel.text = String(voteAverage)
-            } else {
-                print("Error: cannot find vote average")
-            }
-            
-            
-            if let voteCount = detailedTrendingMovie?.voteCount {
-                voteCountLabel.text = String(voteCount)
-            } else {
-                print("Error: cannot find vote count")
-            }
-            
-            
-            let backdropName = detailedTrendingMovie?.backdropPath ?? ""
-            if let url = URL(string: "https://www.themoviedb.org/t/p/w780\(backdropName)") {
-                loadImageUsingAlamofire(from: url) { image in
-                    self.backdrop.image = image
-                }
-            } else {
-                backdrop.image = UIImage(named: "AppIcon")
-            }
-        
-    }
     
     func loadImageUsingAlamofire(from url: URL, completion: @escaping (UIImage?) -> Void) {
         AF.request(url).responseData { response in
@@ -122,7 +134,21 @@ class DetailGenresViewController: UIViewController {
             }
         }
     }
+    var arrayOfItems = ["Apple", "Banana", "Orange", "Cherry"]
+}
+
+extension DetailGenresViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        genresInfo.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GenresCell", for: indexPath)
+        cell.textLabel?.text = genresInfo[indexPath.row]
+        return cell
+    }
+    
+    
     
     
 }
-

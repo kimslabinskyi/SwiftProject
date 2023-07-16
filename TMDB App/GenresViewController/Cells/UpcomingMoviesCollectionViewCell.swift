@@ -13,4 +13,7 @@ class UpcomingMoviesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var spiner: UIActivityIndicatorView!
     
+    @IBOutlet weak var upcomingLabel: UILabel!
+
+    
 }

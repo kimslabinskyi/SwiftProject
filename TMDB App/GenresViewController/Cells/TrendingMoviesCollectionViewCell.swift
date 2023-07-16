@@ -12,7 +12,7 @@ class TrendingMoviesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var spiner: UIActivityIndicatorView!
     @IBOutlet weak var trendingImage: UIImageView!
-
+    @IBOutlet weak var trendingLabel: UILabel!
        
     
 }

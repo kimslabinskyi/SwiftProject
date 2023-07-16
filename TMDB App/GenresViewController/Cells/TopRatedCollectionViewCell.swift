@@ -11,4 +11,6 @@ class TopRatedCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var topRatedImage: UIImageView!
     @IBOutlet weak var spiner: UIActivityIndicatorView!
+    @IBOutlet weak var topRatedLabel: UILabel!
+
 }
