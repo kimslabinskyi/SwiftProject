@@ -319,8 +319,15 @@ class NetworkManager {
             
         }
     }
+    
+    func addToWatchlist(movieId: Int){
+        print("Session_id = \(sessionID!)")
+        print("accountInfo?.id = \(accountInfo!.id)")
+        print("apiKey = \(apiKey)")
+        print("movieID = \(movieId)")
+    }
         
-        func markAsFavourite(movieId: Int){
+        /* func markAsFavourite(movieId: Int){
             print("Session_id = \(sessionID!)")
             print("accountInfo?.id = \(accountInfo!.id)")
             print("apiKey = \(apiKey)")
@@ -333,7 +340,7 @@ class NetworkManager {
                     "favorite": true
                 ]
             let headers: HTTPHeaders = [
-                "Authorization": "Bearer \(String(describing: sessionID))",
+                "Authorization": "\(String(describing: sessionID))",
                 "api_key": apiKey
                 ]
             AF.request(url, method: .post, parameters: parameters, headers: headers)
@@ -350,7 +357,7 @@ class NetworkManager {
         
         
     }
-    
+    */
     
 //    func getDailyTrendingMovies(completion: @escaping ([DailyTrendingMoviesResponse]?) -> Void){
 //        let baseUrl = "https://api.themoviedb.org/3"

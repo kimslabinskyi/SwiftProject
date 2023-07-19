@@ -20,6 +20,9 @@ class GenresViewController: UIViewController {
     
     @IBOutlet weak var segmentedControll: UISegmentedControl!
     
+    @IBOutlet weak var GenresCollectionView: UICollectionView!
+    
+    
     let apiKey = "15ec7b54d43e199ced41a6e461173cee"
     var mainDetailMovie: String?
     
@@ -82,6 +85,7 @@ class GenresViewController: UIViewController {
         dualCollectionView.showsHorizontalScrollIndicator = false
         topRatedCollectionView.showsHorizontalScrollIndicator = false
         upcomingCollectionView.showsHorizontalScrollIndicator = false
+        GenresCollectionView.showsVerticalScrollIndicator = false
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imageView.contentMode = .scaleAspectFit
         imageView.isLoading = true
@@ -90,7 +94,7 @@ class GenresViewController: UIViewController {
         fetchTrendingMovies()
         fetchTopRatedMovies()
         fetchUpcomingMovies()
-        fetchDailyTrendingMovies()
+        //fetchDailyTrendingMovies()
     }
     
     
@@ -141,7 +145,7 @@ class GenresViewController: UIViewController {
         }
     }
     
-    func fetchDailyTrendingMovies(){
+    private func fetchDailyTrendingMovies(){
         NetworkManager.shared.getDailyTrendingMovies{
             [weak self] DailyTrendingMoviesResponse in
             guard let self = self else { return }
@@ -214,6 +218,8 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
         } else if collectionView == upcomingCollectionView {
             return dataSourceUpcomingMovies.count
+        } else if collectionView == GenresCollectionView {
+            return 6
         }
         return 0
     }
@@ -275,6 +281,12 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
         
         return cell
         
+    } else if collectionView == GenresCollectionView {
+        let arrayOfGenres = ["Action", "Comedy", "Family", "Fantasy","Science Fiction", "Triller"]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GenresCell", for: indexPath) as! GenresCollectionViewCell
+        cell.genresImage.image = UIImage(named: "AppIcon")
+        cell.genresLabel.text = arrayOfGenres[indexPath.row]
+        return cell
     }
     return TopRatedCollectionViewCell()
 }

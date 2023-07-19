@@ -43,13 +43,16 @@ class DetailGenresViewController: UIViewController {
     
     @IBOutlet weak var releaseDateLabel: UILabel!
     
-    @IBAction func addToFavouritesButton(_ sender: Any) {
-        NetworkManager.shared.markAsFavourite(movieId: detailedMovie?.moviesIDS ?? 0 )
-            print(detailedMovie?.moviesIDS ?? 78)
-        
-        
-    }
+//    @IBAction func addToFavouritesButton(_ sender: Any) {
+//        NetworkManager.shared.markAsFavourite(movieId: detailedMovie?.moviesIDS ?? 0 )
+//            print(detailedMovie?.moviesIDS ?? 78)
+//
+//
+//    }
     
+    @IBAction func addToWatchlistButton(_ sender: Any) {
+        NetworkManager.shared.addToWatchlist(movieId: detailedMovie?.moviesIDS ?? 2)
+    }
     
     //var genres: GenresViewController!
     var mainDetailMovie: String?
@@ -83,8 +86,7 @@ class DetailGenresViewController: UIViewController {
         super.viewDidLoad()
         
         setUp()
-        print("Array of genres = \(detailedMovie?.genresIDS)")
-        
+                
     }
     
     func setUp() {

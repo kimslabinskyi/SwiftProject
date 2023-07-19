@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B27581B2A66A8080014130A /* GenresCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B27581A2A66A8080014130A /* GenresCollectionViewCell.swift */; };
 		3B29CBF42A330A9400466E72 /* TopRatedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29CBF32A330A9400466E72 /* TopRatedCollectionViewCell.swift */; };
 		3B29CBF72A330C4C00466E72 /* TopRatedMoviesJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29CBF62A330C4C00466E72 /* TopRatedMoviesJSON.swift */; };
 		3B29CBFA2A33245500466E72 /* UpcomingMoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29CBF92A33245500466E72 /* UpcomingMoviesCollectionViewCell.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B27581A2A66A8080014130A /* GenresCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresCollectionViewCell.swift; sourceTree = "<group>"; };
 		3B29CBF32A330A9400466E72 /* TopRatedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedCollectionViewCell.swift; sourceTree = "<group>"; };
 		3B29CBF62A330C4C00466E72 /* TopRatedMoviesJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesJSON.swift; sourceTree = "<group>"; };
 		3B29CBF92A33245500466E72 /* UpcomingMoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingMoviesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				3B29CBF32A330A9400466E72 /* TopRatedCollectionViewCell.swift */,
 				3B29CBF92A33245500466E72 /* UpcomingMoviesCollectionViewCell.swift */,
 				3BB31E482A38F31D0071D4EF /* DayTrendingCollectionViewCell.swift */,
+				3B27581A2A66A8080014130A /* GenresCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				3BB4DDA72A3106F9003FACA5 /* UIImageManager.swift in Sources */,
 				3B29CBF42A330A9400466E72 /* TopRatedCollectionViewCell.swift in Sources */,
 				A560C83D2A30B8C100B91411 /* ImageManager.swift in Sources */,
+				3B27581B2A66A8080014130A /* GenresCollectionViewCell.swift in Sources */,
 				3B66FEE629FAD28C00D26C76 /* SearchViewController.swift in Sources */,
 				3B66FED129FAD14000D26C76 /* WKWebViewController.swift in Sources */,
 				3B74BE012A051E0600D6561A /* AccountInfo.swift in Sources */,
