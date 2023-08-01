@@ -191,11 +191,11 @@ class NetworkManager {
     
     
     
-    func getTrendingMovies(_ completion: @escaping (TrendingMoviesResponse?) -> ()){
+    func getTrendingMovies(page: Int, _ completion: @escaping (TrendingMoviesResponse?) -> ()){
         
         let baseUrl = "https://api.themoviedb.org/3"
         let endpoint = "/trending/movie/week"
-            AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": 1]).responseJSON { response in
+            AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": page]).responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     
@@ -222,12 +222,12 @@ class NetworkManager {
     }
     
     
-    func getTopRatedMovies(_ completion: @escaping (TopRatedMoviesResponse?) -> ()){
+    func getTopRatedMovies(page: Int, _ completion: @escaping (TopRatedMoviesResponse?) -> ()){
         let baseUrl = "https://api.themoviedb.org/3"
         let endpoint = "/movie/top_rated"
         completion(nil)
         
-        AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": 1]).responseJSON { response in
+        AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": page]).responseJSON { response in
             switch response.result {
             case .success(let value):
                 
@@ -255,12 +255,12 @@ class NetworkManager {
         
     }
     
-    func getUpcomingMovies(_ completion: @escaping (UpcomingMoviesResponse?) -> ()){
+    func getUpcomingMovies(page: Int, _ completion: @escaping (UpcomingMoviesResponse?) -> ()){
         let baseUrl = "https://api.themoviedb.org/3"
         let endpoint = "/movie/upcoming"
         completion(nil)
         
-        AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": 1]).responseJSON { response in
+        AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": page]).responseJSON { response in
             switch response.result {
             case .success(let value):
                 

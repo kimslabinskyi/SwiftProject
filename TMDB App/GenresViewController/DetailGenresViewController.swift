@@ -99,6 +99,7 @@ class DetailGenresViewController: UIViewController {
         voteAverageLabel.text = voteAverage
         voteCountLabel.text = voteCount
         releaseDateLabel.text = detailedMovie?.releaseDateString
+        print("detailedMovie = \(detailedMovie)")
         
         for genreId in movieIDS! {
             if let genreName = genres[genreId] {
