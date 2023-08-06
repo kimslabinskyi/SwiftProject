@@ -397,5 +397,83 @@ class NetworkManager {
 //    }
     
     
+    func getMoviesByGenre(genre: String, _ completion: @escaping (GenresMoviesResponse?) -> ()){
+        let url = "https://api.themoviedb.org/3/discover/movie"
+        let parameters: [String: Any] = [
+            "api_key": apiKey,
+            "sort_by": "popularity.desc",
+            "with_genres": getGenreId(for: genre),
+            "page": 1
+        ]
+        completion(nil)
+        
+//        AF.request(url, parameters: parameters).responseJSON { response in
+//            switch response.result {
+//            case .success(let value):
+//
+//                print("Genres movies = \(value)")
+//                let decoder = JSONDecoder()
+//
+//             #warning ("fix it")
+//                if let jsonMovieResponse = try? decoder.decode(GenresMoviesResponse.self, from: response.data!){
+//                    print("success")
+//                    completion(jsonMovieResponse)
+//                    return
+//
+//                }
+//                completion(nil)
+//
+//
+//
+//
+//            case .failure(_):
+//                print("Error with *upcoming movies*")
+//                completion(nil)
+//            }
+        
+        AF.request(url, parameters: parameters).responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    print("Genres movies = \(value)")
+                    let decoder = JSONDecoder()
+                    
+                    if let jsonData = response.data,
+                       let jsonMovieResponse = try? decoder.decode(GenresMoviesResponse.self, from: jsonData) {
+                        print("success")
+                        completion(jsonMovieResponse)
+                    } else {
+                        print("Failed to decode JSON")
+                        completion(nil)
+                    }
+                case .failure(let error):
+                    print("Error: \(error)")
+                    completion(nil)
+                }
+            }
+        }
+
+
+    
+    
+    
+        
+        func getGenreId(for genre: String) -> Int {
+            
+            let genreIds: [String: Int] = [
+                       "Action": 28,
+                       "Comedy": 35,
+                       "Family": 10751,
+                       "Fantasy": 14,
+                       "Science Fiction": 878,
+                       "Thriller": 53
+                   ]
+            
+            return genreIds[genre] ?? 0
+        }
+    
+    
+    
 }
+
+
 

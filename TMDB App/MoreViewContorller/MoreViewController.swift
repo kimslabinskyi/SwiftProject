@@ -15,11 +15,6 @@ class MoreViewController: UIViewController {
     
     // IMAGE MANAGER
     
-    // Detail Screen
-    // Genres Controller
-    
-    
-    
     
     //MARK: CollectionView
     
@@ -27,9 +22,12 @@ class MoreViewController: UIViewController {
     var dataSourceTrendingMovies: [TrendingMovie] = []
     var dataSourceTopRatedMovies: [TopRatedMovie] = []
     var dataSourceUpcomingMovies: [UpcomingMovie] = []
+    var GenresDataSource: [GenreMovie] = []
+    
     var selectedTrendingMovie: TrendingMovie?
     var selectedTopRatedMovie: TopRatedMovie?
     var selectedUpcomingMovie: UpcomingMovie?
+    var selectedGenreMovie: GenreMovie?
     var movieType: String?
     
     var page = 2
@@ -52,6 +50,10 @@ class MoreViewController: UIViewController {
         } else if movieType == "upcoming"{
             mainLabel.text = "UpcomingMovies"
             fetchMoreUpcomingMovies()
+        } else if movieType == "moreGenres"{
+            mainLabel.text = "View more genres"
+            fetchGenres()
+            
         }
         
         
@@ -154,6 +156,25 @@ class MoreViewController: UIViewController {
         }
     }
     
+    private func fetchGenres(){
+        
+        NetworkManager.shared.getMoviesByGenre(genre: "Action"){
+            [weak self] genresMoviesResponse in
+            guard let self = self else { return }
+            
+            if let movies = genresMoviesResponse {
+                self.GenresDataSource = movies.results
+                self.MoreCollectionView.reloadData()
+            } else {
+                print("Failed to fetch genres")
+            }
+        }
+        
+        
+        
+        
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -191,6 +212,9 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return dataSourceTopRatedMovies.count
         } else if movieType == "upcoming" {
             return dataSourceUpcomingMovies.count
+        } else if movieType == "moreGenres"{
+            print("CELL COUNT = \(GenresDataSource.count)")
+            return GenresDataSource.count
         }
         
         return 0
@@ -203,70 +227,57 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         
         if movieType == "trending" {
-            
             let posterName = dataSourceTrendingMovies[indexPath.row].posterPath
-            
             
             cell.moreImageView.image = nil
             cell.moreLabel.text = dataSourceTrendingMovies[indexPath.row].originalTitle
             cell.spinner.startAnimating()
             
             ImageManager.getImageForPosterName(posterName) { image in
-                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")
-                
-            }
-            
-            
+                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")}
             return cell
-            
             
         } else if movieType == "topRated" {
             
-            
             let posterName = dataSourceTopRatedMovies[indexPath.row].posterPath
-            
             
             cell.moreImageView.image = nil
             cell.moreLabel.text = dataSourceTopRatedMovies[indexPath.row].originalTitle
             cell.spinner.startAnimating()
             
             ImageManager.getImageForPosterName(posterName) { image in
-                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")
-                
-            }
-            
-            
+                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")}
             return cell
             
             
         } else if movieType == "upcoming" {
             
-            
-            
             let posterName = dataSourceUpcomingMovies[indexPath.row].posterPath
-            
             
             cell.moreImageView.image = nil
             cell.moreLabel.text = dataSourceUpcomingMovies[indexPath.row].originalTitle
             cell.spinner.startAnimating()
             
             ImageManager.getImageForPosterName(posterName) { image in
-                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")
-                
-            }
+                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")}
             
+            return cell
+            
+        } else if movieType == "moreGenres" {
+            
+            let posterName = GenresDataSource[indexPath.row].posterPath
+            
+            cell.moreImageView.image = nil
+            cell.moreLabel.text = GenresDataSource[indexPath.row].originalTitle
+            cell.spinner.startAnimating()
+            
+            ImageManager.getImageForPosterName(posterName) { image in
+                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")}
             
             return cell
             
         }
-        
-        
-        
-        
         return cell
-        
-        
-        
         
     }
     

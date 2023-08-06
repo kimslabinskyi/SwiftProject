@@ -39,7 +39,7 @@
             </objects>
             <point key="canvasLocation" x="64.885496183206101" y="-34.507042253521128"/>
         </scene>
-        <!--Item 2-->
+        <!--Search-->
         <scene sceneID="g9Z-1m-Wzf">
             <objects>
                 <viewController id="W1m-Gt-71w" customClass="SearchViewController" customModule="TMDB_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -49,13 +49,13 @@
                         <viewLayoutGuide key="safeArea" id="r0i-SS-Jie"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="ZJG-XD-jxO"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="ZJG-XD-jxO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KYM-nE-dXd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1821" y="-709"/>
         </scene>
-        <!--Item-->
+        <!--Favourites-->
         <scene sceneID="zQD-yh-Jem">
             <objects>
                 <viewController id="yKl-Yc-dwI" customClass="FavoritesViewController" customModule="TMDB_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -131,7 +131,7 @@
                         <viewLayoutGuide key="safeArea" id="amh-of-t3G"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="IaL-th-Etu"/>
+                    <tabBarItem key="tabBarItem" title="Favourites" id="IaL-th-Etu"/>
                     <navigationItem key="navigationItem" id="JyX-65-ZRg"/>
                     <connections>
                         <outlet property="collectionView" destination="aez-n6-TRn" id="JjG-45-mNm"/>
@@ -142,11 +142,11 @@
             </objects>
             <point key="canvasLocation" x="2765.6488549618321" y="-35.211267605633807"/>
         </scene>
-        <!--Item-->
+        <!--Favourites-->
         <scene sceneID="Gwy-Ny-NZW">
             <objects>
                 <navigationController id="9Ed-VC-vHf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ziX-Wv-CbU"/>
+                    <tabBarItem key="tabBarItem" title="Favourites" image="star.square.on.square" catalog="system" id="ziX-Wv-CbU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qbW-BZ-lxB">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -295,7 +295,7 @@
             </objects>
             <point key="canvasLocation" x="3716.7938931297708" y="-34.859154929577464"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="322-BV-Vlx">
             <objects>
                 <viewController id="X3n-Yh-Ma8" customClass="AccountInfoViewController" customModule="TMDB_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -340,7 +340,7 @@
                             <constraint firstAttribute="bottom" secondItem="6uE-ep-JK1" secondAttribute="bottom" id="ev0-ey-LsC"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="YVy-J6-2r6"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="YVy-J6-2r6"/>
                     <connections>
                         <outlet property="labelOfUsername" destination="jl1-bK-L9q" id="dTR-xa-3Ji"/>
                         <outlet property="tableView" destination="6uE-ep-JK1" id="HpW-S4-zzo"/>
@@ -457,11 +457,11 @@
             </objects>
             <point key="canvasLocation" x="851" y="-35"/>
         </scene>
-        <!--Item-->
+        <!--Genres-->
         <scene sceneID="BdT-LT-3IR">
             <objects>
                 <navigationController id="8sK-au-K3w" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="3qV-NW-0nX"/>
+                    <tabBarItem key="tabBarItem" title="Genres" image="film" catalog="system" id="3qV-NW-0nX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QzO-Cj-J4m">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -748,9 +748,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pwN-64-X8G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4607" y="-1459"/>
+            <point key="canvasLocation" x="4466" y="-1459"/>
         </scene>
-        <!--Item-->
+        <!--Genres-->
         <scene sceneID="wG8-h1-J6M">
             <objects>
                 <viewController id="GIj-Ll-030" customClass="GenresViewController" customModule="TMDB_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -761,8 +761,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZMT-hE-Gyp">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jNt-y3-l7k">
-                                        <rect key="frame" x="0.0" y="-2" width="393" height="2500"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNt-y3-l7k">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2500"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mG0-DU-02B">
                                                 <rect key="frame" x="8" y="115" width="361" height="329"/>
@@ -883,13 +883,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="End" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1L-HQ-6kD">
-                                                <rect key="frame" x="167" y="2446" width="30" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SjX-8R-3e5">
                                                 <rect key="frame" x="5" y="1439" width="380" height="969"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -933,14 +926,6 @@
                                                     <outlet property="delegate" destination="GIj-Ll-030" id="uNg-s4-exQ"/>
                                                 </connections>
                                             </collectionView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V38-1S-lpI">
-                                                <rect key="frame" x="321" y="1355" width="64" height="61"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system">
-                                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                                </buttonConfiguration>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9f-K6-yRb">
                                                 <rect key="frame" x="219" y="63" width="134" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1072,6 +1057,34 @@
                                                     <outlet property="delegate" destination="GIj-Ll-030" id="4SU-7t-6GS"/>
                                                 </connections>
                                             </collectionView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V38-1S-lpI">
+                                                <rect key="frame" x="31" y="2416" width="332" height="61"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system" cornerStyle="large">
+                                                    <backgroundConfiguration key="background">
+                                                        <color key="backgroundColor" systemColor="systemMintColor"/>
+                                                    </backgroundConfiguration>
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="  Search more genres">
+                                                            <attributes>
+                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                <font key="NSFont" size="20" name="Helvetica"/>
+                                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7O-Bk-hm8">
+                                                <rect key="frame" x="290" y="6" width="50" height="35"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="globe" catalog="system">
+                                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                                </buttonConfiguration>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -1098,12 +1111,12 @@
                             <constraint firstItem="ZMT-hE-Gyp" firstAttribute="leading" secondItem="i4C-Hw-A7H" secondAttribute="leading" id="vbQ-bR-p2a"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="1Qn-W5-24N"/>
+                    <tabBarItem key="tabBarItem" title="Genres" id="1Qn-W5-24N"/>
                     <navigationItem key="navigationItem" id="hau-QF-msg"/>
                     <size key="freeformSize" width="393" height="852"/>
                     <connections>
-                        <outlet property="GenresCollectionView" destination="SjX-8R-3e5" id="LxA-y5-4Y3"/>
                         <outlet property="dualCollectionView" destination="mG0-DU-02B" id="jBS-Xi-cQi"/>
+                        <outlet property="genresCollectionView" destination="SjX-8R-3e5" id="LxA-y5-4Y3"/>
                         <outlet property="segmentedControll" destination="Z0M-Jd-c4B" id="CXp-Np-I0f"/>
                         <outlet property="topRatedCollectionView" destination="TLr-rY-hOT" id="wHn-U2-XeB"/>
                         <outlet property="upcomingCollectionView" destination="TCD-qM-Obn" id="80M-0U-GoP"/>
@@ -1113,6 +1126,7 @@
                         <segue destination="Njq-xG-EI7" kind="show" identifier="moreTrending" id="8dr-XY-ZQZ"/>
                         <segue destination="Njq-xG-EI7" kind="show" identifier="moreTopRated" id="lUd-lL-yDp"/>
                         <segue destination="Njq-xG-EI7" kind="show" identifier="moreUpcoming" id="Yff-8Q-OAh"/>
+                        <segue destination="Njq-xG-EI7" kind="show" identifier="moreGenresSegue" id="odf-be-8xm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVC-9D-JyO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1121,19 +1135,26 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4Jn-wY-met"/>
-        <segue reference="Yff-8Q-OAh"/>
+        <segue reference="Bce-3a-RUY"/>
+        <segue reference="odf-be-8xm"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.backward.circle" catalog="system" width="128" height="123"/>
         <image name="arrow.right.circle" catalog="system" width="128" height="123"/>
         <image name="arrow.right.square.fill" catalog="system" width="128" height="114"/>
+        <image name="film" catalog="system" width="128" height="93"/>
+        <image name="gear" catalog="system" width="128" height="122"/>
+        <image name="globe" catalog="system" width="128" height="123"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="star.square.on.square" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemMintColor">
+            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
