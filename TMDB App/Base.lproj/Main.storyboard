@@ -563,6 +563,7 @@
                         <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailTrendingMovieSegue" id="np5-B5-5iH"/>
                         <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailTopRatedMovieSegue" id="fyx-5O-X0x"/>
                         <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailUpcomingMovieSegue" id="4Jn-wY-met"/>
+                        <segue destination="rT8-yQ-cV4" kind="show" identifier="moreGenresSegue" id="Zmb-LU-lAR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d8g-3G-Lwl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -748,7 +749,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pwN-64-X8G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4466" y="-1459"/>
+            <point key="canvasLocation" x="4445" y="-1430"/>
         </scene>
         <!--Genres-->
         <scene sceneID="wG8-h1-J6M">
@@ -1135,7 +1136,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Bce-3a-RUY"/>
+        <segue reference="Zmb-LU-lAR"/>
         <segue reference="odf-be-8xm"/>
     </inferredMetricsTieBreakers>
     <resources>

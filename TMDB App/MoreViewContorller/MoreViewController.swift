@@ -29,6 +29,7 @@ class MoreViewController: UIViewController {
     var selectedUpcomingMovie: UpcomingMovie?
     var selectedGenreMovie: GenreMovie?
     var movieType: String?
+    var selectedGenre: String? 
     
     var page = 2
     let collectionIndexPath = IndexPath(item: 0, section: 0)
@@ -37,6 +38,7 @@ class MoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("SELECTEDMOVIE = \(movieType)")
+        print("SELECDTED GENRE = \(selectedGenre)")
         MoreCollectionView.dataSource = self
         MoreCollectionView.delegate = self
         previousPageButton.isHidden = true
@@ -68,10 +70,7 @@ class MoreViewController: UIViewController {
     
     @IBOutlet weak var mainLabel: UILabel!
     
-    
-    
-    
-    
+ 
     //MARK: Buttons
     
     @IBOutlet weak var nextPageButton: UIButton!
@@ -158,7 +157,9 @@ class MoreViewController: UIViewController {
     
     private func fetchGenres(){
         
-        NetworkManager.shared.getMoviesByGenre(genre: "Action"){
+        print("Selected genre = \(selectedGenre)")
+        
+        NetworkManager.shared.getMoviesByGenre(genre: selectedGenre!){
             [weak self] genresMoviesResponse in
             guard let self = self else { return }
             
@@ -197,6 +198,10 @@ class MoreViewController: UIViewController {
                 destinationVC.detailedMovie = selectedUpcomingMovie
                 
             }
+        } else if segue.identifier == "moreGenresSegue"{
+            if let destinationVC = segue.destination as? DetailGenresViewController{
+                destinationVC.detailedMovie = selectedGenreMovie
+            }
         }
     }
     
@@ -213,7 +218,6 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else if movieType == "upcoming" {
             return dataSourceUpcomingMovies.count
         } else if movieType == "moreGenres"{
-            print("CELL COUNT = \(GenresDataSource.count)")
             return GenresDataSource.count
         }
         
@@ -297,6 +301,9 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else if movieType == "upcoming" {
             selectedUpcomingMovie = dataSourceUpcomingMovies[indexPath.row]
             performSegue(withIdentifier: SegueId.detailUpcomingMovieSegue, sender: nil)
+        } else if movieType == "moreGenres" {
+            selectedGenreMovie = GenresDataSource[indexPath.row]
+            performSegue(withIdentifier: SegueId.moreGenresSegue, sender: nil)
         }
     }
     

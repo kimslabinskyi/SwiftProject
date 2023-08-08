@@ -12,6 +12,7 @@ enum MovieType {
     case top
     case trending
     case upcoming
+    case genresSorted
 }
 
 protocol DetailGenresMovieProtocol {

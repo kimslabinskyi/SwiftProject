@@ -403,39 +403,22 @@ class NetworkManager {
             "api_key": apiKey,
             "sort_by": "popularity.desc",
             "with_genres": getGenreId(for: genre),
+
             "page": 1
         ]
         completion(nil)
         
-//        AF.request(url, parameters: parameters).responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//
-//                print("Genres movies = \(value)")
-//                let decoder = JSONDecoder()
-//
-//             #warning ("fix it")
-//                if let jsonMovieResponse = try? decoder.decode(GenresMoviesResponse.self, from: response.data!){
-//                    print("success")
-//                    completion(jsonMovieResponse)
-//                    return
-//
-//                }
-//                completion(nil)
-//
-//
-//
-//
-//            case .failure(_):
-//                print("Error with *upcoming movies*")
-//                completion(nil)
-//            }
+
         
         AF.request(url, parameters: parameters).responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     print("Genres movies = \(value)")
                     let decoder = JSONDecoder()
+                    
+                    if let data = response.data , let utf8Text = String(data: data, encoding: .utf8){
+                        print("JSON.DATA = \(utf8Text)")
+                    }
                     
                     if let jsonData = response.data,
                        let jsonMovieResponse = try? decoder.decode(GenresMoviesResponse.self, from: jsonData) {

@@ -41,7 +41,7 @@ class GenresViewController: UIViewController {
     let trendingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let dailyTrendingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     var tempCollectionView: UICollectionView?
-    
+    var selectedGenre: String?
     
     
     override func viewDidLoad(){
@@ -213,8 +213,8 @@ class GenresViewController: UIViewController {
                 
                // moreViewController.movieType = selectedMovieType
                 moreViewController.movieType = "moreGenres"
-                print("selectedMovieType = \(selectedMovieType)")
-            
+                moreViewController.selectedGenre = selectedGenre
+                print("self.selectedGenre = \(self.selectedGenre)")
             }
         }
     }
@@ -338,6 +338,22 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             performSegue(withIdentifier: SegueId.detailUpcomingMovieSegue, sender: nil)
         } else if collectionView == genresCollectionView{
             selectedMovieType = "moreGenres"
+            
+            if indexPath.row == 0{
+                selectedGenre = "Action"
+            } else if indexPath.row == 1 {
+                selectedGenre = "Comedy"
+            } else if indexPath.row == 2 {
+                selectedGenre = "Family"
+            } else if indexPath.row == 3 {
+                selectedGenre = "Fantasy"
+            } else if indexPath.row == 4 {
+                selectedGenre = "Science Fiction"
+            } else if indexPath.row == 5 {
+                selectedGenre = "Thriller"
+            }
+            
+            
             performSegue(withIdentifier: SegueId.moreGenresSegue, sender: nil)
             
         }
