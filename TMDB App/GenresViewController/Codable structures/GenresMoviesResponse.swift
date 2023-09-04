@@ -46,6 +46,19 @@ struct GenreMovie: Codable {
             case voteAverage = "vote_average"
             case voteCount = "vote_count"
         }
+    var unwrappedBackdropPath: String {
+            return backdropPath ?? ""
+        }
+    
+}
+
+struct OptionalString: Codable {
+    let value: String?
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        value = try container.decode(String?.self)
+    }
 }
 
 extension GenreMovie: DetailGenresMovieProtocol{
@@ -80,48 +93,3 @@ extension GenreMovie: DetailGenresMovieProtocol{
     
     
 }
-
-//enum OriginalLanguage: String, Codable {
-//    case en = "en"
-//    case fr = "fr"
-//    case ja = "ja"
-//}
-
-
-//extension GenreMovie: DetailGenresMovieProtocol {
-//    var moviesIDS: Int {
-//        return id
-//    }
-//
-//    var genresIDS: [Int]? {
-//        guard let id = genreIDS else { return nil}
-//        return id
-//    }
-//
-//
-//    var releaseDateString: String? {
-//        guard let realiseDate = releaseDate else { return nil }
-//        return realiseDate
-//    }
-//
-//    var voteCountInt: Int? {
-//        guard let voteCount = voteCount else { return nil }
-//        return voteCount
-//    }
-//
-//
-//    var type: MovieType {
-//        .trending
-//    }
-//
-//    var voteAverageDouble: Double? {
-//        guard let voteAverage = voteAverage else { return nil }
-//        return voteAverage
-//    }
-//
-//    var imageURL: URL? {
-//         URL(string: "https://www.themoviedb.org/t/p/w780\(backdropPath)")
-//    }
-//
-//}
-//

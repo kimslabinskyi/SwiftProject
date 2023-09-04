@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import SafariServices
 
 enum MovieType {
     case top
@@ -43,6 +44,40 @@ class DetailGenresViewController: UIViewController {
     @IBOutlet weak var voteCountLabel: UILabel!
     
     @IBOutlet weak var releaseDateLabel: UILabel!
+    
+    
+    
+    
+    
+    
+    @IBAction func playButton(_ sender: Any) {
+        
+        print(detailedMovie?.moviesIDS ?? 2)
+        NetworkManager.shared.fetchMovieTrailer(movieID: detailedMovie?.moviesIDS ?? 2) { trailerURLString in
+            
+            if trailerURLString != nil{
+                //            if let trailerURLString = trailerURLString, let trailerURL = URL(string: trailerURLString) {
+                //                let player = AVPlayer(url: trailerURL)
+                //                let playerViewController = AVPlayerViewController()
+                //                playerViewController.player = player
+                //                self.present(playerViewController, animated: true) {
+                //                    player.play()
+                //                }
+                //            } else {
+                //                print("Trailer not available")
+                //            }
+                
+                if let url = URL(string: trailerURLString!) {
+                    let safariViewController = SFSafariViewController(url: url)
+                    self.present(safariViewController, animated: true, completion: nil)
+                }
+                
+            } else {
+                
+            }
+            
+        }
+    }
     
 //    @IBAction func addToFavouritesButton(_ sender: Any) {
 //        NetworkManager.shared.markAsFavourite(movieId: detailedMovie?.moviesIDS ?? 0 )
@@ -138,7 +173,6 @@ class DetailGenresViewController: UIViewController {
             }
         }
     }
-    var arrayOfItems = ["Apple", "Banana", "Orange", "Cherry"]
 }
 
 extension DetailGenresViewController: UITableViewDelegate, UITableViewDataSource{

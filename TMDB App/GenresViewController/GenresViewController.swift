@@ -295,7 +295,19 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         } else if collectionView == upcomingCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingCell", for: indexPath) as! UpcomingMoviesCollectionViewCell
             cell.spiner.startAnimating()
-            let posterName = dataSourceUpcomingMovies[indexPath.row].posterPath
+            
+            
+            
+            let posterName: String
+            
+            let optionalPosterName = dataSourceUpcomingMovies[indexPath.row].posterPath
+            
+            if optionalPosterName == nil{
+                posterName = ""
+            } else {
+                posterName = optionalPosterName!
+                print("POSTER NAME = \(posterName)")
+            }
             
             //Image need to be set when it seen by user - cache on collectionView level is working otherwise
             cell.upcomingImage.image = nil
@@ -358,6 +370,27 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
         }
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        guard let trendingCell = cell as? TrendingMoviesCollectionViewCell else {
+                return
+            }
+            
+            let optionalPosterName = dataSourceTrendingMovies[indexPath.row].posterPath
+            let posterName = optionalPosterName ?? ""
+            
+            trendingCell.trendingImage.image = nil
+            trendingCell.trendingLabel.text = dataSourceTrendingMovies[indexPath.row].title
+            
+            ImageManager.getImageForPosterName(posterName, completion: { image in
+                trendingCell.trendingImage.image = image ?? UIImage(named: "AppIcon")
+            })
+    }
+    
+    
+    
 }
 
 extension GenresViewController: UICollectionViewDelegateFlowLayout {

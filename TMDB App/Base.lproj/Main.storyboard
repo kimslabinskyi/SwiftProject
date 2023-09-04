@@ -146,7 +146,9 @@
         <scene sceneID="Gwy-Ny-NZW">
             <objects>
                 <navigationController id="9Ed-VC-vHf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favourites" image="star.square.on.square" catalog="system" id="ziX-Wv-CbU"/>
+                    <tabBarItem key="tabBarItem" title="Favourites" image="star.square.on.square" catalog="system" id="ziX-Wv-CbU">
+                        <color key="badgeColor" systemColor="systemMintColor"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qbW-BZ-lxB">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -294,6 +296,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="foe-Qy-eSB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3716.7938931297708" y="-34.859154929577464"/>
+        </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="RMf-qe-hsB">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="zu8-bc-7fy" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ybe-fQ-lyu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5724" y="-1436"/>
         </scene>
         <!--Settings-->
         <scene sceneID="322-BV-Vlx">
@@ -550,14 +560,21 @@
                                     <color key="baseForegroundColor" systemColor="labelColor"/>
                                 </buttonConfiguration>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="page 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgM-Rq-NvG">
+                                <rect key="frame" x="175" y="741" width="53" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="U09-jN-nDV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="UWZ-2M-97c"/>
                     <connections>
-                        <outlet property="MoreCollectionView" destination="cPZ-Lt-a1b" id="Rg8-4V-d3x"/>
                         <outlet property="mainLabel" destination="bni-KU-om7" id="XSU-kl-zh0"/>
+                        <outlet property="moreCollectionView" destination="cPZ-Lt-a1b" id="Rg8-4V-d3x"/>
                         <outlet property="nextPageButton" destination="6I9-tS-UQu" id="Kqi-oB-Ba4"/>
                         <outlet property="previousPageButton" destination="0Hm-JS-RZr" id="a7s-cu-vZw"/>
                         <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailTrendingMovieSegue" id="np5-B5-5iH"/>
@@ -569,6 +586,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d8g-3G-Lwl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3696.9465648854962" y="-2145.0704225352115"/>
+        </scene>
+        <!--List Of Genres View Controller-->
+        <scene sceneID="Dxv-sW-Bi1">
+            <objects>
+                <viewController id="RSd-Gf-VId" customClass="ListOfGenresViewController" customModule="TMDB_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1lK-8z-JnM">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LlE-Lw-kqP">
+                                <rect key="frame" x="16" y="151" width="361" height="618"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCell" rowHeight="70" id="5ht-5G-KVB" customClass="GenresTableViewCell" customModule="TMDB_App" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="361" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ht-5G-KVB" id="RYA-gC-wGn">
+                                            <rect key="frame" x="0.0" y="0.0" width="361" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name of genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYH-n9-cUf">
+                                                    <rect key="frame" x="20" y="11" width="321" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="listLabel" destination="QYH-n9-cUf" id="bGQ-5P-NMU"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="RSd-Gf-VId" id="eY6-bj-8rT"/>
+                                    <outlet property="delegate" destination="RSd-Gf-VId" id="vkA-EG-UMf"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You can find any genres!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDz-Le-WHk">
+                                <rect key="frame" x="74" y="110" width="245" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Dye-ma-wE6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Hu2-df-TGX"/>
+                    <connections>
+                        <outlet property="listOfGenresTableView" destination="LlE-Lw-kqP" id="0by-5L-i96"/>
+                        <segue destination="Njq-xG-EI7" kind="show" identifier="moreGenres" id="RRs-wF-VDY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AJd-Xx-lZs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2765.6488549618321" y="-2145.0704225352115"/>
         </scene>
         <!--Item-->
         <scene sceneID="cPC-wE-Zp5">
@@ -702,6 +779,15 @@
                                                     <action selector="addToFavouritesButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="6ka-6Z-cbf"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="go3-0c-no2">
+                                                <rect key="frame" x="308" y="324" width="56" height="35"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Play"/>
+                                                <connections>
+                                                    <action selector="playButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="xXr-NQ-oea"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -749,7 +835,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pwN-64-X8G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4445" y="-1430"/>
+            <point key="canvasLocation" x="4787" y="-1436"/>
         </scene>
         <!--Genres-->
         <scene sceneID="wG8-h1-J6M">
@@ -1069,14 +1155,17 @@
                                                     <attributedString key="attributedTitle">
                                                         <fragment content="  Search more genres">
                                                             <attributes>
-                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <font key="NSFont" size="20" name="Helvetica"/>
                                                                 <font key="NSOriginalFont" size="12" name="Helvetica"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
-                                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                                    <color key="baseForegroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <segue destination="RSd-Gf-VId" kind="show" identifier="listOfGenres" id="Aqd-fj-gQ5"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7O-Bk-hm8">
                                                 <rect key="frame" x="290" y="6" width="50" height="35"/>
@@ -1136,8 +1225,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Zmb-LU-lAR"/>
-        <segue reference="odf-be-8xm"/>
+        <segue reference="laH-fJ-N41"/>
+        <segue reference="lUd-lL-yDp"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.backward.circle" catalog="system" width="128" height="123"/>
@@ -1150,6 +1239,9 @@
         <image name="star.square.on.square" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

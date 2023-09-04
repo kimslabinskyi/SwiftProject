@@ -18,24 +18,52 @@ class ImageManager {
         imageCache: AutoPurgingImageCache()
     )
     
-    class func getImageForPosterName(_ posterName: String, completion: @escaping (UIImage?) -> Void) {
+//    class func getImageForPosterName(_ posterName: String, completion: @escaping (UIImage?) -> Void) {
+//
+//        guard let url = URL(string: "https://www.themoviedb.org/t/p/original\(posterName)") else {
+//            completion(nil)
+//            return
+//        }
+//        let urlRequest = URLRequest(url: url)
+//
+//        imageDownloader.download(urlRequest, completion:  { response in
+//
+//            if case .success(let image) = response.result {
+//                completion(image)
+//                return
+//            }
+//            //Error
+//            completion(nil)
+//        })
+//    }
+    
+    
         
-        guard let url = URL(string: "https://www.themoviedb.org/t/p/original\(posterName)") else {
+        
+    class func getImageForPosterName(_ posterName: String?, imageSize: String = "w342", completion: @escaping (UIImage?) -> Void) {
+        // Проверяем, если posterName равен nil, то вызываем completion с дефолтной картинкой
+        guard let posterName = posterName else {
+            completion(UIImage(named: "AppIcon"))
+            return
+        }
+        
+        guard let url = URL(string: "https://www.themoviedb.org/t/p/\(imageSize)/\(posterName)") else {
             completion(nil)
             return
         }
+        
         let urlRequest = URLRequest(url: url)
 
-        imageDownloader.download(urlRequest, completion:  { response in
-
+        imageDownloader.download(urlRequest) { response in
             if case .success(let image) = response.result {
                 completion(image)
                 return
             }
-            //Error
+            // Error
             completion(nil)
-        })
+        }
     }
+
     
     class func getImageForFavouritesName(_ posterName: String, completion: @escaping (UIImage?) -> Void) {
 

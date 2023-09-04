@@ -5,8 +5,9 @@
 //  Created by Kim on 27.04.2023 😎🙌
 //
 
-import Foundation
 import Alamofire
+import AVKit
+import UIKit
 
 class NetworkManager {
     
@@ -267,6 +268,12 @@ class NetworkManager {
                 print("Upcoming Movies = \(value)")
                 let decoder = JSONDecoder()
                 
+                if let data = response.data , let utf8Text = String(data: data, encoding: .utf8){
+                    print("JSON.DATA = \(utf8Text)")
+                }
+                
+                
+                
                 if let jsonMovieResponse = try? decoder.decode(UpcomingMoviesResponse.self, from: response.data!){
                     print("success")
                     completion(jsonMovieResponse)
@@ -397,14 +404,16 @@ class NetworkManager {
 //    }
     
     
-    func getMoviesByGenre(genre: String, _ completion: @escaping (GenresMoviesResponse?) -> ()){
+    func getMoviesByGenre(page: Int, genre: String, _ completion: @escaping (GenresMoviesResponse?) -> ()){
         let url = "https://api.themoviedb.org/3/discover/movie"
         let parameters: [String: Any] = [
             "api_key": apiKey,
             "sort_by": "popularity.desc",
             "with_genres": getGenreId(for: genre),
-
-            "page": 1
+            "page": page
+            //   "certification_country": "US",
+           // "certification": "G"
+            
         ]
         completion(nil)
         
@@ -443,18 +452,53 @@ class NetworkManager {
         func getGenreId(for genre: String) -> Int {
             
             let genreIds: [String: Int] = [
-                       "Action": 28,
-                       "Comedy": 35,
-                       "Family": 10751,
-                       "Fantasy": 14,
-                       "Science Fiction": 878,
-                       "Thriller": 53
-                   ]
+                "Action": 28,
+                "Adventure": 12,
+                "Animation": 16,
+                "Comedy": 35,
+                "Crime": 80,
+                "Documentary": 99,
+                "Drama": 18,
+                "Family": 10751,
+                "Fantasy": 14,
+                "History": 36,
+                "Horror": 27,
+                "Music": 10402,
+                "Mystery": 9638,
+                "Romance": 10749,
+                "Science Fiction": 878,
+                "TV Movie": 10770,
+                "Thriller": 53,
+                "War": 10752,
+                "Western": 37
+            ]
             
             return genreIds[genre] ?? 0
         }
     
-    
+
+    func fetchMovieTrailer(movieID: Int, completion: @escaping (String?) -> Void) {
+        let url = "https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=\(apiKey)"
+        
+        AF.request(url).responseDecodable(of: MovieVideoResponse.self) { response in
+            switch response.result {
+            case .success(let videoResponse):
+                   print("Video response: \(videoResponse)") // Выводим информацию о полученных данных
+                   if let trailer = videoResponse.results.first(where: { $0.type == "Trailer" }) {
+                       let trailerURLString = "https://www.youtube.com/watch?v=\(trailer.key)"
+                       completion(trailerURLString)
+                   } else {
+                       completion(nil) // Если трейлер не найден
+                   }
+               case .failure(let error):
+                   print("Error fetching movie trailer: \(error)")
+                   completion(nil)
+            }
+        }
+    }
+
+   
+
     
 }
 

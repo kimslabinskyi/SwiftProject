@@ -10,15 +10,9 @@ import UIKit
 class MoreViewController: UIViewController {
     
     
-    
-    
-    
-    // IMAGE MANAGER
-    
-    
     //MARK: CollectionView
     
-    @IBOutlet weak var MoreCollectionView: UICollectionView!
+    @IBOutlet weak var moreCollectionView: UICollectionView!
     var dataSourceTrendingMovies: [TrendingMovie] = []
     var dataSourceTopRatedMovies: [TopRatedMovie] = []
     var dataSourceUpcomingMovies: [UpcomingMovie] = []
@@ -32,6 +26,7 @@ class MoreViewController: UIViewController {
     var selectedGenre: String? 
     
     var page = 2
+    var isButtonHide: Bool?
     let collectionIndexPath = IndexPath(item: 0, section: 0)
     
     
@@ -39,9 +34,10 @@ class MoreViewController: UIViewController {
         super.viewDidLoad()
         print("SELECTEDMOVIE = \(movieType)")
         print("SELECDTED GENRE = \(selectedGenre)")
-        MoreCollectionView.dataSource = self
-        MoreCollectionView.delegate = self
+        moreCollectionView.dataSource = self
+        moreCollectionView.delegate = self
         previousPageButton.isHidden = true
+        moreCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         
         if movieType == "trending"{
             mainLabel.text = "Trending Movies"
@@ -54,6 +50,7 @@ class MoreViewController: UIViewController {
             fetchMoreUpcomingMovies()
         } else if movieType == "moreGenres"{
             mainLabel.text = "View more genres"
+            page = 1
             fetchGenres()
             
         }
@@ -79,11 +76,23 @@ class MoreViewController: UIViewController {
     @objc func nextPageButtonTapped(_ sender: Any) {
         page += 1
         print("page = \(page)")
+        isButtonHide = true
         previousPageButton.isHidden = false
-        fetchMoreTrendingMovies()
-        MoreCollectionView.reloadData()
         
-        MoreCollectionView.scrollToItem(at: collectionIndexPath, at: .top, animated: true)
+        if movieType == "trending"{
+            fetchMoreTrendingMovies()
+        } else if movieType == "topRated" {
+            fetchMoreTopRatedMovies()
+        } else if movieType == "upcoming"{
+            fetchMoreUpcomingMovies()
+        } else if movieType == "moreGenres"{
+            fetchGenres()
+        }
+        
+        
+        moreCollectionView.reloadData()
+        
+        moreCollectionView.scrollToItem(at: collectionIndexPath, at: .top, animated: true)
         
     }
     
@@ -92,10 +101,29 @@ class MoreViewController: UIViewController {
         if page == 2 {
             previousPageButton.isHidden = true
         } else {
+            if isButtonHide == true && page == 3 {
+                previousPageButton.isHidden = true
+                    }
+            
+            isButtonHide = true
             page -= 1
-            fetchMoreTrendingMovies()
-            MoreCollectionView.reloadData()
-            MoreCollectionView.scrollToItem(at: collectionIndexPath, at: .top, animated: true)
+            
+            switch movieType {
+                case "trending":
+                    fetchMoreTrendingMovies()
+                case "topRated":
+                    fetchMoreTopRatedMovies()
+                case "upcoming":
+                    fetchMoreUpcomingMovies()
+                case "moreGenres":
+                    fetchGenres()
+                default:
+                    break
+            }
+
+            
+            moreCollectionView.reloadData()
+            moreCollectionView.scrollToItem(at: collectionIndexPath, at: .top, animated: true)
             
         }
         
@@ -117,7 +145,7 @@ class MoreViewController: UIViewController {
             
             if let movies = trendingMoviesResponse {
                 self.dataSourceTrendingMovies = movies.results
-                self.MoreCollectionView.reloadData()
+                self.moreCollectionView.reloadData()
             } else {
                 print("Failed to fetch trending movies")
             }
@@ -132,7 +160,7 @@ class MoreViewController: UIViewController {
             
             if let movies = trendingMoviesResponse {
                 self.dataSourceTopRatedMovies = movies.results
-                self.MoreCollectionView.reloadData()
+                self.moreCollectionView.reloadData()
             } else {
                 print("Failed to fetch trending movies")
             }
@@ -148,9 +176,17 @@ class MoreViewController: UIViewController {
             
             if let movies = trendingMoviesResponse {
                 self.dataSourceUpcomingMovies = movies.results
-                self.MoreCollectionView.reloadData()
+                self.moreCollectionView.reloadData()
+                for movie in movies.results {
+                        let backdropPath = movie.unwrappedBackdropPath
+                        print("Unwrapped Backdrop Path: \(backdropPath)")
+                        // Здесь вы можете использовать значение backdropPath
+                   
+                    }
+                
+        
             } else {
-                print("Failed to fetch trending movies")
+                print("Failed to fetch upcoming movies")
             }
         }
     }
@@ -158,14 +194,14 @@ class MoreViewController: UIViewController {
     private func fetchGenres(){
         
         print("Selected genre = \(selectedGenre)")
-        
-        NetworkManager.shared.getMoviesByGenre(genre: selectedGenre!){
+        print("PAGE = \(page)")
+        NetworkManager.shared.getMoviesByGenre(page: page, genre: selectedGenre!){
             [weak self] genresMoviesResponse in
             guard let self = self else { return }
             
             if let movies = genresMoviesResponse {
                 self.GenresDataSource = movies.results
-                self.MoreCollectionView.reloadData()
+                self.moreCollectionView.reloadData()
             } else {
                 print("Failed to fetch genres")
             }
@@ -249,21 +285,31 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.moreLabel.text = dataSourceTopRatedMovies[indexPath.row].originalTitle
             cell.spinner.startAnimating()
             
-            ImageManager.getImageForPosterName(posterName) { image in
-                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")}
+//            ImageManager.getImageForPosterName(posterName) { image in
+//                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")}
             return cell
             
             
         } else if movieType == "upcoming" {
             
-            let posterName = dataSourceUpcomingMovies[indexPath.row].posterPath
+//            let posterName = dataSourceUpcomingMovies[indexPath.row].posterPath!
+            
+            if let posterPath = dataSourceUpcomingMovies[indexPath.row].posterPath {
+                // Используйте posterPath, так как он не равен nil
+                ImageManager.getImageForPosterName(posterPath) { image in
+                    cell.moreImageView.image = image ?? UIImage(named: "AppIcon")
+                }
+            } else {
+                // Поставьте дефолтную картинку, так как posterPath равен nil
+                cell.moreImageView.image = UIImage(named: "AppIcon")
+            }
             
             cell.moreImageView.image = nil
             cell.moreLabel.text = dataSourceUpcomingMovies[indexPath.row].originalTitle
             cell.spinner.startAnimating()
             
-            ImageManager.getImageForPosterName(posterName) { image in
-                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")}
+           // ImageManager.getImageForPosterName(posterName) { image in
+              //  cell.moreImageView.image = image ?? UIImage(named: "AppIcon")}
             
             return cell
             
@@ -275,8 +321,8 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.moreLabel.text = GenresDataSource[indexPath.row].originalTitle
             cell.spinner.startAnimating()
             
-            ImageManager.getImageForPosterName(posterName) { image in
-                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")}
+//            ImageManager.getImageForPosterName(posterName) { image in
+//                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")}
             
             return cell
             
@@ -306,6 +352,78 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             performSegue(withIdentifier: SegueId.moreGenresSegue, sender: nil)
         }
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if movieType == "trending"{
+            
+            
+            
+            guard let moreCell = cell as? MoreCollectionViewCell else {
+                return
+            }
+            
+            let optionalPosterName = dataSourceTrendingMovies[indexPath.row].posterPath
+            let posterName = optionalPosterName ?? ""
+            
+            moreCell.moreImageView.image = nil
+            moreCell.moreLabel.text = dataSourceTrendingMovies[indexPath.row].title
+            
+            ImageManager.getImageForPosterName(posterName, completion: { image in
+                moreCell.moreImageView.image = image ?? UIImage(named: "AppIcon")
+            })
+        } else if movieType == "topRated"{
+            guard let moreCell = cell as? MoreCollectionViewCell else {
+                return
+            }
+            
+            let optionalPosterName = dataSourceTopRatedMovies[indexPath.row].posterPath
+            let posterName = optionalPosterName ?? ""
+            
+            moreCell.moreImageView.image = nil
+            moreCell.moreLabel.text = dataSourceTopRatedMovies[indexPath.row].title
+            
+            ImageManager.getImageForPosterName(posterName, completion: { image in
+                moreCell.moreImageView.image = image ?? UIImage(named: "AppIcon")
+            })
+        } else if movieType == "Upcoming" {
+            
+            guard let moreCell = cell as? MoreCollectionViewCell else {
+                return
+            }
+            
+            let optionalPosterName = dataSourceUpcomingMovies[indexPath.row].posterPath
+            let posterName = optionalPosterName ?? ""
+            
+            moreCell.moreImageView.image = nil
+            moreCell.moreLabel.text = dataSourceUpcomingMovies[indexPath.row].title
+            
+            ImageManager.getImageForPosterName(posterName, completion: { image in
+                moreCell.moreImageView.image = image ?? UIImage(named: "AppIcon")
+            })
+        } else if movieType == "moreGenres"{
+            
+            guard let moreCell = cell as? MoreCollectionViewCell else {
+                return
+            }
+            
+            let optionalPosterName = GenresDataSource[indexPath.row].posterPath
+            let posterName = optionalPosterName ?? ""
+            
+            moreCell.moreImageView.image = nil
+            moreCell.moreLabel.text = GenresDataSource[indexPath.row].title
+            
+            ImageManager.getImageForPosterName(posterName, completion: { image in
+                moreCell.moreImageView.image = image ?? UIImage(named: "AppIcon")
+            })
+            
+        }
+    }
+        
+    
+    
+    
     
 }
 

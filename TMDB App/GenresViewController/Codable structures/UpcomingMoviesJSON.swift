@@ -21,14 +21,14 @@ struct UpcomingMoviesResponse: Codable {
 
 struct UpcomingMovie: Codable {
     let adult: Bool
-    let backdropPath: String
+    let backdropPath: String?
     let genreIDS: [Int]?
     let id: Int
     let originalLanguage: String
     let originalTitle: String
     let overview: String
     let popularity: Double
-    let posterPath: String
+    let posterPath: String?
     let releaseDate: String?
     let title: String
     let video: Bool
@@ -48,6 +48,11 @@ struct UpcomingMovie: Codable {
 
 
     }
+    
+    var unwrappedBackdropPath: String {
+            return backdropPath ?? ""
+        }
+    
 }
 
 extension UpcomingMovie: DetailGenresMovieProtocol {
@@ -81,9 +86,12 @@ extension UpcomingMovie: DetailGenresMovieProtocol {
     }
     
     var imageURL: URL? {
-         URL(string: "https://www.themoviedb.org/t/p/w780\(backdropPath)")
+        if backdropPath == nil {
+            return nil
+        } else {
+            return URL(string: "https://www.themoviedb.org/t/p/w780\(backdropPath!)")
+        }
     }
-    
     
 }
 
