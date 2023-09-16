@@ -116,7 +116,7 @@ class GenresViewController: UIViewController {
     //MARK: Fetch Movies
     
     private func fetchTrendingMovies() {
-        NetworkManager.shared.getTrendingMovies(page: 1) {
+        NetworkManager.shared.getTrendingMovies(page: 1, language: "uk-UA") {
             
             [weak self] trendingMoviesResponse in
             guard let self = self else { return }

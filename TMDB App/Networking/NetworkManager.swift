@@ -192,11 +192,11 @@ class NetworkManager {
     
     
     
-    func getTrendingMovies(page: Int, _ completion: @escaping (TrendingMoviesResponse?) -> ()){
+    func getTrendingMovies(page: Int, language: String, _ completion: @escaping (TrendingMoviesResponse?) -> ()){
         
         let baseUrl = "https://api.themoviedb.org/3"
         let endpoint = "/trending/movie/week"
-            AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": page]).responseJSON { response in
+            AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": page, "language": language]).responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     
@@ -498,6 +498,32 @@ class NetworkManager {
     }
 
    
+    
+    func getAllRegions(_ completion: @escaping ([Region]?) -> ()) {
+        let baseUrl = "https://api.themoviedb.org/3"
+        let endpoint = "/configuration/countries"
+        
+        let parameters: [String: Any] = [
+            "api_key": apiKey
+        ]
+        
+        AF.request(baseUrl + endpoint, parameters: parameters).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let decoder = JSONDecoder()
+                
+                if let regions = try? decoder.decode([Region].self, from: response.data!) {
+                    completion(regions)
+                } else {
+                    completion(nil)
+                }
+                
+            case .failure(_):
+                print("Error fetching regions")
+                completion(nil)
+            }
+        }
+    }
 
     
 }

@@ -138,7 +138,7 @@ class MoreViewController: UIViewController {
     }
     
     private func fetchMoreTrendingMovies() {
-        NetworkManager.shared.getTrendingMovies(page: page) {
+        NetworkManager.shared.getTrendingMovies(page: page, language: "ru-RU") {
             [weak self] trendingMoviesResponse in
             guard let self = self else { return }
             print("page in request = \(page)")
