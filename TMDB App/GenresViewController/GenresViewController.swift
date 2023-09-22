@@ -67,7 +67,16 @@ class GenresViewController: UIViewController {
         //fetchDailyTrendingMovies()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        dualCollectionView.reloadData()
+        print("ViewWillApper")
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        dualCollectionView.reloadData()
+        print("ViewDidAppear")
+
+    }
     
     
     //MARK: IBAction func's
@@ -116,7 +125,7 @@ class GenresViewController: UIViewController {
     //MARK: Fetch Movies
     
     private func fetchTrendingMovies() {
-        NetworkManager.shared.getTrendingMovies(page: 1, language: "uk-UA") {
+        NetworkManager.shared.getTrendingMovies(page: 1, language: SelectedRegion.shared.region) {
             
             [weak self] trendingMoviesResponse in
             guard let self = self else { return }
@@ -364,6 +373,7 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             } else if indexPath.row == 5 {
                 selectedGenre = "Thriller"
             }
+            
             
             
             performSegue(withIdentifier: SegueId.moreGenresSegue, sender: nil)

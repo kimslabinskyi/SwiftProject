@@ -44,9 +44,7 @@ class DetailGenresViewController: UIViewController {
     @IBOutlet weak var voteCountLabel: UILabel!
     
     @IBOutlet weak var releaseDateLabel: UILabel!
-    
-    
-    
+        
     
     
     
@@ -79,6 +77,24 @@ class DetailGenresViewController: UIViewController {
         }
     }
     
+    
+    
+    @IBAction func addRatingButton(_ sender: Any){
+        NetworkManager.shared.rateMovie(movieID: detailedMovie?.moviesIDS ?? 0, ratingValue: 8.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
+
+            print("id = \(self.detailedMovie?.moviesIDS ?? 0)")
+
+            if success {
+                    print("Рейтинг успешно установлен!")
+                } else {
+                    print("Произошла ошибка при установке рейтинга.")
+                }
+
+
+
+        }
+        
+    }
 //    @IBAction func addToFavouritesButton(_ sender: Any) {
 //        NetworkManager.shared.markAsFavourite(movieId: detailedMovie?.moviesIDS ?? 0 )
 //            print(detailedMovie?.moviesIDS ?? 78)

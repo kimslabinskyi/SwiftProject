@@ -660,11 +660,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="regionCell" rowHeight="61" id="ZVx-jO-9yf" customClass="RegionsTableViewCell" customModule="TMDB_App" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="61"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="regionCell" rowHeight="60" id="ZVx-jO-9yf" customClass="RegionsTableViewCell" customModule="TMDB_App" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZVx-jO-9yf" id="gNA-I2-dPs" customClass="RegionsTableViewCell" customModule="TMDB_App" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="61"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PvP-y3-al1">
@@ -788,6 +788,9 @@
                                                 <buttonConfiguration key="configuration" style="plain" title="Rate">
                                                     <color key="baseForegroundColor" systemColor="tintColor"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="addRatingButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="shJ-nX-MNp"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Yj-tV-xxz">
                                                 <rect key="frame" x="8" y="371" width="109" height="21"/>

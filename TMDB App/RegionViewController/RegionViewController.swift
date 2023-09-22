@@ -25,12 +25,23 @@ class RegionViewController: UIViewController {
                 print("Failed to fetch regions")
             }
         }
-
+        
+//        regionKeys = Array(regions.keys)
+//        regionValues = Array(regions.values)
+//
+//
+//        lazy var regionKeys: [String] = {
+//                return Array(self.regions.keys)
+//            }()
     }
     
-    let regionsNames: [String] = ["Ukraine", "USA","Britain","Italian", "Portugal", "Spain", "German", "France", "Japan", "Saudi Arabia", "Georgia" ]
+//    let regionsNames: [String: String] = ["Ukraine": "🇺🇦", "USA": "🇺🇸","Britain": "🇬🇧","Italian": "🇮🇹", "Portugal": "🇵🇹", "Spain": "🇪🇸", "German": "🇩🇪", "France": "🇫🇷", "Japan": "🇯🇵", "Saudi Arabia": "🇸🇦", "Georgia": "🇬🇪" ]
+//
     
-    let regions = ["Ukraine": "UA", "Gernaja": "DE"]
+    let regionsNames: [String] = ["USA", "Ukraine","Italian", "Portugal", "Spain", "German", "France", "Japan", "Saudi Arabia", "Georgia" ]
+    let regionsFlags: [String] = [ "🇺🇸", "🇺🇦", "🇮🇹", "🇵🇹", "🇪🇸", "🇩🇪",  "🇫🇷", "🇯🇵", "🇸🇦", "🇬🇪" ]
+
+
 
 }
 
@@ -42,34 +53,26 @@ extension RegionViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "regionCell", for: indexPath) as! RegionsTableViewCell
         cell.regionLabel.text = regionsNames[indexPath.row]
-        cell.flagLabel.text = "🇦🇱"
-        cell.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16) // Пример отступов 16 точек слева и справа
+        cell.flagLabel.text = regionsFlags[indexPath.row]
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
         return cell 
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0{
+            SelectedRegion.shared.region = "en-US"
+            print(SelectedRegion.shared.region)
+        } else if indexPath.row == 1{
+            SelectedRegion.shared.region = "uk-UA"
+            print(SelectedRegion.shared.region)
+        }
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Здесь устанавливайте высоту для каждой ячейки. Например, возвращаем 50 точек.
-        return 50.0
+        return 60.0
     }
 
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        // Здесь можно установить высоту для заголовка секции (если он есть)
-//        return 30.0
-//    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        // Здесь можно установить высоту для подвала секции (если он есть)
-        return 20.0
-    }
-
-    func tableView(_ tableView: UITableView, heightForSpacingBetweenSectionsIn section: Int) -> CGFloat {
-        // Здесь можно установить отступ между секциями таблицы
-        return 10.0
-    }
-
-    
-    
+ 
     
 }

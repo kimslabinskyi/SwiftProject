@@ -196,30 +196,30 @@ class NetworkManager {
         
         let baseUrl = "https://api.themoviedb.org/3"
         let endpoint = "/trending/movie/week"
-            AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": page, "language": language]).responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    
-                    // print("TrendingMovies = \(value)")
-                    let decoder = JSONDecoder()
-                    
-                    if let jsonMovieResponse = try? decoder.decode(TrendingMoviesResponse.self, from: response.data!){
-                        print("success")
-                        completion(jsonMovieResponse)
-                        return
-                        
-                    }
-                    completion(nil)
-                    
-                    
-                    
-                    
-                case .failure(_):
-                    print("Error with *trending movies*")
-                    completion(nil)
-                }
+        AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": page, "language": language]).responseJSON { response in
+            switch response.result {
+            case .success(let value):
                 
+                // print("TrendingMovies = \(value)")
+                let decoder = JSONDecoder()
+                
+                if let jsonMovieResponse = try? decoder.decode(TrendingMoviesResponse.self, from: response.data!){
+                    print("success")
+                    completion(jsonMovieResponse)
+                    return
+                    
+                }
+                completion(nil)
+                
+                
+                
+                
+            case .failure(_):
+                print("Error with *trending movies*")
+                completion(nil)
             }
+            
+        }
     }
     
     
@@ -245,14 +245,14 @@ class NetworkManager {
                 
                 
                 
-        
+                
             case .failure(_):
                 print("Error with *top rated movies*")
                 completion(nil)
             }
             
         }
-
+        
         
     }
     
@@ -284,7 +284,7 @@ class NetworkManager {
                 
                 
                 
-        
+                
             case .failure(_):
                 print("Error with *upcoming movies*")
                 completion(nil)
@@ -333,75 +333,75 @@ class NetworkManager {
         print("apiKey = \(apiKey)")
         print("movieID = \(movieId)")
     }
-        
-        /* func markAsFavourite(movieId: Int){
-            print("Session_id = \(sessionID!)")
-            print("accountInfo?.id = \(accountInfo!.id)")
-            print("apiKey = \(apiKey)")
-            
-           
-            let url = "https://api.themoviedb.org/3/account/\(accountInfo!.id)/favorite"
-            let parameters: Parameters = [
-                    "media_type": "movie",
-                    "media_id": movieId,
-                    "favorite": true
-                ]
-            let headers: HTTPHeaders = [
-                "Authorization": "\(String(describing: sessionID))",
-                "api_key": apiKey
-                ]
-            AF.request(url, method: .post, parameters: parameters, headers: headers)
-                   .validate()
-                   .responseJSON { response in
-                       switch response.result {
-                       case .success:
-                           print("Movie marked as favorite successfully!")
-                       case .failure(let error):
-                           print("Failed to mark movie as favorite: \(error)")
-                       }
-                   }
-        
-        
-        
-    }
-    */
     
-//    func getDailyTrendingMovies(completion: @escaping ([DailyTrendingMoviesResponse]?) -> Void){
-//        let baseUrl = "https://api.themoviedb.org/3"
-//           let endpoint = "/trending/movie/day"
-//
-//           let dateFormatter = DateFormatter()
-//           dateFormatter.dateFormat = "yyyy-MM-dd"
-//           let currentDate = dateFormatter.string(from: Date())
-//
-//           AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "date": currentDate, "page": 1]).responseJSON { response in
-//               switch response.result {
-//               case .success(let value):
-//
-//                   let decoder = JSONDecoder()
-//
-//
-////                   if let data = response.data, let movieResponse = try? decoder.decode(DailyTrendingMoviesResponse.self, from: data) {
-////                       let movies = movieResponse.results
-////                       completion(movies)
-////
-////                   } else {
-////                       completion(nil)
-////                   }
-//                   if let jsonMovieResponse = try? decoder.decode(DailyTrendingMoviesResponse.self, from: response.data!){
-//                       print("success")
-//                       completion(jsonMovieResponse)
-//                       return
-//
-//                   }
-//                   completion(nil)
-//
-//               case .failure(let error):
-//                   print("Error: \(error)")
-//                   completion(nil)
-//               }
-//           }
-//    }
+    /* func markAsFavourite(movieId: Int){
+     print("Session_id = \(sessionID!)")
+     print("accountInfo?.id = \(accountInfo!.id)")
+     print("apiKey = \(apiKey)")
+     
+     
+     let url = "https://api.themoviedb.org/3/account/\(accountInfo!.id)/favorite"
+     let parameters: Parameters = [
+     "media_type": "movie",
+     "media_id": movieId,
+     "favorite": true
+     ]
+     let headers: HTTPHeaders = [
+     "Authorization": "\(String(describing: sessionID))",
+     "api_key": apiKey
+     ]
+     AF.request(url, method: .post, parameters: parameters, headers: headers)
+     .validate()
+     .responseJSON { response in
+     switch response.result {
+     case .success:
+     print("Movie marked as favorite successfully!")
+     case .failure(let error):
+     print("Failed to mark movie as favorite: \(error)")
+     }
+     }
+     
+     
+     
+     }
+     */
+    
+    //    func getDailyTrendingMovies(completion: @escaping ([DailyTrendingMoviesResponse]?) -> Void){
+    //        let baseUrl = "https://api.themoviedb.org/3"
+    //           let endpoint = "/trending/movie/day"
+    //
+    //           let dateFormatter = DateFormatter()
+    //           dateFormatter.dateFormat = "yyyy-MM-dd"
+    //           let currentDate = dateFormatter.string(from: Date())
+    //
+    //           AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "date": currentDate, "page": 1]).responseJSON { response in
+    //               switch response.result {
+    //               case .success(let value):
+    //
+    //                   let decoder = JSONDecoder()
+    //
+    //
+    ////                   if let data = response.data, let movieResponse = try? decoder.decode(DailyTrendingMoviesResponse.self, from: data) {
+    ////                       let movies = movieResponse.results
+    ////                       completion(movies)
+    ////
+    ////                   } else {
+    ////                       completion(nil)
+    ////                   }
+    //                   if let jsonMovieResponse = try? decoder.decode(DailyTrendingMoviesResponse.self, from: response.data!){
+    //                       print("success")
+    //                       completion(jsonMovieResponse)
+    //                       return
+    //
+    //                   }
+    //                   completion(nil)
+    //
+    //               case .failure(let error):
+    //                   print("Error: \(error)")
+    //                   completion(nil)
+    //               }
+    //           }
+    //    }
     
     
     func getMoviesByGenre(page: Int, genre: String, _ completion: @escaping (GenresMoviesResponse?) -> ()){
@@ -412,92 +412,92 @@ class NetworkManager {
             "with_genres": getGenreId(for: genre),
             "page": page
             //   "certification_country": "US",
-           // "certification": "G"
+            // "certification": "G"
             
         ]
         completion(nil)
         
-
+        
         
         AF.request(url, parameters: parameters).responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    print("Genres movies = \(value)")
-                    let decoder = JSONDecoder()
-                    
-                    if let data = response.data , let utf8Text = String(data: data, encoding: .utf8){
-                        print("JSON.DATA = \(utf8Text)")
-                    }
-                    
-                    if let jsonData = response.data,
-                       let jsonMovieResponse = try? decoder.decode(GenresMoviesResponse.self, from: jsonData) {
-                        print("success")
-                        completion(jsonMovieResponse)
-                    } else {
-                        print("Failed to decode JSON")
-                        completion(nil)
-                    }
-                case .failure(let error):
-                    print("Error: \(error)")
+            switch response.result {
+            case .success(let value):
+                print("Genres movies = \(value)")
+                let decoder = JSONDecoder()
+                
+                if let data = response.data , let utf8Text = String(data: data, encoding: .utf8){
+                    print("JSON.DATA = \(utf8Text)")
+                }
+                
+                if let jsonData = response.data,
+                   let jsonMovieResponse = try? decoder.decode(GenresMoviesResponse.self, from: jsonData) {
+                    print("success")
+                    completion(jsonMovieResponse)
+                } else {
+                    print("Failed to decode JSON")
                     completion(nil)
                 }
+            case .failure(let error):
+                print("Error: \(error)")
+                completion(nil)
             }
         }
-
-
+    }
     
     
     
+    
+    
+    
+    func getGenreId(for genre: String) -> Int {
         
-        func getGenreId(for genre: String) -> Int {
-            
-            let genreIds: [String: Int] = [
-                "Action": 28,
-                "Adventure": 12,
-                "Animation": 16,
-                "Comedy": 35,
-                "Crime": 80,
-                "Documentary": 99,
-                "Drama": 18,
-                "Family": 10751,
-                "Fantasy": 14,
-                "History": 36,
-                "Horror": 27,
-                "Music": 10402,
-                "Mystery": 9638,
-                "Romance": 10749,
-                "Science Fiction": 878,
-                "TV Movie": 10770,
-                "Thriller": 53,
-                "War": 10752,
-                "Western": 37
-            ]
-            
-            return genreIds[genre] ?? 0
-        }
+        let genreIds: [String: Int] = [
+            "Action": 28,
+            "Adventure": 12,
+            "Animation": 16,
+            "Comedy": 35,
+            "Crime": 80,
+            "Documentary": 99,
+            "Drama": 18,
+            "Family": 10751,
+            "Fantasy": 14,
+            "History": 36,
+            "Horror": 27,
+            "Music": 10402,
+            "Mystery": 9638,
+            "Romance": 10749,
+            "Science Fiction": 878,
+            "TV Movie": 10770,
+            "Thriller": 53,
+            "War": 10752,
+            "Western": 37
+        ]
+        
+        return genreIds[genre] ?? 0
+    }
     
-
+    
     func fetchMovieTrailer(movieID: Int, completion: @escaping (String?) -> Void) {
         let url = "https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=\(apiKey)"
         
         AF.request(url).responseDecodable(of: MovieVideoResponse.self) { response in
             switch response.result {
             case .success(let videoResponse):
-                   print("Video response: \(videoResponse)") // Выводим информацию о полученных данных
-                   if let trailer = videoResponse.results.first(where: { $0.type == "Trailer" }) {
-                       let trailerURLString = "https://www.youtube.com/watch?v=\(trailer.key)"
-                       completion(trailerURLString)
-                   } else {
-                       completion(nil) // Если трейлер не найден
-                   }
-               case .failure(let error):
-                   print("Error fetching movie trailer: \(error)")
-                   completion(nil)
+                print("Video response: \(videoResponse)") // Выводим информацию о полученных данных
+                if let trailer = videoResponse.results.first(where: { $0.type == "Trailer" }) {
+                    let trailerURLString = "https://www.youtube.com/watch?v=\(trailer.key)"
+                    completion(trailerURLString)
+                } else {
+                    completion(nil) // Если трейлер не найден
+                }
+            case .failure(let error):
+                print("Error fetching movie trailer: \(error)")
+                completion(nil)
             }
         }
     }
-
-   
+    
+    
     
     func getAllRegions(_ completion: @escaping ([Region]?) -> ()) {
         let baseUrl = "https://api.themoviedb.org/3"
@@ -524,9 +524,42 @@ class NetworkManager {
             }
         }
     }
+    
+    
+    
+    
+    
+    func rateMovie(movieID: Int, ratingValue: Double, sessionID: String, completion: @escaping (Bool) -> ()) {
+        let baseUrl = "https://api.themoviedb.org/3"
+        let endpoint = "/movie/\(movieID)/rating"
+        
 
+        let parameters: [String: Any] = [
+            "api_key": apiKey,
+            "session_id": sessionID,
+            "value": ratingValue
+        ]
+        
+
+        var request = URLRequest(url: URL(string: baseUrl + endpoint)!)
+        request.method = .post
+
+        
+        AF.request(request).response { response in
+            switch response.result {
+            case .success(_):
+                if let statusCode = response.response?.statusCode, statusCode == 201 {
+                    completion(true) 
+                } else {
+                    completion(false)
+                }
+                
+            case .failure(_):
+                completion(false)
+            }
+        }
+    }
+    
+    
     
 }
-
-
-
