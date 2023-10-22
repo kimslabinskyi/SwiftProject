@@ -56,6 +56,10 @@ struct UpcomingMovie: Codable {
 }
 
 extension UpcomingMovie: DetailGenresMovieProtocol {
+    var posterURL: URL? {
+        return URL(string: "https://www.themoviedb.org/t/p/w780\(String(describing: posterPath))")
+    }
+    
     var moviesIDS: Int {
         return id 
     }

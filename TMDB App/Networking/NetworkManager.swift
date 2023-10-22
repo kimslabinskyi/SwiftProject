@@ -529,36 +529,86 @@ class NetworkManager {
     
     
     
+//    func rateMovie(movieID: Int, ratingValue: Double, sessionID: String, completion: @escaping (Bool) -> ()) {
+//        let baseUrl = "https://api.themoviedb.org/3"
+//        let endpoint = "/movie/\(movieID)/rating"
+//        
+//
+//        let parameters: [String: Any] = [
+//            "api_key": apiKey,
+//            "session_id": sessionID,
+//            "value": ratingValue
+//        ]
+//        
+//        
+//        
+//
+//        var request = URLRequest(url: URL(string: baseUrl + endpoint)!)
+//        do {
+//            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+//        } catch {print("error")}
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.httpMethod = "POST"
+//
+//        //request.method = .post
+//
+//        
+//        AF.request(request).response { response in
+//            switch response.result {
+//            case .success(_):
+//                if let statusCode = response.response?.statusCode, statusCode == 201 {
+//                    completion(true) 
+//                } else {
+//                    completion(false)
+//                }
+//                
+//            case .failure(_):
+//                completion(false)
+//            }
+//        }
+//          print(request)
+//
+//
+//    }
+//    
+//    
+    
+    
     func rateMovie(movieID: Int, ratingValue: Double, sessionID: String, completion: @escaping (Bool) -> ()) {
         let baseUrl = "https://api.themoviedb.org/3"
         let endpoint = "/movie/\(movieID)/rating"
         
-
-        let parameters: [String: Any] = [
-            "api_key": apiKey,
-            "session_id": sessionID,
-            "value": ratingValue
+        var components = URLComponents(string: baseUrl + endpoint)
+        components?.queryItems = [
+            URLQueryItem(name: "api_key", value: apiKey),
+            URLQueryItem(name: "session_id", value: sessionID),
+            URLQueryItem(name: "value", value: String(ratingValue))
         ]
         
-
-        var request = URLRequest(url: URL(string: baseUrl + endpoint)!)
-        request.method = .post
-
-        
-        AF.request(request).response { response in
-            switch response.result {
-            case .success(_):
-                if let statusCode = response.response?.statusCode, statusCode == 201 {
-                    completion(true) 
-                } else {
+        if let url = components?.url {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            AF.request(request).response { response in
+                switch response.result {
+                case .success(_):
+                    if let statusCode = response.response?.statusCode, statusCode == 201 {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                    
+                case .failure(_):
                     completion(false)
                 }
-                
-            case .failure(_):
-                completion(false)
             }
+            
+            print(request)
         }
     }
+
+    
     
     
     

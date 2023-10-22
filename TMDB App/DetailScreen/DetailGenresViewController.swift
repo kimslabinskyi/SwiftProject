@@ -26,12 +26,11 @@ protocol DetailGenresMovieProtocol {
     var releaseDateString: String? { get }
     var genresIDS: [Int]? { get }
     var moviesIDS: Int { get }
+    var posterURL: URL? { get }
 }
 
 class DetailGenresViewController: UIViewController {
-    
-    var delegate: String?
-    
+        
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -54,53 +53,37 @@ class DetailGenresViewController: UIViewController {
         NetworkManager.shared.fetchMovieTrailer(movieID: detailedMovie?.moviesIDS ?? 2) { trailerURLString in
             
             if trailerURLString != nil{
-                //            if let trailerURLString = trailerURLString, let trailerURL = URL(string: trailerURLString) {
-                //                let player = AVPlayer(url: trailerURL)
-                //                let playerViewController = AVPlayerViewController()
-                //                playerViewController.player = player
-                //                self.present(playerViewController, animated: true) {
-                //                    player.play()
-                //                }
-                //            } else {
-                //                print("Trailer not available")
-                //            }
-                
+               
                 if let url = URL(string: trailerURLString!) {
                     let safariViewController = SFSafariViewController(url: url)
                     self.present(safariViewController, animated: true, completion: nil)
                 }
-                
             } else {
-                
+        
             }
-            
         }
     }
     
     
     
     @IBAction func addRatingButton(_ sender: Any){
-        NetworkManager.shared.rateMovie(movieID: detailedMovie?.moviesIDS ?? 0, ratingValue: 8.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
+        
 
-            print("id = \(self.detailedMovie?.moviesIDS ?? 0)")
-
-            if success {
-                    print("Рейтинг успешно установлен!")
-                } else {
-                    print("Произошла ошибка при установке рейтинга.")
-                }
-
-
-
-        }
+        
+//       NetworkManager.shared.rateMovie(movieID: detailedMovie?.moviesIDS ?? 0, ratingValue: 10.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
+//
+//            print("id = \(self.detailedMovie?.moviesIDS ?? 0)")
+//
+//            if success {
+//                    print("Рейтинг успешно установлен!")
+//                } else {
+//                    print("Произошла ошибка при установке рейтинга.")
+//                }
+//
+//        }
         
     }
-//    @IBAction func addToFavouritesButton(_ sender: Any) {
-//        NetworkManager.shared.markAsFavourite(movieId: detailedMovie?.moviesIDS ?? 0 )
-//            print(detailedMovie?.moviesIDS ?? 78)
-//
-//
-//    }
+
     
     @IBAction func addToWatchlistButton(_ sender: Any) {
         NetworkManager.shared.addToWatchlist(movieId: detailedMovie?.moviesIDS ?? 2)
@@ -140,6 +123,7 @@ class DetailGenresViewController: UIViewController {
         setUp()
                 
     }
+        
     
     func setUp() {
         let voteAverage: String = String(format: "%.1f", detailedMovie?.voteAverageDouble ?? 0.01)
@@ -159,13 +143,6 @@ class DetailGenresViewController: UIViewController {
             }
         }
         
-        //        if let voteCount = detailedTrendingMovie?.voteCount {
-        //            voteCountLabel.text = String(voteCount)
-        //        } else {
-        //            print("Error: cannot find vote count")
-        //        }
-        
-        
         
         if let url = detailedMovie?.imageURL {
             
@@ -174,6 +151,38 @@ class DetailGenresViewController: UIViewController {
             }
         } else {
             backdrop.image = UIImage(named: "AppIcon")
+        }
+        
+        //Data to pass
+        if let dataToPass = detailedMovie?.posterURL {
+            self.posterURLToPass = dataToPass
+        }
+        if let dataToPass = detailedMovie?.moviesIDS{
+            self.movieIDToPass = dataToPass
+        }
+        if let voteAverage = detailedMovie?.voteAverageDouble {
+            let dataToPass = String(format: "%.1f", voteAverage)
+            self.voteAverageToPass = dataToPass
+        } else {
+            print("No average rating")
+        }
+
+        if let dataToPass = detailedMovie?.title{
+            self.labelToPass = dataToPass
+        }
+    }
+    
+    var posterURLToPass: URL?
+    var movieIDToPass: Int?
+    var voteAverageToPass: String?
+    var labelToPass: String? 
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? RateViewController {
+            destinationViewController.receivedPosterURL = posterURLToPass
+            destinationViewController.receivedMovieID = movieIDToPass
+            destinationViewController.receivedVoteAverage = voteAverageToPass
+            destinationViewController.receivedLabel = labelToPass
         }
     }
     

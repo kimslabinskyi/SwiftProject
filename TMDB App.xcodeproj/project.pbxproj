@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B0418412ABC298F002300C6 /* AddRatingResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0418402ABC298F002300C6 /* AddRatingResponce.swift */; };
 		3B27581B2A66A8080014130A /* GenresCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B27581A2A66A8080014130A /* GenresCollectionViewCell.swift */; };
 		3B27581D2A67D7C40014130A /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B27581C2A67D7C40014130A /* MoreViewController.swift */; };
 		3B27581F2A67D7F50014130A /* MoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B27581E2A67D7F50014130A /* MoreCollectionViewCell.swift */; };
@@ -43,6 +42,7 @@
 		3BB31E4B2A3CEFAC0071D4EF /* DailyTrendingMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB31E4A2A3CEFAC0071D4EF /* DailyTrendingMoviesResponse.swift */; };
 		3BB31E4D2A59AD6F0071D4EF /* imageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB31E4C2A59AD6E0071D4EF /* imageLoader.swift */; };
 		3BB4DDA72A3106F9003FACA5 /* UIImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB4DDA62A3106F9003FACA5 /* UIImageManager.swift */; };
+		3BB818A42AD84DEF006C689E /* RateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB818A32AD84DEF006C689E /* RateViewController.swift */; };
 		3BCD569D2A27D10100495460 /* TrendingMoviesJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD569C2A27D10100495460 /* TrendingMoviesJSON.swift */; };
 		3BCD569F2A28C2B300495460 /* DetailGenresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD569E2A28C2B300495460 /* DetailGenresViewController.swift */; };
 		3BCD56A12A28C54500495460 /* TrendingMoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD56A02A28C54500495460 /* TrendingMoviesCollectionViewCell.swift */; };
@@ -55,7 +55,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B0418402ABC298F002300C6 /* AddRatingResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRatingResponce.swift; sourceTree = "<group>"; };
 		3B27581A2A66A8080014130A /* GenresCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresCollectionViewCell.swift; sourceTree = "<group>"; };
 		3B27581C2A67D7C40014130A /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		3B27581E2A67D7F50014130A /* MoreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -92,6 +91,7 @@
 		3BB31E4A2A3CEFAC0071D4EF /* DailyTrendingMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTrendingMoviesResponse.swift; sourceTree = "<group>"; };
 		3BB31E4C2A59AD6E0071D4EF /* imageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageLoader.swift; sourceTree = "<group>"; };
 		3BB4DDA62A3106F9003FACA5 /* UIImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageManager.swift; sourceTree = "<group>"; };
+		3BB818A32AD84DEF006C689E /* RateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateViewController.swift; sourceTree = "<group>"; };
 		3BCD569C2A27D10100495460 /* TrendingMoviesJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMoviesJSON.swift; sourceTree = "<group>"; };
 		3BCD569E2A28C2B300495460 /* DetailGenresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGenresViewController.swift; sourceTree = "<group>"; };
 		3BCD56A02A28C54500495460 /* TrendingMoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMoviesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -118,8 +118,6 @@
 		3B0418422ABC299F002300C6 /* Responces */ = {
 			isa = PBXGroup;
 			children = (
-				3B0418402ABC298F002300C6 /* AddRatingResponce.swift */,
-				3B68C9FF2AAB956100FEF52A /* RegionStruct.swift */,
 			);
 			path = Responces;
 			sourceTree = "<group>";
@@ -199,6 +197,7 @@
 				3BBC3A9D2A079F7900FB0111 /* ActivityController */,
 				3BB4DDA82A310708003FACA5 /* UIImageManager */,
 				3BB31E4E2A59AD750071D4EF /* imageLoader */,
+				3BB818A52AD84DF6006C689E /* RateViewController */,
 			);
 			path = "TMDB App";
 			sourceTree = "<group>";
@@ -231,6 +230,7 @@
 		3B68C9FE2AAB943600FEF52A /* RegionViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3B68C9FF2AAB956100FEF52A /* RegionStruct.swift */,
 				3B68C9FC2AAB943000FEF52A /* RegionViewController.swift */,
 				3BACCB2E2AB6E95200B495BA /* SelectedRegion.swift */,
 				3B68CA012AAF771E00FEF52A /* RegionsTableViewCell.swift */,
@@ -290,6 +290,14 @@
 			);
 			name = UIImageManager;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		3BB818A52AD84DF6006C689E /* RateViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3BB818A32AD84DEF006C689E /* RateViewController.swift */,
+			);
+			path = RateViewController;
 			sourceTree = "<group>";
 		};
 		3BBC3A9D2A079F7900FB0111 /* ActivityController */ = {
@@ -429,7 +437,6 @@
 				3B27581D2A67D7C40014130A /* MoreViewController.swift in Sources */,
 				3B66FED129FAD14000D26C76 /* WKWebViewController.swift in Sources */,
 				3B74BE012A051E0600D6561A /* AccountInfo.swift in Sources */,
-				3B0418412ABC298F002300C6 /* AddRatingResponce.swift in Sources */,
 				3B66FEEF29FE75D300D26C76 /* File.swift in Sources */,
 				3B74BE032A06F8D800D6561A /* ActivityController .swift in Sources */,
 				3B7E8C2E2A0F67BB008396D8 /* MoviesInfo.swift in Sources */,
@@ -437,6 +444,7 @@
 				3BB31E4B2A3CEFAC0071D4EF /* DailyTrendingMoviesResponse.swift in Sources */,
 				3B27581F2A67D7F50014130A /* MoreCollectionViewCell.swift in Sources */,
 				3B66FECD29FAD14000D26C76 /* AppDelegate.swift in Sources */,
+				3BB818A42AD84DEF006C689E /* RateViewController.swift in Sources */,
 				3B66FECF29FAD14000D26C76 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

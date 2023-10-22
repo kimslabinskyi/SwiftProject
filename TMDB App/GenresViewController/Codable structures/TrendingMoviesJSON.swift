@@ -50,6 +50,10 @@ struct TrendingMovie: Codable {
 }
 
 extension TrendingMovie: DetailGenresMovieProtocol {
+    var posterURL: URL? {
+        return URL(string: "https://www.themoviedb.org/t/p/w780\(posterPath)")
+    }
+    
     var moviesIDS: Int {
         return id
     }

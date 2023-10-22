@@ -62,6 +62,10 @@ struct OptionalString: Codable {
 }
 
 extension GenreMovie: DetailGenresMovieProtocol{
+    var posterURL: URL? {
+        return URL(string: "https://www.themoviedb.org/t/p/w780\(posterPath)")
+    }
+    
     var type: MovieType {
         return .genresSorted
     }
