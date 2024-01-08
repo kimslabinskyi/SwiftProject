@@ -12,31 +12,27 @@ import Alamofire
 class GenresViewController: UIViewController {
     
     @IBOutlet weak var dualCollectionView: UICollectionView!
-    
     @IBOutlet weak var topRatedCollectionView: UICollectionView!
-    
     @IBOutlet weak var upcomingCollectionView: UICollectionView!
-    
-    @IBOutlet weak var segmentedControll: UISegmentedControl!
-    
     @IBOutlet weak var genresCollectionView: UICollectionView!
-    
+    @IBOutlet weak var greetingLabel: UILabel!
     
     let apiKey = "15ec7b54d43e199ced41a6e461173cee"
     var mainDetailMovie: String?
     var selectedMovieType: String?
+    var animationLabelText = "What’s new, "
+    var hasAnimatedLabel = false
+
     
     var dataSourceTrendingMovies: [TrendingMovie] = []
     var dataSourceTopRatedMovies: [TopRatedMovie] = []
     var dataSourceUpcomingMovies: [UpcomingMovie] = []
     var dataSourceGenresMovies: [GenreMovie] = []
-    var dataSourceDailyTrendingMovies: [DailyTrendingMovie] = []
     
     var selectedTrendingMovie: TrendingMovie?
     var selectedTopRatedMovie: TopRatedMovie?
     var selectedUpcomingMovie: UpcomingMovie?
     var selectedGenreMovie: GenreMovie?
-    var selectedDailyTrendingMovie: DailyTrendingMovie?
     
     let trendingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let dailyTrendingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -46,66 +42,45 @@ class GenresViewController: UIViewController {
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        setUp()
         
+        fetchTrendingMovies()
+        fetchTopRatedMovies()
+        fetchUpcomingMovies()
+    }
+    
+    func setUp(){
         trendingCollectionView.register(TrendingMoviesCollectionViewCell.self, forCellWithReuseIdentifier: "TrendingCell")
-        dailyTrendingCollectionView.register(DayTrendingCollectionViewCell.self, forCellWithReuseIdentifier: "DayTrendingCell")
-        
-        
         
         dualCollectionView.showsHorizontalScrollIndicator = false
         topRatedCollectionView.showsHorizontalScrollIndicator = false
         upcomingCollectionView.showsHorizontalScrollIndicator = false
         genresCollectionView.showsVerticalScrollIndicator = false
+        
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imageView.contentMode = .scaleAspectFit
         imageView.isLoading = true
         imageView.image = (UIImage(named: "AppIcon"))
         
-        fetchTrendingMovies()
-        fetchTopRatedMovies()
-        fetchUpcomingMovies()
-        //fetchDailyTrendingMovies()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        dualCollectionView.reloadData()
-        print("ViewWillApper")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        dualCollectionView.reloadData()
-        print("ViewDidAppear")
-
-    }
-    
-    
-    //MARK: IBAction func's
-    
-    @IBAction func segmentControllAction(_ sender: UISegmentedControl){
-        switch segmentedControll.selectedSegmentIndex{
-        case 0: print("SEGMENT = 0")
-            //            dualCollectionView = trendingCollectionView
-            //            dualCollectionView.reloadData()
-            tempCollectionView = trendingCollectionView
-            trendingCollectionView.isHidden = false
-            dailyTrendingCollectionView.isHidden = true
-            tempCollectionView?.reloadData()
-            dualCollectionView.reloadData()
-            
-        case 1:
-            print("SEGMENT = 1")
-            //            dualCollectionView = dailyTrendingCollectionView
-            //            dualCollectionView.reloadData()
-            tempCollectionView = dailyTrendingCollectionView
-            trendingCollectionView.isHidden = true
-            dailyTrendingCollectionView.isHidden = false
-            tempCollectionView?.reloadData()
-            dualCollectionView.reloadData()
-        default:
-            print("Error with UISegmentedControl")
+        if let accountInfo = NetworkManager.shared.accountInfo {
+            animationLabelText = animationLabelText + accountInfo.username + "?"
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !hasAnimatedLabel {
+            animateLabel()
+            hasAnimatedLabel = true
+        }
+    }
+    
+    //MARK: IBAction func's
     
     @IBAction func moreTrendingMoviesButton(_ sender: Any) {
         selectedMovieType = "trending"
@@ -169,19 +144,7 @@ class GenresViewController: UIViewController {
         }
     }
     
-    private func fetchDailyTrendingMovies(){
-        NetworkManager.shared.getDailyTrendingMovies{
-            [weak self] DailyTrendingMoviesResponse in
-            guard let self = self else { return }
-            
-            if let movies = DailyTrendingMoviesResponse {
-                self.dataSourceDailyTrendingMovies = movies.results
-                self.dailyTrendingCollectionView.reloadData()
-            } else {
-                print("Failed to fetch daily trending movies")
-            }
-        }
-    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -189,7 +152,6 @@ class GenresViewController: UIViewController {
             if let destinationVC = segue.destination as? DetailGenresViewController {
                 
                 destinationVC.detailedMovie = selectedTrendingMovie
-                
             }
             
         } else if segue.identifier == "DetailTopRatedMovieSegue"{
@@ -228,7 +190,13 @@ class GenresViewController: UIViewController {
         }
     }
     
-    
+    private func animateLabel(){
+        for char in animationLabelText {
+            greetingLabel.text! += "\(char)"
+            
+            RunLoop.current.run(until: Date() + 0.07)
+        }
+    }
     
     
     
@@ -297,10 +265,6 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             return cell
             
-        } else if collectionView == dailyTrendingCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DailyTrendingCell", for: indexPath) as! DayTrendingCollectionViewCell
-            print("code: 4")
-            return cell
         } else if collectionView == upcomingCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingCell", for: indexPath) as! UpcomingMoviesCollectionViewCell
             cell.spiner.startAnimating()
@@ -345,6 +309,34 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         if collectionView == dualCollectionView{
             mainDetailMovie = "trendingMovie"
+            
+//            DispatchQueue.main.async {
+//                NetworkManager.shared.getFavoriteMovies({ [weak self] movieResponse in
+//                    guard let self = self else { return }
+//                    
+//                    print("MOVIE RESPONSE = \(String(describing: movieResponse))")
+//                    
+//                    
+//                    if let movieResponse = movieResponse {
+//                        self.dataSource = movieResponse.results
+//                        
+//                        print("dataSource = \(dataSource)")
+//                        print("Count of favourites = \(dataSource.count)")
+//                        
+//                        for item in dataSource{
+//                            print(item.id)
+//                            if detailedMovie?.moviesIDS == item.id{
+//                                isFavourite = true
+//                                print("DONE!")
+//                                self.favouritesButton.backgroundColor = UIColor.gray
+//                                
+//                            }
+//                        }
+//                        
+//                    }
+//                })
+//            }
+            
             
             selectedTrendingMovie = dataSourceTrendingMovies[indexPath.row]
             //navigateToDetailViewController()

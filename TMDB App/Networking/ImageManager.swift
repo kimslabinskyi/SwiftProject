@@ -67,7 +67,7 @@ class ImageManager {
     
     class func getImageForFavouritesName(_ posterName: String, completion: @escaping (UIImage?) -> Void) {
 
-        guard let url = URL(string: "https://www.themoviedb.org/t/p/original/\(posterName)")
+        guard let url = URL(string: "https://www.themoviedb.org/t/p/original/\(posterName)&width=300")
         else {
             completion(nil)
             return

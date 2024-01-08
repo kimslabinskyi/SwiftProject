@@ -7,7 +7,10 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class CastCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var nameOfActorLabel: UILabel!
+    @IBOutlet weak var secondLabel: UILabel!
     
 }

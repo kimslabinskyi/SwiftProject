@@ -23,29 +23,16 @@ class AccountInfoViewController: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(" \n \n \n")
         
         if let accountInfo = NetworkManager.shared.accountInfo {
-
-            
             labelOfUsername.text = accountInfo.username
-          
-            
+            print(accountInfo.id)
         }
-
-        
-        
- 
-        
-        
-        
-        
+        NetworkManager.shared.getDetailAccountInfo()
+             
     }
     
     
@@ -72,10 +59,9 @@ extension AccountInfoViewController: UITableViewDataSource, UITableViewDelegate{
         NetworkManager.shared.getFavoriteMovies(){
             success in
             
-            
+            self.performSegue(withIdentifier: "WatchlistSegue", sender: self)
         }
         
-        //creating request
-        //seguei 
+       
     }
 }

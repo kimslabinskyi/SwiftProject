@@ -7,19 +7,19 @@
 import Alamofire
 import UIKit
 
-protocol DetailMovieProtocol {
-    var title: String { get }
-    var posterURL: String { get }
+protocol RateViewDelegate {
+   // var success: Bool { get }
+   // func sendData(_ success: Bool)
+    #warning("Change the buttons color")
 }
 
 class RateViewController: UIViewController {
-
+    
     @IBOutlet weak var blurredImageView: UIImageView!
-    
     @IBOutlet weak var mainLabel: UILabel!
-    
-    
     @IBOutlet weak var AverageRatingLabel: UILabel!
+    
+    var delegate: RateViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class RateViewController: UIViewController {
         
 
         if let url = receivedPosterURL {
-            loadImageUsingAlamofire(from: url) { image in
+            NetworkManager.shared.loadImageUsingAlamofire(from: url) { image in
                 if let originalImage = image {
                     let targetSize = CGSize(width: 200, height: 300)
                     let blurRadius: CGFloat = 30
@@ -74,7 +74,8 @@ class RateViewController: UIViewController {
                 }
 
         }
-        navigationController?.popViewController(animated: true)
+        closeViewController()
+        showAlertDialog()
         print("Rating: 1")
     }
     
@@ -89,7 +90,8 @@ class RateViewController: UIViewController {
                 }
 
         }
-        navigationController?.popViewController(animated: true)
+        closeViewController()
+        showAlertDialog()
         print("Rating: 2")
     }
     
@@ -104,7 +106,8 @@ class RateViewController: UIViewController {
                 }
 
         }
-        navigationController?.popViewController(animated: true)
+        closeViewController()
+        showAlertDialog()
         print("Rating: 3")
     }
     @IBAction func rate4(_ sender: Any) {
@@ -118,7 +121,8 @@ class RateViewController: UIViewController {
                 }
 
         }
-        navigationController?.popViewController(animated: true)
+        closeViewController()
+        showAlertDialog()
         print("Rating: 4")
     }
     @IBAction func rate5(_ sender: Any) {
@@ -132,7 +136,8 @@ class RateViewController: UIViewController {
                 }
 
         }
-        navigationController?.popViewController(animated: true)
+        closeViewController()
+        showAlertDialog()
         print("Rating: 5")
     }
     @IBAction func rate6(_ sender: Any) {
@@ -146,7 +151,8 @@ class RateViewController: UIViewController {
                 }
 
         }
-        navigationController?.popViewController(animated: true)
+        closeViewController()
+        showAlertDialog()
         print("Rating: 6")
     }
     @IBAction func rate7(_ sender: Any) {
@@ -160,7 +166,8 @@ class RateViewController: UIViewController {
                 }
 
         }
-        navigationController?.popViewController(animated: true)
+        closeViewController()
+        showAlertDialog()
         print("Rating: 7")
     }
     @IBAction func rate8(_ sender: Any) {
@@ -174,7 +181,8 @@ class RateViewController: UIViewController {
                 }
 
         }
-        navigationController?.popViewController(animated: true)
+        closeViewController()
+        showAlertDialog()
         print("Rating: 8")
     }
     @IBAction func rate9(_ sender: Any) {
@@ -187,7 +195,8 @@ class RateViewController: UIViewController {
                     print("An error occurred while setting the rating.")
                 }
         }
-        navigationController?.popViewController(animated: true)
+        closeViewController()
+        showAlertDialog()
         print("Rating: 9")
 
     }
@@ -203,7 +212,8 @@ class RateViewController: UIViewController {
                         }
         
                 }
-        navigationController?.popViewController(animated: true)
+                closeViewController()
+        showAlertDialog()
         print("Rating: 10")
         
     }
@@ -259,17 +269,22 @@ class RateViewController: UIViewController {
     var receivedVoteAverage: String?
     var receivedLabel: String?
     
-    func loadImageUsingAlamofire(from url: URL, completion: @escaping (UIImage?) -> Void) {
-        AF.request(url).responseData { response in
-            if let data = response.data {
-                let image = UIImage(data: data)
-                completion(image)
-            } else {
-                completion(nil)
+    
+     func showAlertDialog() {
+            let alertController = UIAlertController(title: "Thank you!", message: "Rating added successfully.", preferredStyle: .alert)
+
+            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
             }
+            
+
+            alertController.addAction(okAction)
+
+            self.present(alertController, animated: true, completion: nil)
         }
+    
+    func closeViewController(){
+        navigationController?.popViewController(animated: true)
     }
     
-
-
+    
 }

@@ -12,14 +12,26 @@ class FavoritesViewController: UIViewController{
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var dataSource: [Movie] = []
-    var selectedMovie: Movie?
+    var dataSource: [FavouriteMovie] = []
+    var selectedFavouriteMovie: FavouriteMovie?
     
     override func viewDidLoad(){
         super.viewDidLoad()
         
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
+        setUp()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        setUp()
+        collectionView.reloadData()
+    }
+    
+    
+    func setUp(){
         NetworkManager.shared.getFavoriteMovies { [weak self] movieResponse in
             guard let self = self else { return }
 
@@ -31,28 +43,17 @@ class FavoritesViewController: UIViewController{
                 self.collectionView.reloadData()
             }
         }
-    
-        
-        
     }
     
-    func loadImageUsingAlamofire(from url: URL, completion: @escaping (UIImage?) -> Void) {
-        AF.request(url).responseData { response in
-            if let data = response.data {
-                let image = UIImage(data: data)
-                completion(image)
-            } else {
-                completion(nil)
-            }
-        }
-    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == SegueId.detailFavouriteMovieInfoSegue,
-        let destinationVc = segue.destination as? DetailFavouritesMovies else {
-            return
+        if segue.identifier == "DetailFavouriteMovieInfoSegue"{
+            if let destinationVC = segue.destination as? DetailGenresViewController {
+                
+                destinationVC.detailedMovie = selectedFavouriteMovie
+            }
         }
-        destinationVc.detailedMovie = selectedMovie       
     }
 }
 
@@ -70,17 +71,19 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
         
         cell.movieImageView.image = nil
 
-        ImageManager.getImageForFavouritesName(posterName, completion: { image in
-            cell.movieImageView.image = image ??
-            UIImage(named: "AppIcon")
+        ImageManager.getImageForPosterName(posterName, completion: {
+            image in
+            cell.movieImageView.image = image ?? UIImage(named: "AppIcon")
         })
+        
+
         
         cell.movieLabel.text = dataSource[indexPath.row].title
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedMovie = dataSource[indexPath.row]
+        selectedFavouriteMovie = dataSource[indexPath.row]
         performSegue(withIdentifier: SegueId.detailFavouriteMovieInfoSegue, sender: nil)
     }
 }

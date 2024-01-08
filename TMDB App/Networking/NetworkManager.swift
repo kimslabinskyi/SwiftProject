@@ -2,8 +2,8 @@
 //  NetworkManager.swift
 //  TMDB App
 //
-//  Created by Kim on 27.04.2023 😎🙌
-//
+// Created by Kim on 27.04.2023
+// #DEVELOPMENT HELL on 07.12.2023
 
 import Alamofire
 import AVKit
@@ -158,7 +158,18 @@ class NetworkManager {
         }
     }
     
-    func getFavoriteMovies(_ completion: @escaping (MovieResponse?) -> ()){
+    func loadImageUsingAlamofire(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        AF.request(url).responseData { response in
+            if let data = response.data {
+                let image = UIImage(data: data)
+                completion(image)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    func getFavoriteMovies(_ completion: @escaping (FavouritesMoviesResponse?) -> ()){
         
         let parameters: [String: String] = ["account_id": String(accountInfo!.id)]
         
@@ -166,15 +177,16 @@ class NetworkManager {
         let bodyString = apiKey + "&session_id=" + sessionID! + "&language=en-US&sort_by=created_at.asc&page=1"
         let urlString = httpString + bodyString
         
-        AF.request(urlString, method: .get, parameters: parameters).responseJSON { [self] response in
-            switch response.result {
-            case .success(let value):
-                
-                print("VALUE = \(value)")
+//        let finalURLString = urlString + "&width=100" 
+            
+            AF.request(urlString, method: .get, parameters: parameters).responseJSON { [self] response in
+                switch response.result {
+                case .success(let value):
+                    print("VALUE = \(value)")
                 
                 let decoder = JSONDecoder()
                 
-                if let jsonMovieResponse = try? decoder.decode(MovieResponse.self, from: response.data!){
+                if let jsonMovieResponse = try? decoder.decode(FavouritesMoviesResponse.self, from: response.data!){
                     print("success")
                     completion(jsonMovieResponse)
                     return
@@ -295,113 +307,57 @@ class NetworkManager {
         
     }
     
+
     
-    func getDailyTrendingMovies(_ completion: @escaping (DailyTrendingMoviesResponse?) -> ()){
-        let baseUrl = "https://api.themoviedb.org/3"
-        let endpoint = "/movie/upcoming"
-        completion(nil)
+    
+    func addToWatchlist(movieId: String) {
         
-        AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "page": 1]).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                
-                print("Upcoming Movies = \(value)")
-                let decoder = JSONDecoder()
-                
-                if let jsonMovieResponse = try? decoder.decode(DailyTrendingMoviesResponse.self, from: response.data!){
-                    print("success")
-                    completion(jsonMovieResponse)
-                    return
-                    
-                }
-                completion(nil)
-                
-                
-                
-                
-            case .failure(_):
-                print("Error with *daily movies*")
-                completion(nil)
-            }
+        //        print("Session_id = \(sessionID!)")
+        //        print("accountInfo?.id = \(accountInfo!.id)")
+        //        print("apiKey = \(apiKey)")
+        //        print("movieID = \(movieId)")
+        
+        // https://api.themoviedb.org/3/account/17215644/watchlist?api_key=15ec7b54d43e199ced41a6e461173cee&session_id=9779e7f6bfbab5dde0757cff983e7e2bf1dae04f&media_type=movie&media_id=11216&watchlist=true
+        
+        let accountId = accountInfo!.id
+        print("SESSION_ID = \(sessionID!)")
+        
+        //        let url = "https://api.themoviedb.org/3/account/\(accountId)/watchlist?"
+        
+        let url = "https://api.themoviedb.org/3/account/17215644/watchlist?api_key=15ec7b54d43e199ced41a6e461173cee&session_id=\(sessionID!)"
+        
+        // 0d66f2f42c8a4c06e37ec9ebf67bcc5b143240e8
+        // 9779e7f6bfbab5dde0757cff983e7e2bf1dae04f
+        //
+        let parameters: [String: Any] = [
+            //"api_key": apiKey,
+            //"session_id": sessionID!,
+            "media_id": movieId,
+            "watchlist": true,
+            "media_type": "movie"
             
-        }
+        ]
+        
+        //        let parameters: [String: Any] = [:]
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        //        let parametersWithApiKey = parameters.merging(["api_key": apiKey]) { (_, new) in new }
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    print(url)
+                    print(parameters)
+                    print("Success: \(value)")
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+            }
     }
-    
-    func addToWatchlist(movieId: Int){
-        print("Session_id = \(sessionID!)")
-        print("accountInfo?.id = \(accountInfo!.id)")
-        print("apiKey = \(apiKey)")
-        print("movieID = \(movieId)")
-    }
-    
-    /* func markAsFavourite(movieId: Int){
-     print("Session_id = \(sessionID!)")
-     print("accountInfo?.id = \(accountInfo!.id)")
-     print("apiKey = \(apiKey)")
-     
-     
-     let url = "https://api.themoviedb.org/3/account/\(accountInfo!.id)/favorite"
-     let parameters: Parameters = [
-     "media_type": "movie",
-     "media_id": movieId,
-     "favorite": true
-     ]
-     let headers: HTTPHeaders = [
-     "Authorization": "\(String(describing: sessionID))",
-     "api_key": apiKey
-     ]
-     AF.request(url, method: .post, parameters: parameters, headers: headers)
-     .validate()
-     .responseJSON { response in
-     switch response.result {
-     case .success:
-     print("Movie marked as favorite successfully!")
-     case .failure(let error):
-     print("Failed to mark movie as favorite: \(error)")
-     }
-     }
-     
-     
-     
-     }
-     */
-    
-    //    func getDailyTrendingMovies(completion: @escaping ([DailyTrendingMoviesResponse]?) -> Void){
-    //        let baseUrl = "https://api.themoviedb.org/3"
-    //           let endpoint = "/trending/movie/day"
-    //
-    //           let dateFormatter = DateFormatter()
-    //           dateFormatter.dateFormat = "yyyy-MM-dd"
-    //           let currentDate = dateFormatter.string(from: Date())
-    //
-    //           AF.request(baseUrl + endpoint, parameters: ["api_key": apiKey, "date": currentDate, "page": 1]).responseJSON { response in
-    //               switch response.result {
-    //               case .success(let value):
-    //
-    //                   let decoder = JSONDecoder()
-    //
-    //
-    ////                   if let data = response.data, let movieResponse = try? decoder.decode(DailyTrendingMoviesResponse.self, from: data) {
-    ////                       let movies = movieResponse.results
-    ////                       completion(movies)
-    ////
-    ////                   } else {
-    ////                       completion(nil)
-    ////                   }
-    //                   if let jsonMovieResponse = try? decoder.decode(DailyTrendingMoviesResponse.self, from: response.data!){
-    //                       print("success")
-    //                       completion(jsonMovieResponse)
-    //                       return
-    //
-    //                   }
-    //                   completion(nil)
-    //
-    //               case .failure(let error):
-    //                   print("Error: \(error)")
-    //                   completion(nil)
-    //               }
-    //           }
-    //    }
     
     
     func getMoviesByGenre(page: Int, genre: String, _ completion: @escaping (GenresMoviesResponse?) -> ()){
@@ -498,82 +454,6 @@ class NetworkManager {
     }
     
     
-    
-    func getAllRegions(_ completion: @escaping ([Region]?) -> ()) {
-        let baseUrl = "https://api.themoviedb.org/3"
-        let endpoint = "/configuration/countries"
-        
-        let parameters: [String: Any] = [
-            "api_key": apiKey
-        ]
-        
-        AF.request(baseUrl + endpoint, parameters: parameters).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let decoder = JSONDecoder()
-                
-                if let regions = try? decoder.decode([Region].self, from: response.data!) {
-                    completion(regions)
-                } else {
-                    completion(nil)
-                }
-                
-            case .failure(_):
-                print("Error fetching regions")
-                completion(nil)
-            }
-        }
-    }
-    
-    
-    
-    
-    
-//    func rateMovie(movieID: Int, ratingValue: Double, sessionID: String, completion: @escaping (Bool) -> ()) {
-//        let baseUrl = "https://api.themoviedb.org/3"
-//        let endpoint = "/movie/\(movieID)/rating"
-//        
-//
-//        let parameters: [String: Any] = [
-//            "api_key": apiKey,
-//            "session_id": sessionID,
-//            "value": ratingValue
-//        ]
-//        
-//        
-//        
-//
-//        var request = URLRequest(url: URL(string: baseUrl + endpoint)!)
-//        do {
-//            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-//        } catch {print("error")}
-//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.httpMethod = "POST"
-//
-//        //request.method = .post
-//
-//        
-//        AF.request(request).response { response in
-//            switch response.result {
-//            case .success(_):
-//                if let statusCode = response.response?.statusCode, statusCode == 201 {
-//                    completion(true) 
-//                } else {
-//                    completion(false)
-//                }
-//                
-//            case .failure(_):
-//                completion(false)
-//            }
-//        }
-//          print(request)
-//
-//
-//    }
-//    
-//    
-    
-    
     func rateMovie(movieID: Int, ratingValue: Double, sessionID: String, completion: @escaping (Bool) -> ()) {
         let baseUrl = "https://api.themoviedb.org/3"
         let endpoint = "/movie/\(movieID)/rating"
@@ -607,9 +487,80 @@ class NetworkManager {
             print(request)
         }
     }
+    
+    
+    func markAsFavourite(movieId: String, value: Bool) {
+        let accountId = accountInfo!.id
+        let url = "https://api.themoviedb.org/3/account//(accountId)/favorite?api_key=15ec7b54d43e199ced41a6e461173cee&session_id=\(sessionID!)"
+        
+        let parameters: [String: Any] = [
+            "media_type": "movie",
+            "media_id": movieId,
+            "favorite": value
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    print("Success: \(value)")
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+            }
+    }
+    
+    
+    
+    func getMovieCast(movieId: String, completion: @escaping (Result<CastResponse, Error>) -> Void) {
+           let url = "https://api.themoviedb.org/3/movie/\(movieId)/credits"
+           let apiKey = apiKey
 
+           let parameters: [String: Any] = [
+               "api_key": apiKey
+           ]
+
+           AF.request(url, method: .get, parameters: parameters)
+               .validate()
+               .responseDecodable(of: CastResponse.self) { response in
+                   switch response.result {
+                   case .success(let castResponse):
+                       completion(.success(castResponse))
+                   case .failure(let error):
+                       completion(.failure(error))
+                   }
+               }
+       }
     
     
+    func compressImageBaseUrl(imagePath: String, width: Int) -> String {
+        let baseUrl = "https://image.tmdb.org/t/p/w\(width)"
+        return "\(baseUrl)\(imagePath)"
+    }
+    
+    
+    func getDetailAccountInfo(){
+        
+
+        let userID = accountInfo?.id
+
+        let userDetailsURL = "https://api.themoviedb.org/3/account?api_key=\(apiKey)&session_id=\(String(describing: sessionID))"
+
+        AF.request(userDetailsURL).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+
+                print("Дополнительная информация о пользователе: \(value)")
+                
+            case .failure(let error):
+                print("Ошибка: \(error)")
+            }
+        }
+    }
     
     
 }
