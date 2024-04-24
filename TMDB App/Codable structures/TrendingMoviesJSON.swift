@@ -2,7 +2,7 @@
 //  PopularMoviesJSON.swift
 //  TMDB App
 //
-//  Created by KIm on 31.05.2023.
+//  Created by Kim on 31.05.2023.
 //
 
 import UIKit

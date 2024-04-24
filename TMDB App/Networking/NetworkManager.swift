@@ -35,6 +35,7 @@ class NetworkManager {
     private let apiKey = "15ec7b54d43e199ced41a6e461173cee"
     var accountInfo: AccountInfo?
     
+    
     private init() { }
     
     static let shared = NetworkManager()
@@ -169,37 +170,41 @@ class NetworkManager {
         }
     }
     
-    func getFavoriteMovies(_ completion: @escaping (FavouritesMoviesResponse?) -> ()){
+    func getFavoriteMovies(_ completion: @escaping (FavouritesMoviesResponse?, Error?) -> ()) {
+        guard let accountId = accountInfo?.id else {
+            completion(nil, NSError(domain: "AccountIDNotFound", code: 400, userInfo: [NSLocalizedDescriptionKey: "Account ID not found"]))
+            return
+        }
         
-        let parameters: [String: String] = ["account_id": String(accountInfo!.id)]
+        let url = "https://api.themoviedb.org/3/account/\(accountId)/favorite/movies"
+        let parameters: [String: Any] = [
+            "api_key": apiKey,
+            "session_id": sessionID ?? "",
+            "language": "en-US",
+            "sort_by": "created_at.asc",
+            "page": 1
+        ]
         
-        let httpString = "https://api.themoviedb.org/3/account/" + String(accountInfo!.id) + "/favorite/movies?api_key="
-        let bodyString = apiKey + "&session_id=" + sessionID! + "&language=en-US&sort_by=created_at.asc&page=1"
-        let urlString = httpString + bodyString
-        
-//        let finalURLString = urlString + "&width=100" 
-            
-            AF.request(urlString, method: .get, parameters: parameters).responseJSON { [self] response in
-                switch response.result {
-                case .success(let value):
-                    print("VALUE = \(value)")
-                
-                let decoder = JSONDecoder()
-                
-                if let jsonMovieResponse = try? decoder.decode(FavouritesMoviesResponse.self, from: response.data!){
-                    print("success")
-                    completion(jsonMovieResponse)
+        AF.request(url, method: .get, parameters: parameters).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                guard let jsonData = try? JSONSerialization.data(withJSONObject: value, options: []),
+                      let jsonMovieResponse = try? JSONDecoder().decode(FavouritesMoviesResponse.self, from: jsonData) else {
+                    completion(nil, NSError(domain: "InvalidResponse", code: 400, userInfo: [NSLocalizedDescriptionKey: "Invalid JSON response"]))
                     return
                 }
-                completion(nil)
+                completion(jsonMovieResponse, nil)
                 
-            case .failure(_):
-                print("Error with *favourite movies*")
-                completion(nil)
-                
+            case .failure(let error):
+                if let statusCode = response.response?.statusCode {
+                    completion(nil, NSError(domain: "ServerError", code: statusCode, userInfo: [NSLocalizedDescriptionKey: "Server Error"]))
+                } else {
+                    completion(nil, error)
+                }
             }
         }
     }
+
     
     
     
@@ -543,21 +548,82 @@ class NetworkManager {
     }
     
     
-    func getDetailAccountInfo(){
+//    func getDetailAccountInfo(){
+//        
+//
+//        let userID = accountInfo?.id
+//
+//        let userDetailsURL = "https://api.themoviedb.org/3/account?api_key=\(apiKey)&session_id=\(String(describing: sessionID))"
+//
+//        AF.request(userDetailsURL).responseJSON { response in
+//            switch response.result {
+//            case .success(let value):
+//
+//                print("Дополнительная информация о пользователе: \(value)")
+//                
+//            case .failure(let error):
+//                print("Ошибка: \(error)")
+//            }
+//        }
+//    }
+    
+    func getWatchlistMovies(accountId: Int, _ completion: @escaping (WatchlistMoviesResponse?) -> ()){
         
-
-        let userID = accountInfo?.id
-
-        let userDetailsURL = "https://api.themoviedb.org/3/account?api_key=\(apiKey)&session_id=\(String(describing: sessionID))"
-
-        AF.request(userDetailsURL).responseJSON { response in
+        let watchlistURL = "https://api.themoviedb.org/3/account/\(accountId)/watchlist/movies"
+        
+        let parameters: [String: Any]
+        = ["api_key": apiKey,
+           "session_id": sessionID ?? " "]
+            completion(nil)
+        
+        
+        
+        
+        AF.request(watchlistURL, method: .get, parameters: parameters).responseJSON{
+            response in
+            switch response.result{
+            case.success(let value):
+                print("value = \(value)")
+                
+                let decoder = JSONDecoder()
+                if let jsonData = response.data,
+                   let jsonMovieResponse = try? decoder.decode(WatchlistMoviesResponse.self, from: jsonData) {
+                    print("success")
+                    completion(jsonMovieResponse)
+                } else {
+                    print("Failed to decode JSON")
+                    completion(nil)
+                }
+            case.failure(let error):
+                print("Error = \(error)")
+                completion(nil)
+            
+            }
+        }
+        
+    }
+    
+    
+    
+    func searchMovies(query: String, _ completion: @escaping (FoundMoviesResponse?) -> ()) {
+        let url = "https://api.themoviedb.org/3/search/movie"
+        let parameters: [String: Any] = [
+            "api_key": apiKey,
+            "query": query
+        ]
+        
+        AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             switch response.result {
             case .success(let value):
-
-                print("Дополнительная информация о пользователе: \(value)")
-                
-            case .failure(let error):
-                print("Ошибка: \(error)")
+                let decoder = JSONDecoder()
+                if let jsonMovieResponse = try? decoder.decode(FoundMoviesResponse.self, from: response.data!) {
+                    print("success")
+                    completion(jsonMovieResponse)
+                    return
+                }
+            case .failure(_):
+                print("Error with *found movies*")
+                completion(nil)
             }
         }
     }

@@ -14,13 +14,15 @@ class GenresViewController: UIViewController {
     @IBOutlet weak var dualCollectionView: UICollectionView!
     @IBOutlet weak var topRatedCollectionView: UICollectionView!
     @IBOutlet weak var upcomingCollectionView: UICollectionView!
-    @IBOutlet weak var genresCollectionView: UICollectionView!
-    @IBOutlet weak var greetingLabel: UILabel!
+    @IBOutlet weak var genresTableView: UITableView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var topLabel: UILabel!
     
     let apiKey = "15ec7b54d43e199ced41a6e461173cee"
+    var animationLabelText = "What’s new, "
     var mainDetailMovie: String?
     var selectedMovieType: String?
-    var animationLabelText = "What’s new, "
     var hasAnimatedLabel = false
 
     
@@ -28,6 +30,9 @@ class GenresViewController: UIViewController {
     var dataSourceTopRatedMovies: [TopRatedMovie] = []
     var dataSourceUpcomingMovies: [UpcomingMovie] = []
     var dataSourceGenresMovies: [GenreMovie] = []
+    var dataSourceFavouritesMovies: [FavouriteMovie] = []
+    
+    
     
     var selectedTrendingMovie: TrendingMovie?
     var selectedTopRatedMovie: TopRatedMovie?
@@ -43,41 +48,28 @@ class GenresViewController: UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         setUp()
+        updateTabBarColors()
         
         fetchTrendingMovies()
         fetchTopRatedMovies()
         fetchUpcomingMovies()
     }
     
-    func setUp(){
-        trendingCollectionView.register(TrendingMoviesCollectionViewCell.self, forCellWithReuseIdentifier: "TrendingCell")
-        
-        dualCollectionView.showsHorizontalScrollIndicator = false
-        topRatedCollectionView.showsHorizontalScrollIndicator = false
-        upcomingCollectionView.showsHorizontalScrollIndicator = false
-        genresCollectionView.showsVerticalScrollIndicator = false
-        
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        imageView.contentMode = .scaleAspectFit
-        imageView.isLoading = true
-        imageView.image = (UIImage(named: "AppIcon"))
-        
-        if let accountInfo = NetworkManager.shared.accountInfo {
-            animationLabelText = animationLabelText + accountInfo.username + "?"
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
-
+        ListOfFavouritesMovies.shared.getList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if !hasAnimatedLabel {
-            animateLabel()
-            hasAnimatedLabel = true
-        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        updateTabBarColors()
+        
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                    updateTabBarColors()
+                }
     }
     
     //MARK: IBAction func's
@@ -96,9 +88,45 @@ class GenresViewController: UIViewController {
     }
     
     
+    func setUp(){
+        trendingCollectionView.register(TrendingMoviesCollectionViewCell.self, forCellWithReuseIdentifier: "TrendingCell")
+        
+        dualCollectionView.showsHorizontalScrollIndicator = false
+        topRatedCollectionView.showsHorizontalScrollIndicator = false
+        upcomingCollectionView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        imageView.contentMode = .scaleAspectFit
+        imageView.isLoading = true
+        imageView.image = (UIImage(named: "AppIcon"))
+        
+        
+        if let accountInfo = NetworkManager.shared.accountInfo {
+            animationLabelText = animationLabelText + accountInfo.username + "?"
+        }
+        
+        ListOfFavouritesMovies.shared.getList()
+
+    }
+    
+    
+    func updateTabBarColors(){
+        
+        if traitCollection.userInterfaceStyle == .dark {
+                    self.tabBarController?.tabBar.tintColor = UIColor.systemMint
+                    self.tabBarController?.tabBar.barTintColor = UIColor.black
+                } else {
+                    self.tabBarController?.tabBar.tintColor = UIColor.systemMint
+                    self.tabBarController?.tabBar.barTintColor = UIColor.white
+                }
+        
+    }
+    
     
     //MARK: Fetch Movies
-    
+  
     private func fetchTrendingMovies() {
         NetworkManager.shared.getTrendingMovies(page: 1, language: SelectedRegion.shared.region) {
             
@@ -147,25 +175,36 @@ class GenresViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "DetailTrendingMovieSegue" {
             if let destinationVC = segue.destination as? DetailGenresViewController {
-                
                 destinationVC.detailedMovie = selectedTrendingMovie
+                
+                if ListOfFavouritesMovies.shared.listOfFavouritesMovies.contains(selectedTrendingMovie?.id ?? 0){
+                    print("success")
+                    destinationVC.receivedFavouriteValue = true
+                }
+                
             }
-            
+                         
         } else if segue.identifier == "DetailTopRatedMovieSegue"{
             if let destinationVC = segue.destination as? DetailGenresViewController {
                 
                 destinationVC.detailedMovie = selectedTopRatedMovie
                 
+                if ListOfFavouritesMovies.shared.listOfFavouritesMovies.contains(selectedTopRatedMovie?.id ?? 0){
+                    destinationVC.receivedFavouriteValue = true
+                }
+                
             }
             
         } else if segue.identifier == "DetailUpcomingMovieSegue" {
             if let destinationVC = segue.destination as? DetailGenresViewController {
-                
-                // destinationVC.detailedTrendingMovie = selectedTrendingMovie
+
                 destinationVC.detailedMovie = selectedUpcomingMovie
+                
+                if ListOfFavouritesMovies.shared.listOfFavouritesMovies.contains(selectedUpcomingMovie?.id ?? 0){
+                    destinationVC.receivedFavouriteValue = true
+                }
             }
         } else if segue.identifier == "moreTrending" {
             if let moreViewController = segue.destination as? MoreViewController {
@@ -189,20 +228,11 @@ class GenresViewController: UIViewController {
             }
         }
     }
-    
-    private func animateLabel(){
-        for char in animationLabelText {
-            greetingLabel.text! += "\(char)"
-            
-            RunLoop.current.run(until: Date() + 0.07)
-        }
-    }
-    
-    
+
     
 }
 
-extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -222,8 +252,6 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         } else if collectionView == upcomingCollectionView {
             return dataSourceUpcomingMovies.count
             
-        } else if collectionView == genresCollectionView {
-            return 6
         }
         return 0
     }
@@ -292,13 +320,8 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             return cell
             
-        } else if collectionView == genresCollectionView {
-            let arrayOfGenres = ["Action", "Comedy", "Family", "Fantasy","Science Fiction", "Triller"]
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GenresCell", for: indexPath) as! GenresCollectionViewCell
-            cell.genresImage.image = UIImage(named: "AppIcon")
-            cell.genresLabel.text = arrayOfGenres[indexPath.row]
-            return cell
         }
+        
         return TopRatedCollectionViewCell()
     }
     
@@ -309,37 +332,7 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         if collectionView == dualCollectionView{
             mainDetailMovie = "trendingMovie"
-            
-//            DispatchQueue.main.async {
-//                NetworkManager.shared.getFavoriteMovies({ [weak self] movieResponse in
-//                    guard let self = self else { return }
-//                    
-//                    print("MOVIE RESPONSE = \(String(describing: movieResponse))")
-//                    
-//                    
-//                    if let movieResponse = movieResponse {
-//                        self.dataSource = movieResponse.results
-//                        
-//                        print("dataSource = \(dataSource)")
-//                        print("Count of favourites = \(dataSource.count)")
-//                        
-//                        for item in dataSource{
-//                            print(item.id)
-//                            if detailedMovie?.moviesIDS == item.id{
-//                                isFavourite = true
-//                                print("DONE!")
-//                                self.favouritesButton.backgroundColor = UIColor.gray
-//                                
-//                            }
-//                        }
-//                        
-//                    }
-//                })
-//            }
-            
-            
             selectedTrendingMovie = dataSourceTrendingMovies[indexPath.row]
-            //navigateToDetailViewController()
             performSegue(withIdentifier: SegueId.detailTrendingMovieSegue, sender: nil)
         } else if collectionView == topRatedCollectionView{
             mainDetailMovie = "topRatedMovie"
@@ -349,27 +342,6 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             mainDetailMovie = "upcomingMovie"
             selectedUpcomingMovie = dataSourceUpcomingMovies[indexPath.row]
             performSegue(withIdentifier: SegueId.detailUpcomingMovieSegue, sender: nil)
-        } else if collectionView == genresCollectionView{
-            selectedMovieType = "moreGenres"
-            
-            if indexPath.row == 0{
-                selectedGenre = "Action"
-            } else if indexPath.row == 1 {
-                selectedGenre = "Comedy"
-            } else if indexPath.row == 2 {
-                selectedGenre = "Family"
-            } else if indexPath.row == 3 {
-                selectedGenre = "Fantasy"
-            } else if indexPath.row == 4 {
-                selectedGenre = "Science Fiction"
-            } else if indexPath.row == 5 {
-                selectedGenre = "Thriller"
-            }
-            
-            
-            
-            performSegue(withIdentifier: SegueId.moreGenresSegue, sender: nil)
-            
         }
     }
     
@@ -377,21 +349,54 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         guard let trendingCell = cell as? TrendingMoviesCollectionViewCell else {
-                return
-            }
-            
-            let optionalPosterName = dataSourceTrendingMovies[indexPath.row].posterPath
-            let posterName = optionalPosterName ?? ""
-            
-            trendingCell.trendingImage.image = nil
-            trendingCell.trendingLabel.text = dataSourceTrendingMovies[indexPath.row].title
-            
-            ImageManager.getImageForPosterName(posterName, completion: { image in
-                trendingCell.trendingImage.image = image ?? UIImage(named: "AppIcon")
-            })
+            return
+        }
+        
+        let optionalPosterName = dataSourceTrendingMovies[indexPath.row].posterPath
+        let posterName = optionalPosterName
+        
+        trendingCell.trendingImage.image = nil
+        trendingCell.trendingLabel.text = dataSourceTrendingMovies[indexPath.row].title
+        
+        ImageManager.getImageForPosterName(posterName, completion: { image in
+            trendingCell.trendingImage.image = image ?? UIImage(named: "AppIcon")
+        })
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let arrayOfGenres = ["Action", "Comedy", "Family", "Science Fiction", "Triller"]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GenresCell", for: indexPath) as! GenresCollectionViewCell
+        cell.genresLabel.text = arrayOfGenres[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedMovieType = "moreGenres"
+        
+        if indexPath.row == 0{
+            selectedGenre = "Action"
+        } else if indexPath.row == 1 {
+            selectedGenre = "Comedy"
+        } else if indexPath.row == 2 {
+            selectedGenre = "Family"
+        } else if indexPath.row == 3 {
+            selectedGenre = "Science Fiction"
+        } else if indexPath.row == 49 {
+            selectedGenre = "Thriller"
+        }
+        
+        tableView.cellForRow(at: indexPath)?.isSelected = false
+        performSegue(withIdentifier: SegueId.moreGenresSegue, sender: nil)
     }
     
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
+    }
     
 }
 

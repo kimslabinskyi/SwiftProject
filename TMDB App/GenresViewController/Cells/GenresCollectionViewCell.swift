@@ -7,9 +7,7 @@
 
 import UIKit
 
-class GenresCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var genresImage: UIImageView!
+class GenresCollectionViewCell: UITableViewCell {
     
     @IBOutlet weak var genresLabel: UILabel!
     

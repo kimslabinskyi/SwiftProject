@@ -15,6 +15,7 @@ enum MovieType {
     case trending
     case upcoming
     case genresSorted
+    case found
 }
 
 protocol DetailGenresMovieProtocol {
@@ -50,9 +51,9 @@ class DetailGenresViewController: UIViewController {
     var mainDetailMovie: String?
     var genresInfo = [String]()
     var castImages = [String]()
-    var isFavourite: Bool = false
+    var receivedFavouriteValue: Bool = false
 
-    var dataSource: [FavouriteMovie] = []
+    //var dataSource: [FavouriteMovie] = []
     var detailedMovie: DetailGenresMovieProtocol?
 
    let genres =
@@ -80,11 +81,8 @@ class DetailGenresViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUp()
-        buttonsSetUp()
         getMovieCast()
-        
     }
         
     func setUp() {
@@ -98,7 +96,6 @@ class DetailGenresViewController: UIViewController {
         voteCountLabel.text = voteCount
         releaseDateLabel.text = detailedMovie?.releaseDateString
         
-        favouritesButton.backgroundColor = .systemMint
         favouritesButton.titleLabel?.textColor = .white
         favouritesButton.layer.cornerRadius = 7
         
@@ -116,11 +113,16 @@ class DetailGenresViewController: UIViewController {
         if let url = detailedMovie?.imageURL {
             
             NetworkManager.shared.loadImageUsingAlamofire(from: url) { image in
+                
                 self.backdrop.image = image
             }
-        } else {
-            backdrop.image = UIImage(named: "AppIcon")
         }
+        
+//        if let urlString = detailedMovie?.imageURL?.absoluteString, urlString == "https://www.themoviedb.org/t/p/w780" {
+//            self.backdrop.image = UIImage(named: "AppIcon")
+//        }
+        
+        
         
         //Data to pass
         if let dataToPass = detailedMovie?.posterURL {
@@ -139,49 +141,33 @@ class DetailGenresViewController: UIViewController {
         if let dataToPass = detailedMovie?.title{
             self.labelToPass = dataToPass
         }
+            
         
-    }
-    
-    
-    func buttonsSetUp(){
-        DispatchQueue.main.async {
-            NetworkManager.shared.getFavoriteMovies({ [weak self] movieResponse in
-                guard let self = self else { return }
-                
-                print("MOVIE RESPONSE = \(String(describing: movieResponse))")
-                
-                
-                if let movieResponse = movieResponse {
-                    self.dataSource = movieResponse.results
-                    
-                    print("dataSource = \(dataSource)")
-                    print("Count of favourites = \(dataSource.count)")
-                    
-                    for item in dataSource{
-                        print(item.id)
-                        if detailedMovie?.moviesIDS == item.id{
-                            isFavourite = true
-                            print("DONE!")
-                            self.favouritesButton.backgroundColor = UIColor.gray
-                            
-                        }
-                    }
-                    
-                }
-            })
+        if receivedFavouriteValue == true {
+            print("FAVOURITE = 1")
+            favouritesButton.setTitle("Liked", for: .normal)
+            favouritesButton.setTitleColor(.white, for: .normal)
+            favouritesButton.backgroundColor = .gray
+            
+        } else {
+            print("FAVOURITE = 0")
+            favouritesButton.setTitleColor(.white, for: .normal)
+            favouritesButton.backgroundColor = .systemMint
+
         }
         
-       
-               for subview in view.subviews where subview is UIButton {
-                   if let button = subview as? UIButton {
-                       favouritesButton.setTitleColor(UIColor.white, for: .normal)
-                   }
-               }
-           
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
     }
-   
+    
+    override func viewDidAppear(_ animated: Bool) {
+         
+    }
+    
+
+    
     
     func getMovieCast() {
         NetworkManager.shared.getMovieCast(movieId: String(detailedMovie?.moviesIDS ?? 2)) { result in
@@ -261,13 +247,12 @@ class DetailGenresViewController: UIViewController {
     
 
     @IBAction func addToFavouritesButton(_ sender: Any) {
-        if isFavourite == false {
+        if receivedFavouriteValue == false {
         NetworkManager.shared.markAsFavourite(movieId: String(detailedMovie?.moviesIDS ?? 0), value: true)
-            isFavourite = true
+            receivedFavouriteValue = true
         } else {
             NetworkManager.shared.markAsFavourite(movieId: String(detailedMovie?.moviesIDS ?? 0), value: false)
-            isFavourite = false
-
+            receivedFavouriteValue = false
         }
         
     }

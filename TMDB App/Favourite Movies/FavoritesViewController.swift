@@ -21,22 +21,30 @@ class FavoritesViewController: UIViewController{
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         setUp()
+        ListOfFavouritesMovies.shared.getList()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
+        ListOfFavouritesMovies.shared.getList()
+        collectionView.reloadData()
         setUp()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         collectionView.reloadData()
     }
     
+   
+    
+
+    
+    
     
     func setUp(){
-        NetworkManager.shared.getFavoriteMovies { [weak self] movieResponse in
+        NetworkManager.shared.getFavoriteMovies { [weak self] movieResponse, arg  in
             guard let self = self else { return }
-
-            print("MOVIE RESOPONSE = \(movieResponse)")
-
             
             if let movieResponse = movieResponse {
                 self.dataSource = movieResponse.results
@@ -50,8 +58,11 @@ class FavoritesViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailFavouriteMovieInfoSegue"{
             if let destinationVC = segue.destination as? DetailGenresViewController {
-                
                 destinationVC.detailedMovie = selectedFavouriteMovie
+                
+                if ListOfFavouritesMovies.shared.listOfFavouritesMovies.contains(selectedFavouriteMovie?.id ?? 0){
+                    destinationVC.receivedFavouriteValue = true
+                }
             }
         }
     }

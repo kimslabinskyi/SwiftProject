@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -39,6 +39,23 @@
             </objects>
             <point key="canvasLocation" x="64.885496183206101" y="-34.507042253521128"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="kVm-jq-jhl">
+            <objects>
+                <navigationController id="fiL-K0-BZf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Ns0-9h-EID"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YNE-Ps-qdb">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="W1m-Gt-71w" kind="relationship" relationship="rootViewController" id="jyn-4Q-Vga"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aLB-98-tms" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1821" y="-709"/>
+        </scene>
         <!--Search-->
         <scene sceneID="g9Z-1m-Wzf">
             <objects>
@@ -46,14 +63,88 @@
                     <view key="view" contentMode="scaleToFill" id="3Gr-Yd-1Jq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cqd-vh-qdr">
+                                <rect key="frame" x="16" y="103" width="361" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="W1m-Gt-71w" id="SJp-z9-uMm"/>
+                                </connections>
+                            </textField>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="r0i-SS-Jie"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="ZJG-XD-jxO"/>
+                    <navigationItem key="navigationItem" id="Oey-lH-FJM"/>
+                    <connections>
+                        <outlet property="textField" destination="cqd-vh-qdr" id="SGU-Pg-WbQ"/>
+                        <segue destination="dn9-BK-wne" kind="show" identifier="foundMovies" id="AB8-ww-Vtg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KYM-nE-dXd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1821" y="-709"/>
+            <point key="canvasLocation" x="2764" y="-709"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="5xv-B9-nMU">
+            <objects>
+                <viewController id="hVl-zt-5z8" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="96v-XX-OZ4">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HqQ-dZ-UGQ">
+                                <rect key="frame" x="16" y="59" width="361" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yVg-dr-Unl">
+                                    <size key="itemSize" width="156" height="192"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="oDd-s9-vZo">
+                                        <rect key="frame" x="0.0" y="0.0" width="156" height="192"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="c8w-j3-8rH">
+                                            <rect key="frame" x="0.0" y="0.0" width="156" height="192"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ms1-P9-IcM">
+                                                    <rect key="frame" x="0.0" y="8" width="148" height="147"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKj-q9-8H4">
+                                                    <rect key="frame" x="8" y="163" width="140" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="156" height="192"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hFO-YF-9T8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HqQ-dZ-UGQ" firstAttribute="leading" secondItem="hFO-YF-9T8" secondAttribute="leading" constant="16" id="Raj-Ij-MV9"/>
+                            <constraint firstItem="hFO-YF-9T8" firstAttribute="trailing" secondItem="HqQ-dZ-UGQ" secondAttribute="trailing" constant="16" id="Wkh-71-zRm"/>
+                            <constraint firstItem="HqQ-dZ-UGQ" firstAttribute="bottom" secondItem="hFO-YF-9T8" secondAttribute="bottom" id="cTr-jA-8TH"/>
+                            <constraint firstItem="HqQ-dZ-UGQ" firstAttribute="top" secondItem="hFO-YF-9T8" secondAttribute="top" id="yVM-B4-bRE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Hi6-Ux-LFn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hka-qX-Bq8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3697" y="-35"/>
         </scene>
         <!--Favourites-->
         <scene sceneID="zQD-yh-Jem">
@@ -140,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptl-id-iJM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4698" y="-773"/>
+            <point key="canvasLocation" x="4702" y="-709"/>
         </scene>
         <!--Favourites-->
         <scene sceneID="Gwy-Ny-NZW">
@@ -193,25 +284,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6uE-ep-JK1">
-                                <rect key="frame" x="0.0" y="512" width="393" height="340"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwA-bj-z8Y">
+                                <rect key="frame" x="16" y="650" width="178" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableViewCell" id="lKK-r5-nv0">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lKK-r5-nv0" id="Hoi-3p-yBV">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Your rated movies">
+                                    <color key="baseBackgroundColor" systemColor="systemMintColor"/>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2K-j8-yCY">
+                                <rect key="frame" x="16" y="240" width="138" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Wathchlist">
+                                    <color key="baseBackgroundColor" systemColor="systemMintColor"/>
+                                </buttonConfiguration>
                                 <connections>
-                                    <outlet property="dataSource" destination="X3n-Yh-Ma8" id="YBI-f2-pOh"/>
-                                    <outlet property="delegate" destination="X3n-Yh-Ma8" id="Oyr-Ev-Okl"/>
+                                    <action selector="watchlistButton:" destination="X3n-Yh-Ma8" eventType="touchUpInside" id="YSJ-eq-h0Z"/>
                                 </connections>
-                            </tableView>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rLx-C3-hhg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -220,7 +311,6 @@
                     <navigationItem key="navigationItem" id="ECM-6W-iVP"/>
                     <connections>
                         <outlet property="labelOfUsername" destination="jl1-bK-L9q" id="dTR-xa-3Ji"/>
-                        <outlet property="tableView" destination="6uE-ep-JK1" id="HpW-S4-zzo"/>
                         <segue destination="sj5-AT-ksb" kind="show" identifier="WatchlistSegue" id="e5l-j3-neh"/>
                     </connections>
                 </viewController>
@@ -228,10 +318,10 @@
             </objects>
             <point key="canvasLocation" x="2765.6488549618321" y="704.92957746478874"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Watchlist View Controller-->
         <scene sceneID="y6y-aN-m6B">
             <objects>
-                <tableViewController id="sj5-AT-ksb" sceneMemberID="viewController">
+                <tableViewController id="sj5-AT-ksb" customClass="WatchlistViewController" customModule="TMDB_App" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="hnF-I4-iwi">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -267,10 +357,10 @@
                         <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="8sK-au-K3w" kind="relationship" relationship="viewControllers" id="aJu-7i-466"/>
-                        <segue destination="W1m-Gt-71w" kind="relationship" relationship="viewControllers" id="afA-Zq-IFU"/>
-                        <segue destination="9Ed-VC-vHf" kind="relationship" relationship="viewControllers" id="5bQ-2X-tNW"/>
-                        <segue destination="zge-ar-LG0" kind="relationship" relationship="viewControllers" id="sY4-YT-9oX"/>
+                        <segue destination="8sK-au-K3w" kind="relationship" relationship="viewControllers" id="iB3-V1-B6q"/>
+                        <segue destination="fiL-K0-BZf" kind="relationship" relationship="viewControllers" id="MeW-Jc-miI"/>
+                        <segue destination="9Ed-VC-vHf" kind="relationship" relationship="viewControllers" id="z0d-fZ-u3F"/>
+                        <segue destination="zge-ar-LG0" kind="relationship" relationship="viewControllers" id="g4c-gR-0zp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFb-L6-TNj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -354,16 +444,8 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Hm-JS-RZr">
-                                <rect key="frame" x="16" y="729" width="137" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Previous page ">
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                </buttonConfiguration>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6I9-tS-UQu">
-                                <rect key="frame" x="240" y="729" width="137" height="35"/>
+                                <rect key="frame" x="240" y="726" width="137" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
@@ -378,13 +460,28 @@
                                     <color key="baseForegroundColor" systemColor="labelColor"/>
                                 </buttonConfiguration>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="page 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgM-Rq-NvG">
-                                <rect key="frame" x="170" y="736" width="53" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8j-Jp-nct">
+                                <rect key="frame" x="162" y="732" width="41" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgM-Rq-NvG">
+                                <rect key="frame" x="205" y="732" width="26" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Hm-JS-RZr">
+                                <rect key="frame" x="16" y="726" width="137" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Previous page ">
+                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="U09-jN-nDV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -394,6 +491,7 @@
                         <outlet property="mainLabel" destination="bni-KU-om7" id="XSU-kl-zh0"/>
                         <outlet property="moreCollectionView" destination="cPZ-Lt-a1b" id="Rg8-4V-d3x"/>
                         <outlet property="nextPageButton" destination="6I9-tS-UQu" id="Kqi-oB-Ba4"/>
+                        <outlet property="pageCounterLabel" destination="MgM-Rq-NvG" id="w2A-YL-6MH"/>
                         <outlet property="previousPageButton" destination="0Hm-JS-RZr" id="a7s-cu-vZw"/>
                         <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailTrendingMovieSegue" id="np5-B5-5iH"/>
                         <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailTopRatedMovieSegue" id="fyx-5O-X0x"/>
@@ -709,6 +807,7 @@
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
+                                                    <color key="baseForegroundColor" systemColor="systemMintColor"/>
                                                 </buttonConfiguration>
                                                 <connections>
                                                     <action selector="addRatingButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="3YF-ti-JTT"/>
@@ -990,7 +1089,7 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNt-y3-l7k">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2500"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1700"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mG0-DU-02B">
                                                 <rect key="frame" x="8" y="101" width="385" height="329"/>
@@ -1035,72 +1134,27 @@
                                                             <outlet property="trendingLabel" destination="2ky-pf-2aQ" id="T4y-xf-JD3"/>
                                                         </connections>
                                                     </collectionViewCell>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DailyTrendingCell" id="O3R-tZ-a1b" customClass="TrendingMoviesCollectionViewCell" customModule="TMDB_App" customModuleProvider="target">
-                                                        <rect key="frame" x="170" y="7" width="160" height="315"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kVk-yo-AW5" customClass="DayTrendingCollectionViewCell" customModule="TMDB_App" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="160" height="315"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="0sb-vY-2Nv">
-                                                                    <rect key="frame" x="61" y="111" width="37" height="37"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </activityIndicatorView>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xTZ-rK-Csq">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="260"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label of movie contains a lot of sybols" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOj-aw-QXB">
-                                                                    <rect key="frame" x="8" y="259" width="152" height="48"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </collectionViewCellContentView>
-                                                        <size key="customSize" width="160" height="315"/>
-                                                        <connections>
-                                                            <outlet property="spiner" destination="0sb-vY-2Nv" id="eA9-x7-305"/>
-                                                            <outlet property="trendingImage" destination="xTZ-rK-Csq" id="mrc-qf-4BX"/>
-                                                        </connections>
-                                                    </collectionViewCell>
                                                 </cells>
                                                 <connections>
                                                     <outlet property="dataSource" destination="GIj-Ll-030" id="04W-w8-Rqd"/>
                                                     <outlet property="delegate" destination="GIj-Ll-030" id="UUd-TL-vgC"/>
                                                 </connections>
                                             </collectionView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75f-wm-gbR">
-                                                <rect key="frame" x="12" y="457" width="237" height="34"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WkD-uV-Bhf">
+                                                <rect key="frame" x="19" y="1252" width="296" height="61"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="Top Rated Movies">
+                                                    <fragment content="Popular genres">
                                                         <attributes>
-                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="24" name="Avenir-Medium"/>
+                                                            <font key="NSFont" size="41" name="Avenir-Book"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WkD-uV-Bhf">
-                                                <rect key="frame" x="12" y="1355" width="296" height="61"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="Popular genres">
-                                                        <attributes>
-                                                            <font key="NSFont" size="41" name="Avenir-Book"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mW-mj-XIc">
-                                                <rect key="frame" x="12" y="847" width="205" height="35"/>
+                                                <rect key="frame" x="19" y="847" width="205" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Upcoming Movies">
@@ -1112,49 +1166,6 @@
                                                 </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SjX-8R-3e5">
-                                                <rect key="frame" x="5" y="1439" width="380" height="1039"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="brY-R2-zIc">
-                                                    <size key="itemSize" width="171" height="275"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GenresCell" id="gof-LT-CeT" customClass="GenresCollectionViewCell" customModule="TMDB_App" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="171" height="275"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Hag-v6-Zkz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="171" height="275"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VRo-7k-hT7">
-                                                                    <rect key="frame" x="0.0" y="8" width="163" height="222"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name of genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Wl-xt-mo6">
-                                                                    <rect key="frame" x="8" y="238" width="155" height="29"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </collectionViewCellContentView>
-                                                        <size key="customSize" width="171" height="275"/>
-                                                        <connections>
-                                                            <outlet property="GenresImage" destination="VRo-7k-hT7" id="jgx-dG-mdh"/>
-                                                            <outlet property="GenresLabel" destination="9Wl-xt-mo6" id="LEw-JJ-wK7"/>
-                                                        </connections>
-                                                    </collectionViewCell>
-                                                </cells>
-                                                <connections>
-                                                    <outlet property="dataSource" destination="GIj-Ll-030" id="SMR-Jn-Rfb"/>
-                                                    <outlet property="delegate" destination="GIj-Ll-030" id="uNg-s4-exQ"/>
-                                                </connections>
-                                            </collectionView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TLr-rY-hOT">
                                                 <rect key="frame" x="8" y="492" width="385" height="335"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1253,106 +1264,119 @@
                                                     <outlet property="delegate" destination="GIj-Ll-030" id="4SU-7t-6GS"/>
                                                 </connections>
                                             </collectionView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qL-kU-thw">
-                                                <rect key="frame" x="12" y="59" width="213" height="41"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfb-Ay-JSE">
+                                                <rect key="frame" x="19" y="0.0" width="74" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="Trending trailers">
+                                                    <fragment content="Home">
                                                         <attributes>
-                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <font key="NSFont" size="25" name="Avenir-Medium"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTL-lC-PA4">
+                                                <rect key="frame" x="19" y="59" width="191" height="41"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Trending movies">
+                                                        <attributes>
                                                             <font key="NSFont" size="24" name="Avenir-Medium"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
                                                 <nil key="highlightedColor"/>
-                                                <size key="shadowOffset" width="0.0" height="0.0"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9f-K6-yRb">
-                                                <rect key="frame" x="300" y="65" width="73" height="35"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uG3-P3-ZCT">
+                                                <rect key="frame" x="19" y="454" width="198" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <size key="titleShadowOffset" width="15" height="15"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" cornerStyle="capsule">
-                                                    <backgroundConfiguration key="background">
-                                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </backgroundConfiguration>
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="More">
-                                                            <attributes>
-                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                <font key="NSFont" size="14" name="Avenir-Medium"/>
-                                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="-3" trailing="0.0"/>
-                                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="moreTrendingMoviesButton:" destination="GIj-Ll-030" eventType="touchUpInside" id="cZ8-to-7aX"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JnH-xh-Z8s">
-                                                <rect key="frame" x="300" y="457" width="73" height="35"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <size key="titleShadowOffset" width="15" height="15"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" cornerStyle="capsule">
-                                                    <backgroundConfiguration key="background">
-                                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </backgroundConfiguration>
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="More">
-                                                            <attributes>
-                                                                <font key="NSFont" size="19" name="Avenir-Medium"/>
-                                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="-3" trailing="0.0"/>
-                                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="moreTopRatedMoviesButton:" destination="GIj-Ll-030" eventType="touchUpInside" id="d63-Pd-0xN"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2J-zr-Tnt">
-                                                <rect key="frame" x="300" y="850" width="73" height="35"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <size key="titleShadowOffset" width="15" height="15"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" cornerStyle="capsule">
-                                                    <backgroundConfiguration key="background">
-                                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </backgroundConfiguration>
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="More">
-                                                            <attributes>
-                                                                <font key="NSFont" size="19" name="Avenir-Medium"/>
-                                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="-3" trailing="0.0"/>
-                                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="moreUpcomingMoviesButton:" destination="GIj-Ll-030" eventType="touchUpInside" id="5Wc-Wg-yG3"/>
-                                                </connections>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfb-Ay-JSE">
-                                                <rect key="frame" x="12" y="0.0" width="373" height="41"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="24"/>
-                                                <color key="textColor" systemColor="systemMintColor"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Top rated movies">
+                                                        <attributes>
+                                                            <font key="NSFont" size="24" name="Avenir-Medium"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xj2-R5-TSs">
+                                                <rect key="frame" x="218" y="65" width="28" height="28"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="greaterthan.circle.fill" catalog="system">
+                                                    <color key="baseForegroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="moreTrendingMoviesButton:" destination="GIj-Ll-030" eventType="touchUpInside" id="kbx-2G-mFG"/>
+                                                </connections>
+                                            </button>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="IWd-0L-Vj7">
+                                                <rect key="frame" x="8" y="1321" width="365" height="320"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GenresCell" rowHeight="58" id="rDr-dL-6WO" customClass="GenresCollectionViewCell" customModule="TMDB_App" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="50" width="365" height="58"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rDr-dL-6WO" id="mqn-av-Pzr" customClass="GenresCollectionViewCell" customModule="TMDB_App" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="365" height="58"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uau-si-5YS">
+                                                                    <rect key="frame" x="20" y="11" width="236" height="36"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <attributedString key="attributedText">
+                                                                        <fragment content="Label">
+                                                                            <attributes>
+                                                                                <font key="NSFont" size="25" name="Avenir-Roman"/>
+                                                                            </attributes>
+                                                                        </fragment>
+                                                                    </attributedString>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="genresLabel" destination="Uau-si-5YS" id="MPP-Dk-Q2C"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="GIj-Ll-030" id="FZV-CJ-jjQ"/>
+                                                    <outlet property="delegate" destination="GIj-Ll-030" id="65r-u9-o0c"/>
+                                                </connections>
+                                            </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KjE-i9-xIq">
+                                                <rect key="frame" x="240" y="850" width="28" height="28"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="greaterthan.circle.fill" catalog="system">
+                                                    <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="moreUpcomingMoviesButton:" destination="GIj-Ll-030" eventType="touchUpInside" id="S14-RQ-tCT"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycX-qK-XFt">
+                                                <rect key="frame" x="233" y="460" width="28" height="28"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="greaterthan.circle.fill" catalog="system">
+                                                    <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="moreTopRatedMoviesButton:" destination="GIj-Ll-030" eventType="touchUpInside" id="arF-dT-T0Y"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="2500" id="NH8-wa-oFt"/>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="2500" id="P4m-zd-La6"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1700" id="NH8-wa-oFt"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="1700" id="P4m-zd-La6"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1379,8 +1403,9 @@
                     <size key="freeformSize" width="393" height="852"/>
                     <connections>
                         <outlet property="dualCollectionView" destination="mG0-DU-02B" id="jBS-Xi-cQi"/>
-                        <outlet property="genresCollectionView" destination="SjX-8R-3e5" id="LxA-y5-4Y3"/>
-                        <outlet property="greetingLabel" destination="kfb-Ay-JSE" id="pet-IF-wWe"/>
+                        <outlet property="genresTableView" destination="IWd-0L-Vj7" id="6rd-wR-Map"/>
+                        <outlet property="scrollView" destination="ZMT-hE-Gyp" id="MHj-5x-Ypv"/>
+                        <outlet property="topLabel" destination="kfb-Ay-JSE" id="pet-IF-wWe"/>
                         <outlet property="topRatedCollectionView" destination="TLr-rY-hOT" id="wHn-U2-XeB"/>
                         <outlet property="upcomingCollectionView" destination="TCD-qM-Obn" id="80M-0U-GoP"/>
                         <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailTrendingMovieSegue" id="laH-fJ-N41"/>
@@ -1396,13 +1421,101 @@
             </objects>
             <point key="canvasLocation" x="2765.6488549618321" y="-1457.7464788732395"/>
         </scene>
+        <!--FoundMovies-->
+        <scene sceneID="l6J-Jz-DaL">
+            <objects>
+                <viewController title="FoundMovies" id="dn9-BK-wne" customClass="FoundMoviesCollectionViewController" customModule="TMDB_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8yQ-40-7E5">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Found Movies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvo-SX-3FC">
+                                <rect key="frame" x="89" y="52" width="215" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wfU-Ig-pEa">
+                                <rect key="frame" x="16" y="101" width="361" height="657"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3b0-iN-bgX">
+                                    <size key="itemSize" width="160" height="286"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FoundMoviesCell" id="mBK-4o-P7o" customClass="FoundMovieCollectionViewCell" customModule="TMDB_App" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="270"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LQp-8W-Pqm">
+                                            <rect key="frame" x="0.0" y="0.0" width="160" height="270"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="4Q3-hI-Gec">
+                                                    <rect key="frame" x="61.666666666666657" y="116.66666666666669" width="37" height="37"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="37" id="DHG-aR-6Rv"/>
+                                                        <constraint firstAttribute="width" constant="37" id="pft-Yr-uSe"/>
+                                                    </constraints>
+                                                    <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </activityIndicatorView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sWs-Hu-zyY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="221"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movie name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKx-OT-lUN">
+                                                    <rect key="frame" x="8" y="229" width="144" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="4Q3-hI-Gec" firstAttribute="centerY" secondItem="LQp-8W-Pqm" secondAttribute="centerY" id="3RS-Gr-qVP"/>
+                                                <constraint firstItem="4Q3-hI-Gec" firstAttribute="centerX" secondItem="LQp-8W-Pqm" secondAttribute="centerX" id="tZL-ET-qZa"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <size key="customSize" width="160" height="270"/>
+                                        <connections>
+                                            <outlet property="cellImage" destination="sWs-Hu-zyY" id="Dlg-M4-afQ"/>
+                                            <outlet property="cellLabel" destination="QKx-OT-lUN" id="Koj-vO-782"/>
+                                            <outlet property="spinner" destination="4Q3-hI-Gec" id="UJU-7K-HS9"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="dn9-BK-wne" id="3FP-GL-7Nv"/>
+                                    <outlet property="delegate" destination="dn9-BK-wne" id="6hz-0o-9SH"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Cwl-Q3-cyg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Favourites" id="rdL-8Z-shZ"/>
+                    <navigationItem key="navigationItem" id="Ctb-um-3so"/>
+                    <connections>
+                        <outlet property="mainCollectionView" destination="wfU-Ig-pEa" id="WoA-Mu-0Ey"/>
+                        <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailFoundMovieSegue" id="59q-ZI-Ukz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ASN-V3-lJo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3708" y="-709"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="NGP-93-9S8"/>
+        <segue reference="59q-ZI-Ukz"/>
         <segue reference="8dr-XY-ZQZ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="film" catalog="system" width="128" height="93"/>
+        <image name="greaterthan.circle.fill" catalog="system" width="128" height="123"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="person" catalog="system" width="128" height="121"/>
         <image name="star" width="512" height="512"/>
@@ -1414,7 +1527,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemMintColor">
-            <color red="0.0" green="0.78039215689999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

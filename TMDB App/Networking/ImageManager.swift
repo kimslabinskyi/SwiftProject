@@ -41,7 +41,6 @@ class ImageManager {
         
         
     class func getImageForPosterName(_ posterName: String?, imageSize: String = "w342", completion: @escaping (UIImage?) -> Void) {
-        // Проверяем, если posterName равен nil, то вызываем completion с дефолтной картинкой
         guard let posterName = posterName else {
             completion(UIImage(named: "AppIcon"))
             return

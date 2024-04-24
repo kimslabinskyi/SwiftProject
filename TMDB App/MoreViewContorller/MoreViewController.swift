@@ -32,8 +32,8 @@ class MoreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("SELECTEDMOVIE = \(movieType)")
-        print("SELECDTED GENRE = \(selectedGenre)")
+        print("SELECTEDMOVIE = \(String(describing: movieType))")
+        print("SELECDTED GENRE = \(String(describing: selectedGenre))")
         moreCollectionView.dataSource = self
         moreCollectionView.delegate = self
         previousPageButton.isHidden = true
@@ -66,8 +66,8 @@ class MoreViewController: UIViewController {
     
     
     @IBOutlet weak var mainLabel: UILabel!
+    @IBOutlet weak var pageCounterLabel: UILabel!
     
- 
     //MARK: Buttons
     
     @IBOutlet weak var nextPageButton: UIButton!
@@ -89,9 +89,11 @@ class MoreViewController: UIViewController {
             fetchGenres()
         }
         
+        UIView.animate(withDuration: 0.5) {
+            self.moreCollectionView.reloadData()
+        }
         
-        moreCollectionView.reloadData()
-        
+        pageCounterLabel.text = "\(page)"
         moreCollectionView.scrollToItem(at: collectionIndexPath, at: .top, animated: true)
         
     }
@@ -123,6 +125,7 @@ class MoreViewController: UIViewController {
 
             
             moreCollectionView.reloadData()
+            pageCounterLabel.text = "\(page)"
             moreCollectionView.scrollToItem(at: collectionIndexPath, at: .top, animated: true)
             
         }
@@ -206,7 +209,6 @@ class MoreViewController: UIViewController {
                 print("Failed to fetch genres")
             }
         }
-        
         
         
         
