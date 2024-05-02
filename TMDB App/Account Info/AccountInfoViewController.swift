@@ -2,7 +2,7 @@
 //  AccountInfoViewController.swift
 //  TMDB App
 //
-//  Created by KIm on 01.05.2023.
+//  Created by Kim on 01.05.2023.
 //
 
 import UIKit
@@ -18,29 +18,26 @@ class AccountInfoViewController: UIViewController{
         super.viewDidLoad()
         print(" \n \n \n")
         
-        let accountInfo: AccountInfo?
-        var accountId: Int = 0
-
-        if let accountInfo = NetworkManager.shared.accountInfo {
-            accountId = accountInfo.id
-            labelOfUsername.text = accountInfo.username
-            print(accountInfo.id)
-        }
+//        let accountInfo: AccountInfo?
+//
+//        if let accountInfo = NetworkManager.shared.accountInfo {
+//            accountId = accountInfo.id
+//            labelOfUsername.text = accountInfo.username
+//            print(accountInfo.id)
+//        }
         
             
-        NetworkManager.shared.getWatchlistMovies(accountId: accountId){
-            [weak self] watchlistMoviesResponse in
-            guard let self = self else { return }
-            
-            if let movies = watchlistMoviesResponse {
-                self.watchlistMoviesDataSource = movies.results
-            } else {
-                print("Failed to fetch genres")
-            }
-        }
+        WatchlistData.shared.getData()
+        
+        
+        
+    }
     
-        
-        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? WatchlistViewController{
+            let reversedDataSource = Array(watchlistMoviesDataSource.reversed())
+                //destinationVC.watchlistMoviesDataSource = reversedDataSource
+        }
     }
     
     

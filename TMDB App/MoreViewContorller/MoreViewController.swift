@@ -43,13 +43,13 @@ class MoreViewController: UIViewController {
             mainLabel.text = "Trending Movies"
             fetchMoreTrendingMovies()
         } else if movieType == "topRated" {
-            mainLabel.text = "TopRated"
+            mainLabel.text = "Top rated movies"
             fetchMoreTopRatedMovies()
         } else if movieType == "upcoming"{
-            mainLabel.text = "UpcomingMovies"
+            mainLabel.text = "Upcoming movies"
             fetchMoreUpcomingMovies()
         } else if movieType == "moreGenres"{
-            mainLabel.text = "View more genres"
+            mainLabel.text = "Sorted movies"
             page = 1
             fetchGenres()
             
@@ -284,7 +284,7 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let posterName = dataSourceTopRatedMovies[indexPath.row].posterPath
             
             cell.moreImageView.image = nil
-            cell.moreLabel.text = dataSourceTopRatedMovies[indexPath.row].originalTitle
+            cell.moreLabel.text = dataSourceTopRatedMovies[indexPath.row].title
             cell.spinner.startAnimating()
             
 //            ImageManager.getImageForPosterName(posterName) { image in
@@ -307,7 +307,7 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             
             cell.moreImageView.image = nil
-            cell.moreLabel.text = dataSourceUpcomingMovies[indexPath.row].originalTitle
+            cell.moreLabel.text = dataSourceUpcomingMovies[indexPath.row].title
             cell.spinner.startAnimating()
             
            // ImageManager.getImageForPosterName(posterName) { image in
@@ -320,7 +320,7 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let posterName = GenresDataSource[indexPath.row].posterPath
             
             cell.moreImageView.image = nil
-            cell.moreLabel.text = GenresDataSource[indexPath.row].originalTitle
+            cell.moreLabel.text = GenresDataSource[indexPath.row].title
             cell.spinner.startAnimating()
             
 //            ImageManager.getImageForPosterName(posterName) { image in

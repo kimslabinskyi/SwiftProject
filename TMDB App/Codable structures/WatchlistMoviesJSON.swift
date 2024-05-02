@@ -21,16 +21,18 @@ struct WatchlistMoviesResponse: Codable {
 
 struct WatchlistMovie: Codable {
     let adult: Bool
-        let backdropPath: String
+        let backdropPath: String?
         let genreIDS: [Int]?
         let id: Int
         let originalLanguage: String
         let originalTitle, overview: String
         let popularity: Double
-        let posterPath, releaseDate, title: String
+        let posterPath: String?
+        let releaseDate: String?
+        let title: String
         let video: Bool
         let voteAverage: Double
-        let voteCount: Int
+        let voteCount: Int?
 
     enum CodingKeys: String, CodingKey {
             case adult
@@ -53,11 +55,11 @@ struct WatchlistMovie: Codable {
 
 extension WatchlistMovie: DetailGenresMovieProtocol{
     var posterURL: URL? {
-        return URL(string: "https://www.themoviedb.org/t/p/w780\(posterPath)")
+        URL(string: "https://www.themoviedb.org/t/p/w780\(posterPath ?? "")")
     }
     
     var type: MovieType {
-        return .genresSorted
+        return .watchlist
     }
     
     var voteAverageDouble: Double? {
@@ -69,7 +71,7 @@ extension WatchlistMovie: DetailGenresMovieProtocol{
     }
     
     var imageURL: URL? {
-        return URL(string: "https://www.themoviedb.org/t/p/w780\(backdropPath)")
+        URL(string: "https://www.themoviedb.org/t/p/w780\(backdropPath ?? "")")
     }
     
     var releaseDateString: String? {

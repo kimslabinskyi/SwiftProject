@@ -16,6 +16,7 @@ enum MovieType {
     case upcoming
     case genresSorted
     case found
+    case watchlist
 }
 
 protocol DetailGenresMovieProtocol {
@@ -53,7 +54,6 @@ class DetailGenresViewController: UIViewController {
     var castImages = [String]()
     var receivedFavouriteValue: Bool = false
 
-    //var dataSource: [FavouriteMovie] = []
     var detailedMovie: DetailGenresMovieProtocol?
 
    let genres =
@@ -108,6 +108,7 @@ class DetailGenresViewController: UIViewController {
                 genresInfo.append(genreName)
             }
         }
+
         
         
         if let url = detailedMovie?.imageURL {
@@ -241,8 +242,7 @@ class DetailGenresViewController: UIViewController {
 
     
     @IBAction func addToWatchlistButton(_ sender: Any) {
-            NetworkManager.shared.addToWatchlist(movieId: String(detailedMovie?.moviesIDS ?? 2)
-            )
+        NetworkManager.shared.addToWatchlist(movieId: String(detailedMovie?.moviesIDS ?? 2), value: true)
     }
     
 
@@ -250,9 +250,15 @@ class DetailGenresViewController: UIViewController {
         if receivedFavouriteValue == false {
         NetworkManager.shared.markAsFavourite(movieId: String(detailedMovie?.moviesIDS ?? 0), value: true)
             receivedFavouriteValue = true
+            favouritesButton.setTitle("Liked", for: .normal)
+            favouritesButton.setTitleColor(.white, for: .normal)
+            favouritesButton.backgroundColor = .gray
         } else {
             NetworkManager.shared.markAsFavourite(movieId: String(detailedMovie?.moviesIDS ?? 0), value: false)
             receivedFavouriteValue = false
+            favouritesButton.setTitle("Like", for: .normal)
+            favouritesButton.setTitleColor(.white, for: .normal)
+            favouritesButton.backgroundColor = .systemMint
         }
         
     }

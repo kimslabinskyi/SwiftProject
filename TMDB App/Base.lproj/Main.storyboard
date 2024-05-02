@@ -88,64 +88,6 @@
             </objects>
             <point key="canvasLocation" x="2764" y="-709"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="5xv-B9-nMU">
-            <objects>
-                <viewController id="hVl-zt-5z8" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="96v-XX-OZ4">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HqQ-dZ-UGQ">
-                                <rect key="frame" x="16" y="59" width="361" height="759"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yVg-dr-Unl">
-                                    <size key="itemSize" width="156" height="192"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="oDd-s9-vZo">
-                                        <rect key="frame" x="0.0" y="0.0" width="156" height="192"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="c8w-j3-8rH">
-                                            <rect key="frame" x="0.0" y="0.0" width="156" height="192"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ms1-P9-IcM">
-                                                    <rect key="frame" x="0.0" y="8" width="148" height="147"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKj-q9-8H4">
-                                                    <rect key="frame" x="8" y="163" width="140" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </collectionViewCellContentView>
-                                        <size key="customSize" width="156" height="192"/>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="hFO-YF-9T8"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="HqQ-dZ-UGQ" firstAttribute="leading" secondItem="hFO-YF-9T8" secondAttribute="leading" constant="16" id="Raj-Ij-MV9"/>
-                            <constraint firstItem="hFO-YF-9T8" firstAttribute="trailing" secondItem="HqQ-dZ-UGQ" secondAttribute="trailing" constant="16" id="Wkh-71-zRm"/>
-                            <constraint firstItem="HqQ-dZ-UGQ" firstAttribute="bottom" secondItem="hFO-YF-9T8" secondAttribute="bottom" id="cTr-jA-8TH"/>
-                            <constraint firstItem="HqQ-dZ-UGQ" firstAttribute="top" secondItem="hFO-YF-9T8" secondAttribute="top" id="yVM-B4-bRE"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Hi6-Ux-LFn"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hka-qX-Bq8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3697" y="-35"/>
-        </scene>
         <!--Favourites-->
         <scene sceneID="zQD-yh-Jem">
             <objects>
@@ -278,7 +220,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account name " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jl1-bK-L9q">
-                                <rect key="frame" x="16" y="110" width="361" height="33.666666666666657"/>
+                                <rect key="frame" x="135" y="103" width="242" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
@@ -293,7 +235,7 @@
                                 </buttonConfiguration>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2K-j8-yCY">
-                                <rect key="frame" x="16" y="240" width="138" height="37"/>
+                                <rect key="frame" x="16" y="552" width="138" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Wathchlist">
@@ -303,6 +245,29 @@
                                     <action selector="watchlistButton:" destination="X3n-Yh-Ma8" eventType="touchUpInside" id="YSJ-eq-h0Z"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7kk-g9-jJu">
+                                <rect key="frame" x="8" y="95" width="126" height="113"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="uaa-as-o6k">
+                                <rect key="frame" x="16" y="103" width="111" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Watch information about movies in watchlist! " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZZ-vb-hdC">
+                                <rect key="frame" x="16" y="504" width="361" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Watch the movies you rated!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S14-PW-bPS">
+                                <rect key="frame" x="16" y="610" width="361" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rLx-C3-hhg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -311,41 +276,12 @@
                     <navigationItem key="navigationItem" id="ECM-6W-iVP"/>
                     <connections>
                         <outlet property="labelOfUsername" destination="jl1-bK-L9q" id="dTR-xa-3Ji"/>
-                        <segue destination="sj5-AT-ksb" kind="show" identifier="WatchlistSegue" id="e5l-j3-neh"/>
+                        <segue destination="5zD-aK-Hbo" kind="show" identifier="WatchlistSegue" id="9Cg-VX-CwH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ADo-xd-Bpf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2765.6488549618321" y="704.92957746478874"/>
-        </scene>
-        <!--Watchlist View Controller-->
-        <scene sceneID="y6y-aN-m6B">
-            <objects>
-                <tableViewController id="sj5-AT-ksb" customClass="WatchlistViewController" customModule="TMDB_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="hnF-I4-iwi">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="lSG-fw-ggR">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lSG-fw-ggR" id="Ikh-jM-5RP">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="sj5-AT-ksb" id="MQN-m9-VwA"/>
-                            <outlet property="delegate" destination="sj5-AT-ksb" id="rgK-1b-LzH"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="jtY-pM-2aK"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sZ7-AT-fIZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3709" y="705"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1sa-X4-L3K">
@@ -392,13 +328,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trending movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bni-KU-om7">
-                                <rect key="frame" x="75" y="103" width="242" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cPZ-Lt-a1b">
                                 <rect key="frame" x="0.0" y="151" width="393" height="551"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -482,6 +411,13 @@
                                     <color key="baseForegroundColor" systemColor="labelColor"/>
                                 </buttonConfiguration>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trending movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bni-KU-om7">
+                                <rect key="frame" x="57" y="103" width="279" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="U09-jN-nDV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -649,29 +585,6 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" systemColor="labelColor"/>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbD-Kj-yki">
-                                                <rect key="frame" x="189" y="552" width="75" height="36"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" cornerStyle="dynamic">
-                                                    <backgroundConfiguration key="background">
-                                                        <color key="backgroundColor" systemColor="systemMintColor"/>
-                                                    </backgroundConfiguration>
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="Rate">
-                                                            <attributes>
-                                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                <font key="NSFont" size="19" name="Avenir-Book"/>
-                                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="addRatingButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="shJ-nX-MNp"/>
-                                                    <segue destination="JT7-y8-Q2m" kind="show" id="PIn-GR-Y9b"/>
-                                                </connections>
-                                            </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="ptb-N5-cfe">
                                                 <rect key="frame" x="20" y="559" width="41" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -692,29 +605,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LL0-B2-WuE">
-                                                <rect key="frame" x="189" y="603" width="175" height="36"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" cornerStyle="dynamic">
-                                                    <backgroundConfiguration key="background">
-                                                        <color key="backgroundColor" systemColor="systemMintColor"/>
-                                                    </backgroundConfiguration>
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="Add to Watchlist">
-                                                            <attributes>
-                                                                <font key="NSFont" size="18" name="Avenir-Book"/>
-                                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="addRatingButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="h8I-f8-e58"/>
-                                                    <action selector="addToWatchlistButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="u04-bC-Xlj"/>
-                                                </connections>
-                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxW-oY-9f2">
                                                 <rect key="frame" x="60" y="553" width="49" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -792,26 +682,72 @@
                                                 </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2L6-8y-Kst">
-                                                <rect key="frame" x="289" y="552" width="75" height="36"/>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWV-jl-KNG">
+                                                <rect key="frame" x="292" y="552" width="72" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" cornerStyle="dynamic">
-                                                    <backgroundConfiguration key="background"/>
+                                                    <backgroundConfiguration key="background">
+                                                        <color key="backgroundColor" systemColor="systemMintColor"/>
+                                                    </backgroundConfiguration>
                                                     <attributedString key="attributedTitle">
                                                         <fragment content="Like">
                                                             <attributes>
-                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                <font key="NSFont" size="17" name="Helvetica"/>
+                                                                <font key="NSFont" size="18" name="Avenir-Book"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
-                                                    <color key="baseForegroundColor" systemColor="systemMintColor"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </buttonConfiguration>
                                                 <connections>
-                                                    <action selector="addRatingButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="3YF-ti-JTT"/>
-                                                    <action selector="addToFavouritesButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="pxu-aL-bnD"/>
+                                                    <action selector="addToFavouritesButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="jp4-Oa-OF3"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YwZ-tv-3GX">
+                                                <rect key="frame" x="190" y="609" width="174" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" cornerStyle="dynamic">
+                                                    <backgroundConfiguration key="background">
+                                                        <color key="backgroundColor" systemColor="systemMintColor"/>
+                                                    </backgroundConfiguration>
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Add  to watchlist">
+                                                            <attributes>
+                                                                <font key="NSFont" size="18" name="Avenir-Book"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="addToWatchlistButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="uVW-CR-ttf"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I4I-Nv-0t3">
+                                                <rect key="frame" x="190" y="552" width="72" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" cornerStyle="dynamic">
+                                                    <backgroundConfiguration key="background">
+                                                        <color key="backgroundColor" systemColor="systemMintColor"/>
+                                                    </backgroundConfiguration>
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Rate">
+                                                            <attributes>
+                                                                <font key="NSFont" size="18" name="Avenir-Book"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="addRatingButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="pSL-xH-YaF"/>
+                                                    <action selector="addToFavouritesButton:" destination="rT8-yQ-cV4" eventType="touchUpInside" id="41p-nV-QWx"/>
+                                                    <segue destination="JT7-y8-Q2m" kind="show" id="LJc-vh-NwC"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -861,12 +797,12 @@
                     <navigationItem key="navigationItem" id="rEB-Rt-eEP"/>
                     <size key="freeformSize" width="393" height="855"/>
                     <connections>
-                        <outlet property="addToWatchlistButton" destination="LL0-B2-WuE" id="RaA-ow-4OP"/>
+                        <outlet property="addToWatchlistButton" destination="YwZ-tv-3GX" id="A1y-eC-x7w"/>
                         <outlet property="backdrop" destination="gVR-xE-ODF" id="X6u-g9-ZWt"/>
                         <outlet property="collectionView" destination="IKi-UX-1EM" id="y2e-X2-Y6G"/>
                         <outlet property="descriptionOfMovie" destination="vvb-Pa-oQv" id="l9q-ht-tuU"/>
-                        <outlet property="favouritesButton" destination="2L6-8y-Kst" id="2yl-l8-Vny"/>
-                        <outlet property="rateButton" destination="KbD-Kj-yki" id="CyS-8O-5hM"/>
+                        <outlet property="favouritesButton" destination="LWV-jl-KNG" id="WgM-Bp-3M5"/>
+                        <outlet property="rateButton" destination="I4I-Nv-0t3" id="IWG-b2-2lc"/>
                         <outlet property="releaseDateLabel" destination="zwE-Dk-nX9" id="8kB-6Z-sl5"/>
                         <outlet property="tableView" destination="jpV-ZM-p41" id="P9f-NR-Vot"/>
                         <outlet property="titleLabel" destination="KHN-k3-ddi" id="dYX-KX-3Ol"/>
@@ -1508,9 +1444,96 @@
             </objects>
             <point key="canvasLocation" x="3708" y="-709"/>
         </scene>
+        <!--Watchlist-->
+        <scene sceneID="QUf-HC-wbd">
+            <objects>
+                <viewController title="FoundMovies" id="5zD-aK-Hbo" userLabel="Watchlist" customClass="WatchlistViewController" customModule="TMDB_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6n1-Zi-3r1">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Watchlist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aW-M5-iwl">
+                                <rect key="frame" x="89" y="52" width="215" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Lv-VD-62n">
+                                <rect key="frame" x="16" y="101" width="361" height="657"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="T9o-Bd-tXQ">
+                                    <size key="itemSize" width="160" height="286"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WatchlistCell" id="rFc-cp-Oii" customClass="WatchlistCollectionViewCell" customModule="TMDB_App" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="270"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="bWi-BD-KXx">
+                                            <rect key="frame" x="0.0" y="0.0" width="160" height="270"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="vh2-Bu-0L8">
+                                                    <rect key="frame" x="61.666666666666657" y="116.66666666666669" width="37" height="37"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="37" id="4W9-qi-zfc"/>
+                                                        <constraint firstAttribute="width" constant="37" id="HBD-ZW-ykZ"/>
+                                                    </constraints>
+                                                    <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </activityIndicatorView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LO8-AW-EaP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="221"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movie name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1L2-vk-lCT">
+                                                    <rect key="frame" x="8" y="229" width="144" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vh2-Bu-0L8" firstAttribute="centerX" secondItem="bWi-BD-KXx" secondAttribute="centerX" id="jUG-W6-s1P"/>
+                                                <constraint firstItem="vh2-Bu-0L8" firstAttribute="centerY" secondItem="bWi-BD-KXx" secondAttribute="centerY" id="mct-Dy-hOB"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <size key="customSize" width="160" height="270"/>
+                                        <connections>
+                                            <outlet property="cellImage" destination="LO8-AW-EaP" id="agx-Dj-cOr"/>
+                                            <outlet property="cellLabel" destination="1L2-vk-lCT" id="9W5-N5-3gQ"/>
+                                            <outlet property="spinner" destination="vh2-Bu-0L8" id="2JS-Ps-lRI"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="5zD-aK-Hbo" id="ice-tQ-sgW"/>
+                                    <outlet property="delegate" destination="5zD-aK-Hbo" id="A0V-zc-dC8"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ONq-gX-CRr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Favourites" id="UpY-zv-dP0"/>
+                    <navigationItem key="navigationItem" id="ibD-gM-Dp4"/>
+                    <connections>
+                        <outlet property="mainCollectionView" destination="7Lv-VD-62n" id="LGK-dR-lBS"/>
+                        <segue destination="rT8-yQ-cV4" kind="show" identifier="DetailWatchlist" id="ZAB-u8-VQ3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0ML-Vt-VTg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3811" y="705"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="59q-ZI-Ukz"/>
+        <segue reference="ZAB-u8-VQ3"/>
         <segue reference="8dr-XY-ZQZ"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -1520,6 +1543,7 @@
         <image name="person" catalog="system" width="128" height="121"/>
         <image name="star" width="512" height="512"/>
         <image name="star.square.on.square" catalog="system" width="128" height="116"/>
+        <image name="user" width="512" height="512"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -1527,7 +1551,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemMintColor">
-            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.78039215689999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -33,9 +33,6 @@ class ListOfFavouritesMovies{
         })
         
     }
-    func cleanList(){
-        listOfFavouritesMovies = []
-    }
     
     
 }

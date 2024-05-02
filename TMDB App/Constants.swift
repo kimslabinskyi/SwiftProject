@@ -27,7 +27,10 @@ struct SegueId {
     
     static let detailFoundMovieSegue = "DetailFoundMovieSegue"
     
+    static let detailWatchlist = "DetailWatchlist"
+    
     static let moreGenresSegue = "moreGenresSegue"
+    
 }
 
 

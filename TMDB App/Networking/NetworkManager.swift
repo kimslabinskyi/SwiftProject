@@ -3,7 +3,6 @@
 //  TMDB App
 //
 // Created by Kim on 27.04.2023
-// #DEVELOPMENT HELL on 07.12.2023
 
 import Alamofire
 import AVKit
@@ -315,42 +314,27 @@ class NetworkManager {
 
     
     
-    func addToWatchlist(movieId: String) {
-        
-        //        print("Session_id = \(sessionID!)")
-        //        print("accountInfo?.id = \(accountInfo!.id)")
-        //        print("apiKey = \(apiKey)")
-        //        print("movieID = \(movieId)")
-        
-        // https://api.themoviedb.org/3/account/17215644/watchlist?api_key=15ec7b54d43e199ced41a6e461173cee&session_id=9779e7f6bfbab5dde0757cff983e7e2bf1dae04f&media_type=movie&media_id=11216&watchlist=true
-        
+    func addToWatchlist(movieId: String, value: Bool) {
+
         let accountId = accountInfo!.id
         print("SESSION_ID = \(sessionID!)")
         
-        //        let url = "https://api.themoviedb.org/3/account/\(accountId)/watchlist?"
         
         let url = "https://api.themoviedb.org/3/account/17215644/watchlist?api_key=15ec7b54d43e199ced41a6e461173cee&session_id=\(sessionID!)"
         
-        // 0d66f2f42c8a4c06e37ec9ebf67bcc5b143240e8
-        // 9779e7f6bfbab5dde0757cff983e7e2bf1dae04f
-        //
+
         let parameters: [String: Any] = [
-            //"api_key": apiKey,
-            //"session_id": sessionID!,
             "media_id": movieId,
-            "watchlist": true,
+            "watchlist": value,
             "media_type": "movie"
             
         ]
         
-        //        let parameters: [String: Any] = [:]
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
-        
-        //        let parametersWithApiKey = parameters.merging(["api_key": apiKey]) { (_, new) in new }
-        
+                
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseJSON { response in
                 switch response.result {
@@ -567,24 +551,15 @@ class NetworkManager {
 //        }
 //    }
     
-    func getWatchlistMovies(accountId: Int, _ completion: @escaping (WatchlistMoviesResponse?) -> ()){
-        
+    func getWatchlistMovies(_ completion: @escaping (WatchlistMoviesResponse?) -> ()) {
+        let accountId = accountInfo?.id ?? 0
         let watchlistURL = "https://api.themoviedb.org/3/account/\(accountId)/watchlist/movies"
+        let parameters: [String: Any] = ["api_key": apiKey, "session_id": sessionID ?? " "]
         
-        let parameters: [String: Any]
-        = ["api_key": apiKey,
-           "session_id": sessionID ?? " "]
-            completion(nil)
-        
-        
-        
-        
-        AF.request(watchlistURL, method: .get, parameters: parameters).responseJSON{
-            response in
-            switch response.result{
-            case.success(let value):
+        AF.request(watchlistURL, method: .get, parameters: parameters).responseJSON { response in
+            switch response.result {
+            case .success(let value):
                 print("value = \(value)")
-                
                 let decoder = JSONDecoder()
                 if let jsonData = response.data,
                    let jsonMovieResponse = try? decoder.decode(WatchlistMoviesResponse.self, from: jsonData) {
@@ -594,14 +569,13 @@ class NetworkManager {
                     print("Failed to decode JSON")
                     completion(nil)
                 }
-            case.failure(let error):
+            case .failure(let error):
                 print("Error = \(error)")
                 completion(nil)
-            
             }
         }
-        
     }
+
     
     
     
