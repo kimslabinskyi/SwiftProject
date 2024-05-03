@@ -237,7 +237,6 @@ class RateViewController: UIViewController {
 
     
     func resizeImageWithDelay(_ image: UIImage, targetSize: CGSize, delayInSeconds: TimeInterval) -> UIImage {
-        // Step 1: Reduce image size
         let size = image.size
         let widthRatio = targetSize.width / size.width
         let heightRatio = targetSize.height / size.height
@@ -254,10 +253,6 @@ class RateViewController: UIViewController {
             image.draw(in: CGRect(origin: .zero, size: newSize))
         }
         
-        // Step 2: Add a delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) {
-            // Here you can perform the action after delay if necessary
-        }
         
         return resizedImage
     }

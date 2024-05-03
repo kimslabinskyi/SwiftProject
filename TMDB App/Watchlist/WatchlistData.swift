@@ -26,9 +26,11 @@ class WatchlistData{
                 }         
             }
         }
-        
     }
     
-    
+    func changeData(id: String, value: Bool){
+        NetworkManager.shared.addToWatchlist(movieId: id, value: value)
+
+    }
     
 }

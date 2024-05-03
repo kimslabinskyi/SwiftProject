@@ -57,6 +57,7 @@ class GenresViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         ListOfFavouritesMovies.shared.getList()
+        WatchlistData.shared.getData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -108,6 +109,7 @@ class GenresViewController: UIViewController {
         }
         
         ListOfFavouritesMovies.shared.getList()
+    
 
     }
     

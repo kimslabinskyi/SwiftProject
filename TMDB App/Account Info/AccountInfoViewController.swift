@@ -18,14 +18,6 @@ class AccountInfoViewController: UIViewController{
         super.viewDidLoad()
         print(" \n \n \n")
         
-//        let accountInfo: AccountInfo?
-//
-//        if let accountInfo = NetworkManager.shared.accountInfo {
-//            accountId = accountInfo.id
-//            labelOfUsername.text = accountInfo.username
-//            print(accountInfo.id)
-//        }
-        
             
         WatchlistData.shared.getData()
         

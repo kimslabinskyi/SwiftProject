@@ -53,6 +53,7 @@ class DetailGenresViewController: UIViewController {
     var genresInfo = [String]()
     var castImages = [String]()
     var receivedFavouriteValue: Bool = false
+    var receivedWatchlistValue: Bool = false 
 
     var detailedMovie: DetailGenresMovieProtocol?
 
@@ -157,14 +158,23 @@ class DetailGenresViewController: UIViewController {
 
         }
         
+        if receivedWatchlistValue == true {
+            addToWatchlistButton.setTitle("Added to watchlist", for: .normal)
+            addToWatchlistButton.setTitleColor(.white, for: .normal)
+            addToWatchlistButton.backgroundColor = .gray
+        } else {
+            addToWatchlistButton.setTitleColor(.white, for: .normal)
+            addToWatchlistButton.backgroundColor = .systemMint
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-         
+    override func viewWillDisappear(_ animated: Bool) {
+
     }
     
 
@@ -242,7 +252,20 @@ class DetailGenresViewController: UIViewController {
 
     
     @IBAction func addToWatchlistButton(_ sender: Any) {
-        NetworkManager.shared.addToWatchlist(movieId: String(detailedMovie?.moviesIDS ?? 2), value: true)
+   
+        if receivedWatchlistValue == false{
+             //NetworkManager.shared.addToWatchlist(movieId: String(detailedMovie?.moviesIDS ?? 2), value: true)
+            WatchlistData.shared.changeData(id: String(detailedMovie?.moviesIDS ?? 2), value: true)
+            receivedWatchlistValue = true
+        } else {
+            WatchlistData.shared.changeData(id: String(detailedMovie?.moviesIDS ?? 2), value: false)
+            receivedWatchlistValue = false
+        }
+        
+        
+        
+        
+        // NetworkManager.shared.addToWatchlist(movieId: String(detailedMovie?.moviesIDS ?? 2), value: true)
     }
     
 

@@ -20,7 +20,10 @@ class WatchlistViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         WatchlistData.shared.getData()
-        mainCollectionView.reloadData()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+            self.mainCollectionView.reloadData()
+        }
 
     }
     
@@ -30,6 +33,11 @@ class WatchlistViewController: UIViewController {
         if segue.identifier == SegueId.detailWatchlist{
             if let destinationVC = segue.destination as? DetailGenresViewController{
                 destinationVC.detailedMovie = selectedWatchlistMovie
+                
+                if WatchlistData.shared.watchlistData.contains(selectedWatchlistMovie?.id ?? 0){
+                    print("success")
+                    destinationVC.receivedWatchlistValue = true
+                }
             }
         }
     }
@@ -66,9 +74,14 @@ extension WatchlistViewController: UICollectionViewDelegate, UICollectionViewDat
 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedWatchlistMovie = WatchlistData.shared.watchlistMoviesDataSource[indexPath.row]
-        performSegue(withIdentifier: SegueId.detailWatchlist, sender: nil)
+        if indexPath.row < WatchlistData.shared.watchlistMoviesDataSource.count {
+            selectedWatchlistMovie = WatchlistData.shared.watchlistMoviesDataSource[indexPath.row]
+            performSegue(withIdentifier: SegueId.detailWatchlist, sender: nil)
+        } else {
+            print("Index out of range!")
+        }
     }
+
     
     
     
