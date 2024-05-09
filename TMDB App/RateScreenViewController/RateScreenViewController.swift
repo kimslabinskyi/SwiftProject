@@ -7,19 +7,19 @@
 import Alamofire
 import UIKit
 
-protocol RateViewDelegate {
+protocol RateScreenViewDelegate {
    // var success: Bool { get }
    // func sendData(_ success: Bool)
     #warning("Change the buttons color")
 }
 
-class RateViewController: UIViewController {
+class RateScreenViewController: UIViewController {
     
     @IBOutlet weak var blurredImageView: UIImageView!
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var AverageRatingLabel: UILabel!
     
-    var delegate: RateViewDelegate?
+    var delegate: RateScreenViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
