@@ -120,13 +120,7 @@ class DetailGenresViewController: UIViewController {
             }
         }
         
-//        if let urlString = detailedMovie?.imageURL?.absoluteString, urlString == "https://www.themoviedb.org/t/p/w780" {
-//            self.backdrop.image = UIImage(named: "AppIcon")
-//        }
-        
-        
-        
-        //Data to pass
+
         if let dataToPass = detailedMovie?.posterURL {
             self.posterURLToPass = dataToPass
         }
@@ -215,7 +209,7 @@ class DetailGenresViewController: UIViewController {
     var labelToPass: String? 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = segue.destination as? RateViewController {
+        if let destinationViewController = segue.destination as? RateScreenViewController {
             destinationViewController.receivedPosterURL = posterURLToPass
             destinationViewController.receivedMovieID = movieIDToPass
             destinationViewController.receivedVoteAverage = voteAverageToPass

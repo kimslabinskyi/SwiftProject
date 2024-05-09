@@ -20,4 +20,8 @@ class RatedMoviesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBOutlet weak var mainImage: UIImageView!
+    
+    @IBOutlet weak var mainLabel: UILabel!
+    
 }

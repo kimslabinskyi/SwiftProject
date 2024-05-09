@@ -31,6 +31,8 @@ struct SegueId {
     
     static let moreGenresSegue = "moreGenresSegue"
     
+    static let changeRatingSegue = "changeRatingSegue"
+    
 }
 
 

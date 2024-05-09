@@ -44,7 +44,6 @@ class WatchlistViewController: UIViewController {
     
     
     @IBOutlet weak var mainCollectionView: UICollectionView!
-    //var watchlistMoviesDataSource: [WatchlistMovie] = []
     var selectedWatchlistMovie: WatchlistMovie?
     
 

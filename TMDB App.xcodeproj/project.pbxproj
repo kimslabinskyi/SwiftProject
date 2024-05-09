@@ -43,10 +43,14 @@
 		3B940D122BCBE8DD0080AFB1 /* FoundMoviesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B940D112BCBE8DD0080AFB1 /* FoundMoviesCollectionViewController.swift */; };
 		3B940D162BCD78870080AFB1 /* FoundMoviesJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B940D152BCD78870080AFB1 /* FoundMoviesJSON.swift */; };
 		3B940D182BCDA3080080AFB1 /* FoundMovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B940D172BCDA3080080AFB1 /* FoundMovieCollectionViewCell.swift */; };
+		3B9E1F992BE54B150096B9DF /* RatedMoviesJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9E1F982BE54B150096B9DF /* RatedMoviesJSON.swift */; };
+		3B9E1F9B2BE5590B0096B9DF /* RatedMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9E1F9A2BE5590B0096B9DF /* RatedMoviesViewController.swift */; };
+		3B9E1F9E2BE559BE0096B9DF /* RatedMoviesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9E1F9D2BE559BE0096B9DF /* RatedMoviesData.swift */; };
+		3B9E1FA02BE7891C0096B9DF /* RatedMoviesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9E1F9F2BE7891C0096B9DF /* RatedMoviesTableViewCell.swift */; };
 		3BAD454A2BE25CAB0065B0E6 /* WatchlistData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAD45492BE25CAB0065B0E6 /* WatchlistData.swift */; };
 		3BB31E4D2A59AD6F0071D4EF /* imageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB31E4C2A59AD6E0071D4EF /* imageLoader.swift */; };
 		3BB4DDA72A3106F9003FACA5 /* UIImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB4DDA62A3106F9003FACA5 /* UIImageManager.swift */; };
-		3BB818A42AD84DEF006C689E /* RateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB818A32AD84DEF006C689E /* RateViewController.swift */; };
+		3BB818A42AD84DEF006C689E /* RateScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB818A32AD84DEF006C689E /* RateScreenViewController.swift */; };
 		3BCD569D2A27D10100495460 /* TrendingMoviesJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD569C2A27D10100495460 /* TrendingMoviesJSON.swift */; };
 		3BCD569F2A28C2B300495460 /* DetailGenresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD569E2A28C2B300495460 /* DetailGenresViewController.swift */; };
 		3BCD56A12A28C54500495460 /* TrendingMoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD56A02A28C54500495460 /* TrendingMoviesCollectionViewCell.swift */; };
@@ -97,10 +101,14 @@
 		3B940D112BCBE8DD0080AFB1 /* FoundMoviesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundMoviesCollectionViewController.swift; sourceTree = "<group>"; };
 		3B940D152BCD78870080AFB1 /* FoundMoviesJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundMoviesJSON.swift; sourceTree = "<group>"; };
 		3B940D172BCDA3080080AFB1 /* FoundMovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundMovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		3B9E1F982BE54B150096B9DF /* RatedMoviesJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedMoviesJSON.swift; sourceTree = "<group>"; };
+		3B9E1F9A2BE5590B0096B9DF /* RatedMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedMoviesViewController.swift; sourceTree = "<group>"; };
+		3B9E1F9D2BE559BE0096B9DF /* RatedMoviesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedMoviesData.swift; sourceTree = "<group>"; };
+		3B9E1F9F2BE7891C0096B9DF /* RatedMoviesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedMoviesTableViewCell.swift; sourceTree = "<group>"; };
 		3BAD45492BE25CAB0065B0E6 /* WatchlistData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistData.swift; sourceTree = "<group>"; };
 		3BB31E4C2A59AD6E0071D4EF /* imageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageLoader.swift; sourceTree = "<group>"; };
 		3BB4DDA62A3106F9003FACA5 /* UIImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageManager.swift; sourceTree = "<group>"; };
-		3BB818A32AD84DEF006C689E /* RateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateViewController.swift; sourceTree = "<group>"; };
+		3BB818A32AD84DEF006C689E /* RateScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateScreenViewController.swift; sourceTree = "<group>"; };
 		3BCD569C2A27D10100495460 /* TrendingMoviesJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMoviesJSON.swift; sourceTree = "<group>"; };
 		3BCD569E2A28C2B300495460 /* DetailGenresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGenresViewController.swift; sourceTree = "<group>"; };
 		3BCD56A02A28C54500495460 /* TrendingMoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMoviesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -209,12 +217,13 @@
 				3B7E8C272A0C3504008396D8 /* Favourite Movies */,
 				3B7E8C282A0C354F008396D8 /* Account Info */,
 				3B018DE82BDA70FE00A21680 /* Watchlist */,
+				3B9E1F9C2BE559470096B9DF /* RatedMovies */,
 				3BEFEEA82B2374B400E707E8 /* Region */,
 				3B66FEED29FAD3DC00D26C76 /* JSON */,
 				3BBC3A9D2A079F7900FB0111 /* ActivityController */,
 				3BB4DDA82A310708003FACA5 /* UIImageManager */,
 				3BB31E4E2A59AD750071D4EF /* imageLoader */,
-				3BB818A52AD84DF6006C689E /* RateViewController */,
+				3BB818A52AD84DF6006C689E /* RateScreenViewController */,
 			);
 			path = "TMDB App";
 			sourceTree = "<group>";
@@ -278,6 +287,17 @@
 			path = DetailScreen;
 			sourceTree = "<group>";
 		};
+		3B9E1F9C2BE559470096B9DF /* RatedMovies */ = {
+			isa = PBXGroup;
+			children = (
+				3B9E1F9A2BE5590B0096B9DF /* RatedMoviesViewController.swift */,
+				3B9E1F9D2BE559BE0096B9DF /* RatedMoviesData.swift */,
+				3B9E1F982BE54B150096B9DF /* RatedMoviesJSON.swift */,
+				3B9E1F9F2BE7891C0096B9DF /* RatedMoviesTableViewCell.swift */,
+			);
+			path = RatedMovies;
+			sourceTree = "<group>";
+		};
 		3BB31E4E2A59AD750071D4EF /* imageLoader */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,12 +324,12 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		3BB818A52AD84DF6006C689E /* RateViewController */ = {
+		3BB818A52AD84DF6006C689E /* RateScreenViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3BB818A32AD84DEF006C689E /* RateViewController.swift */,
+				3BB818A32AD84DEF006C689E /* RateScreenViewController.swift */,
 			);
-			path = RateViewController;
+			path = RateScreenViewController;
 			sourceTree = "<group>";
 		};
 		3BBC3A9D2A079F7900FB0111 /* ActivityController */ = {
@@ -445,6 +465,7 @@
 				3B66FEEC29FAD3D200D26C76 /* RequestTokenResponse.swift in Sources */,
 				3BCD569D2A27D10100495460 /* TrendingMoviesJSON.swift in Sources */,
 				3B66FEE429FAD27D00D26C76 /* GenresViewController.swift in Sources */,
+				3B9E1F992BE54B150096B9DF /* RatedMoviesJSON.swift in Sources */,
 				3B29CBFC2A3324FB00466E72 /* UpcomingMoviesJSON.swift in Sources */,
 				3BCD569F2A28C2B300495460 /* DetailGenresViewController.swift in Sources */,
 				3BB4DDA72A3106F9003FACA5 /* UIImageManager.swift in Sources */,
@@ -453,9 +474,11 @@
 				A560C83D2A30B8C100B91411 /* ImageManager.swift in Sources */,
 				3B87BA6C2A9B789D0040A580 /* AVPStruct.swift in Sources */,
 				3B27581B2A66A8080014130A /* GenresCollectionViewCell.swift in Sources */,
+				3B9E1FA02BE7891C0096B9DF /* RatedMoviesTableViewCell.swift in Sources */,
 				3B66FEE629FAD28C00D26C76 /* SearchViewController.swift in Sources */,
 				3B27581D2A67D7C40014130A /* MoreViewController.swift in Sources */,
 				3B018DEA2BDA714B00A21680 /* WatchlistViewController.swift in Sources */,
+				3B9E1F9E2BE559BE0096B9DF /* RatedMoviesData.swift in Sources */,
 				3B66FED129FAD14000D26C76 /* WKWebViewController.swift in Sources */,
 				3B1A4B122BBD74E6004F6AD4 /* ListOfFavouritesMovies.swift in Sources */,
 				3B74BE012A051E0600D6561A /* AccountInfo.swift in Sources */,
@@ -471,7 +494,8 @@
 				3B940D162BCD78870080AFB1 /* FoundMoviesJSON.swift in Sources */,
 				3BE328152B0F5F620054BB14 /* CastsJson.swift in Sources */,
 				3B66FECD29FAD14000D26C76 /* AppDelegate.swift in Sources */,
-				3BB818A42AD84DEF006C689E /* RateViewController.swift in Sources */,
+				3BB818A42AD84DEF006C689E /* RateScreenViewController.swift in Sources */,
+				3B9E1F9B2BE5590B0096B9DF /* RatedMoviesViewController.swift in Sources */,
 				3B66FECF29FAD14000D26C76 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

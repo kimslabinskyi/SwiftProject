@@ -7,11 +7,6 @@
 import Alamofire
 import UIKit
 
-protocol RateScreenViewDelegate {
-   // var success: Bool { get }
-   // func sendData(_ success: Bool)
-    #warning("Change the buttons color")
-}
 
 class RateScreenViewController: UIViewController {
     
@@ -19,14 +14,14 @@ class RateScreenViewController: UIViewController {
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var AverageRatingLabel: UILabel!
     
-    var delegate: RateScreenViewDelegate?
+    var valueToSave: [Int: Int] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("ICON = \(String(describing: receivedPosterURL))")
         print("receivedMovieID = \(String(describing: receivedMovieID))")
         print("receivedVoteAverage = \(String(describing: receivedVoteAverage))")
-        print("receivedLabel = \(receivedLabel)")
+        print("receivedLabel = \(String(describing: receivedLabel))")
         
         
         blurredImageView.alpha = 0
@@ -63,9 +58,13 @@ class RateScreenViewController: UIViewController {
         
     }
     
+    
+    
     @IBAction func rate1(_ sender: Any) {
         NetworkManager.shared.rateMovie(movieID: receivedMovieID ?? 0, ratingValue: 1.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
-
+            guard let movieId = self.receivedMovieID else {
+                return
+            }
 
             if success {
                     print("The rating has been successfully established!")
@@ -81,10 +80,13 @@ class RateScreenViewController: UIViewController {
     
     @IBAction func rate2(_ sender: Any) {
         NetworkManager.shared.rateMovie(movieID: receivedMovieID ?? 0, ratingValue: 2.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
-
+            guard let movieId = self.receivedMovieID else {
+                return
+            }
 
             if success {
                     print("The rating has been successfully established!")
+
                 } else {
                     print("An error occurred while setting the rating.")
                 }
@@ -97,10 +99,13 @@ class RateScreenViewController: UIViewController {
     
     @IBAction func rate3(_ sender: Any) {
         NetworkManager.shared.rateMovie(movieID: receivedMovieID ?? 0, ratingValue: 3.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
-
+            guard let movieId = self.receivedMovieID else {
+                return
+            }
 
             if success {
                     print("The rating has been successfully established!")
+
                 } else {
                     print("An error occurred while setting the rating.")
                 }
@@ -112,10 +117,13 @@ class RateScreenViewController: UIViewController {
     }
     @IBAction func rate4(_ sender: Any) {
         NetworkManager.shared.rateMovie(movieID: receivedMovieID ?? 0, ratingValue: 4.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
-
+            guard let movieId = self.receivedMovieID else {
+                return
+            }
 
             if success {
                     print("The rating has been successfully established!")
+
                 } else {
                     print("An error occurred while setting the rating.")
                 }
@@ -127,10 +135,13 @@ class RateScreenViewController: UIViewController {
     }
     @IBAction func rate5(_ sender: Any) {
         NetworkManager.shared.rateMovie(movieID: receivedMovieID ?? 0, ratingValue: 5.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
-
+            guard let movieId = self.receivedMovieID else {
+                return
+            }
 
             if success {
                     print("The rating has been successfully established!")
+
                 } else {
                     print("An error occurred while setting the rating.")
                 }
@@ -142,10 +153,13 @@ class RateScreenViewController: UIViewController {
     }
     @IBAction func rate6(_ sender: Any) {
         NetworkManager.shared.rateMovie(movieID: receivedMovieID ?? 0, ratingValue: 6.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
-
+            guard let movieId = self.receivedMovieID else {
+                return
+            }
 
             if success {
                     print("The rating has been successfully established!")
+
                 } else {
                     print("An error occurred while setting the rating.")
                 }
@@ -157,10 +171,13 @@ class RateScreenViewController: UIViewController {
     }
     @IBAction func rate7(_ sender: Any) {
         NetworkManager.shared.rateMovie(movieID: receivedMovieID ?? 0, ratingValue: 7.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
-
+            guard let movieId = self.receivedMovieID else {
+                return
+            }
 
             if success {
                     print("The rating has been successfully established!")
+
                 } else {
                     print("An error occurred while setting the rating.")
                 }
@@ -172,10 +189,13 @@ class RateScreenViewController: UIViewController {
     }
     @IBAction func rate8(_ sender: Any) {
         NetworkManager.shared.rateMovie(movieID: receivedMovieID ?? 0, ratingValue: 8.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
-
+            guard let movieId = self.receivedMovieID else {
+                return
+            }
 
             if success {
                     print("The rating has been successfully established!")
+
                 } else {
                     print("An error occurred while setting the rating.")
                 }
@@ -187,10 +207,13 @@ class RateScreenViewController: UIViewController {
     }
     @IBAction func rate9(_ sender: Any) {
         NetworkManager.shared.rateMovie(movieID: receivedMovieID ?? 0, ratingValue: 9.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
-
+            guard let movieId = self.receivedMovieID else {
+                return
+            }
 
             if success {
                     print("The rating has been successfully established!")
+
                 } else {
                     print("An error occurred while setting the rating.")
                 }
@@ -203,10 +226,13 @@ class RateScreenViewController: UIViewController {
     @IBAction func rate10(_ sender: Any) {
         
                 NetworkManager.shared.rateMovie(movieID: receivedMovieID ?? 0, ratingValue: 10.0, sessionID: "9779e7f6bfbab5dde0757cff983e7e2bf1dae04f"){ success in
-        
+                    guard let movieId = self.receivedMovieID else {
+                        return
+                    }
         
                     if success {
                             print("The rating has been successfully established!")
+
                         } else {
                             print("An error occurred while setting the rating.")
                         }

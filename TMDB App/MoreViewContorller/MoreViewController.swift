@@ -132,13 +132,13 @@ class MoreViewController: UIViewController {
         
     }
     
-    @objc func buttonTapped() {
-        // Блок кода, который выполнится через 2 секунды после нажатия на кнопку
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            // Ваш код здесь
-            print("Кнопка была нажата с задержкой в 2 секунды.")
-        }
-    }
+//    @objc func buttonTapped() {
+//        // Блок кода, который выполнится через 2 секунды после нажатия на кнопку
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//            // Ваш код здесь
+//            print("Кнопка была нажата с задержкой в 2 секунды.")
+//        }
+//    }
     
     private func fetchMoreTrendingMovies() {
         NetworkManager.shared.getTrendingMovies(page: page, language: SelectedRegion.shared.region) {

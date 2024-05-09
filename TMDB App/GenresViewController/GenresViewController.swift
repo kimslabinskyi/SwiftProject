@@ -267,7 +267,7 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             let posterName = dataSourceTrendingMovies[indexPath.row].posterPath
             
             cell.trendingImage.image = nil
-            cell.trendingLabel.text = dataSourceTrendingMovies[indexPath.row].originalTitle
+            cell.trendingLabel.text = dataSourceTrendingMovies[indexPath.row].title
             print("dataSourceTrendingMovies = \(dataSourceTrendingMovies[indexPath.row].title)")
             
             ImageManager.getImageForPosterName(posterName, completion: { image in

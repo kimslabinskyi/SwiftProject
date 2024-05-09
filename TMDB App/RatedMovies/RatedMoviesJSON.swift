@@ -12,7 +12,7 @@ import Foundation
 struct RatedMoviesResponse: Codable {
     let totalResults: Int
     let totalPages: Int
-    let results: [FoundMovie]
+    let results: [RatedMovie]
     let page: Int
     
     private enum CodingKeys: String, CodingKey {
@@ -37,6 +37,7 @@ struct RatedMovie: Codable {
     let video: Bool
     let voteAverage: Double
     let voteCount: Int?
+
     
     
     enum CodingKeys: String, CodingKey {
@@ -56,6 +57,7 @@ struct RatedMovie: Codable {
 }
 
 extension RatedMovie: DetailGenresMovieProtocol{
+       
     var posterURL: URL? {
         URL(string: "https://www.themoviedb.org/t/p/w780\(posterPath ?? "")")
     }

@@ -20,16 +20,16 @@ class AccountInfoViewController: UIViewController{
         
             
         WatchlistData.shared.getData()
-        
+        RatedMoviesData.shared.getData(page: 1) 
         
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? WatchlistViewController{
-            let reversedDataSource = Array(watchlistMoviesDataSource.reversed())
-                //destinationVC.watchlistMoviesDataSource = reversedDataSource
+
         }
+
     }
     
     

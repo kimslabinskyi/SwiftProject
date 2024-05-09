@@ -78,7 +78,7 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MoviesCollectionViewCell
         cell.spiner.startAnimating()
-        let posterName = dataSource[indexPath.row].posterPath ?? ""
+        let posterName = dataSource[indexPath.row].posterPath 
         
         cell.movieImageView.image = nil
 
@@ -96,6 +96,21 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedFavouriteMovie = dataSource[indexPath.row]
         performSegue(withIdentifier: SegueId.detailFavouriteMovieInfoSegue, sender: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? FoundMovieCollectionViewCell else {
+            return
+        }
+        
+        let optionalPosterName = ListOfFavouritesMovies.shared.dataSourceFavouritesMovies[indexPath.row].posterPath
+        let posterName = optionalPosterName
+        
+        cell.cellImage.image = nil
+        cell.cellLabel.text = ListOfFavouritesMovies.shared.dataSourceFavouritesMovies[indexPath.row].title
+        
+        ImageManager.getImageForPosterName(posterName, completion: { image in
+            cell.cellImage.image = image ?? UIImage(named: "AppIcon") })
     }
 }
 

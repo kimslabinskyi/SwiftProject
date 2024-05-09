@@ -54,6 +54,10 @@ struct FoundMovie: Codable {
 }
 
 extension FoundMovie: DetailGenresMovieProtocol{
+    var ratedAt: String? {
+        nil
+    }
+    
     var posterURL: URL? {
         URL(string: "https://www.themoviedb.org/t/p/w780\(posterPath ?? "")")
     }
