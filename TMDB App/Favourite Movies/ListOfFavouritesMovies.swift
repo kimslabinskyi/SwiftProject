@@ -15,7 +15,7 @@ class ListOfFavouritesMovies{
     
     func getList(){
         listOfFavouritesMovies = []
-        NetworkManager.shared.getFavoriteMovies({ [weak self] movieResponse, arg  in
+        NetworkManager.shared.getFavoriteMovies( { [weak self] movieResponse, arg  in
             guard let self = self else { return }
             
             if let movieResponse = movieResponse {
@@ -33,6 +33,16 @@ class ListOfFavouritesMovies{
         })
         
     }
+    
+//    func checkNextPage(nextPage: Int){
+//        NetworkManager.shared.getFavoriteMovies(page: page, { [weak self] movieResponse, arg in
+//            guard let self = self else { return }
+//            
+//            if let movieResponse = movieResponse {
+//                
+//            }
+//        })
+//    }
     
     
 }

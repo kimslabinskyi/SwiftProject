@@ -169,7 +169,7 @@ class NetworkManager {
         }
     }
     
-    func getFavoriteMovies(_ completion: @escaping (FavouritesMoviesResponse?, Error?) -> ()) {
+    func getFavoriteMovies( _ completion: @escaping (FavouritesMoviesResponse?, Error?) -> ()) {
         guard let accountId = accountInfo?.id else {
             completion(nil, NSError(domain: "AccountIDNotFound", code: 400, userInfo: [NSLocalizedDescriptionKey: "Account ID not found"]))
             return
@@ -180,8 +180,7 @@ class NetworkManager {
             "api_key": apiKey,
             "session_id": sessionID ?? "",
             "language": "en-US",
-            "sort_by": "created_at.asc",
-            "page": 1
+            "sort_by": "created_at.asc"
         ]
         
         AF.request(url, method: .get, parameters: parameters).validate().responseJSON { response in

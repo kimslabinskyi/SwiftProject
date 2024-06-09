@@ -8,7 +8,6 @@
 import UIKit
 import Alamofire
 import SafariServices
-import Kingfisher
 
 enum MovieType {
     case top
@@ -96,9 +95,12 @@ class DetailGenresViewController: UIViewController {
         voteAverageLabel.text = voteAverage
         voteCountLabel.text = voteCount
         releaseDateLabel.text = detailedMovie?.releaseDateString
+        collectionView.showsHorizontalScrollIndicator = false
         
         favouritesButton.titleLabel?.textColor = .white
         favouritesButton.layer.cornerRadius = 7
+        
+        addToWatchlistButton.layer.cornerRadius = 7
         
         rateButton.titleLabel?.textColor = .white
 
@@ -249,11 +251,17 @@ class DetailGenresViewController: UIViewController {
    
         if receivedWatchlistValue == false{
              //NetworkManager.shared.addToWatchlist(movieId: String(detailedMovie?.moviesIDS ?? 2), value: true)
-            WatchlistData.shared.changeData(id: String(detailedMovie?.moviesIDS ?? 2), value: true)
+            WatchlistData.shared.changeData(id: String(detailedMovie?.moviesIDS ?? 0), value: true)
             receivedWatchlistValue = true
+            addToWatchlistButton.setTitle("Added to watchlist", for: .normal)
+            addToWatchlistButton.setTitleColor(.white, for: .normal)
+            addToWatchlistButton.backgroundColor = .gray
         } else {
-            WatchlistData.shared.changeData(id: String(detailedMovie?.moviesIDS ?? 2), value: false)
+            WatchlistData.shared.changeData(id: String(detailedMovie?.moviesIDS ?? 0), value: false)
             receivedWatchlistValue = false
+            addToWatchlistButton.setTitle("Add to watchlist", for: .normal)
+            addToWatchlistButton.setTitleColor(.white, for: .normal)
+            addToWatchlistButton.backgroundColor = .systemMint
         }
         
         
@@ -326,16 +334,21 @@ extension DetailGenresViewController: UICollectionViewDelegate, UICollectionView
             let imageUrl = castImages[indexPath.item]
 
             if imageUrl != "Empty" {
-                let url = URL(string: "https://image.tmdb.org/t/p/w200" + imageUrl)
-                cell.imageView.kf.setImage(with: url)
+                //let url = URL(string: "https://image.tmdb.org/t/p/w200" + imageUrl)
+               // cell.imageView.kf.setImage(with: url)
+                ImageManager.getImageForPosterName("https://image.tmdb.org/t/p/w200" + imageUrl) { image in
+                    cell.imageView.image = image ?? UIImage(named: "question_mark")}
             } else {
 
-                cell.imageView.image = UIImage(named: "AppIcon")
+                cell.imageView.image = UIImage(named: "question_mark")
             }
         }
         
         
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -15,6 +15,13 @@ class RatedMoviesViewController: UIViewController {
         previousPageButton.addTarget(self, action: #selector(previousPageButtonTapped), for: .touchUpInside)
         nextPageButton.addTarget(self, action: #selector(nextPageButtonTapped), for: .touchUpInside)
         tableView.showsVerticalScrollIndicator = false
+        
+        if WatchlistData.shared.watchlistMoviesDataSource.isEmpty{
+            let alertController = UIAlertController(title: "Your list is empty", message: "You can add rating to any movie!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,7 +145,7 @@ extension RatedMoviesViewController: UITableViewDelegate, UITableViewDataSource{
         let posterName = RatedMoviesData.shared.dataSourceRatedMovies[indexPath.row].posterPath
         ImageManager.getImageForPosterName(posterName){
             image in
-            cell.mainImage.image = image ?? UIImage(named: "AppIcon")
+            cell.mainImage.image = image ?? UIImage(named: "question_mark")
         }
         
         return cell
@@ -168,7 +175,7 @@ extension RatedMoviesViewController: UITableViewDelegate, UITableViewDataSource{
         
         let posterName = RatedMoviesData.shared.dataSourceRatedMovies[indexPath.row].posterPath
         ImageManager.getImageForPosterName(posterName) { image in
-            ratedCell.mainImage.image = image ?? UIImage(named: "AppIcon")
+            ratedCell.mainImage.image = image ?? UIImage(named: "question_mark")
         }
     }
 

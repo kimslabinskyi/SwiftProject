@@ -14,7 +14,12 @@ class WatchlistViewController: UIViewController {
         WatchlistData.shared.getData()
         mainCollectionView.showsVerticalScrollIndicator = false
         mainCollectionView.reloadData()
-
+        if WatchlistData.shared.watchlistMoviesDataSource.isEmpty{
+            let alertController = UIAlertController(title: "Your list is empty", message: "You can add any movie to your watchlist!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
         
     }
     
@@ -65,7 +70,7 @@ extension WatchlistViewController: UICollectionViewDelegate, UICollectionViewDat
         
         ImageManager.getImageForPosterName(posterName){
             image in
-            cell.cellImage.image = image ?? UIImage(named: "AppIcon")
+            cell.cellImage.image = image ?? UIImage(named: "question_mark")
         }
         
         return cell

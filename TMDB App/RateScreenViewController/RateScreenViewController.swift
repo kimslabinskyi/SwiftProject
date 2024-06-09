@@ -44,12 +44,12 @@ class RateScreenViewController: UIViewController {
                     })
 
                 } else {
-                    self.blurredImageView.image = UIImage(named: "AppIcon")
+                    self.blurredImageView.image = UIImage(named: "question_mark")
                     self.blurredImageView.alpha = 1
                 }
             }
         } else {
-            self.blurredImageView.image = UIImage(named: "AppIcon")
+            self.blurredImageView.image = UIImage(named: "question_mark")
             self.blurredImageView.alpha = 1
         }
 

@@ -42,7 +42,7 @@ class ImageManager {
         
     class func getImageForPosterName(_ posterName: String?, imageSize: String = "w342", completion: @escaping (UIImage?) -> Void) {
         guard let posterName = posterName else {
-            completion(UIImage(named: "AppIcon"))
+            completion(UIImage(named: "question_mark"))
             return
         }
         

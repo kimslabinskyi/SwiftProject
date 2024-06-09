@@ -18,7 +18,6 @@
 		3B29CBF72A330C4C00466E72 /* TopRatedMoviesJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29CBF62A330C4C00466E72 /* TopRatedMoviesJSON.swift */; };
 		3B29CBFA2A33245500466E72 /* UpcomingMoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29CBF92A33245500466E72 /* UpcomingMoviesCollectionViewCell.swift */; };
 		3B29CBFC2A3324FB00466E72 /* UpcomingMoviesJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29CBFB2A3324FB00466E72 /* UpcomingMoviesJSON.swift */; };
-		3B481A5D2B1DDEF100C1A4B2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3B481A5C2B1DDEF100C1A4B2 /* Kingfisher */; };
 		3B66D71F2A002F02008EEA8A /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66D71E2A002F02008EEA8A /* FavoritesViewController.swift */; };
 		3B66D7212A002F4A008EEA8A /* AccountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66D7202A002F4A008EEA8A /* AccountInfoViewController.swift */; };
 		3B66FECD29FAD14000D26C76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66FECC29FAD14000D26C76 /* AppDelegate.swift */; };
@@ -56,6 +55,7 @@
 		3BCD56A12A28C54500495460 /* TrendingMoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD56A02A28C54500495460 /* TrendingMoviesCollectionViewCell.swift */; };
 		3BD24C832B5165B300E438C2 /* WatchlistMoviesJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD24C822B5165B300E438C2 /* WatchlistMoviesJSON.swift */; };
 		3BDE9D982A797C1A00E102C0 /* GenresMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDE9D972A797C1A00E102C0 /* GenresMoviesResponse.swift */; };
+		3BE1A5912C05D61C00F98298 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE1A5902C05D61B00F98298 /* InitialViewController.swift */; };
 		3BE328152B0F5F620054BB14 /* CastsJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE328142B0F5F620054BB14 /* CastsJson.swift */; };
 		3BE93E322A81FA8500DD9939 /* ListOfGenresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE93E312A81FA8500DD9939 /* ListOfGenresViewController.swift */; };
 		3BE93E342A81FAA400DD9939 /* GenresTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE93E332A81FAA400DD9939 /* GenresTableViewCell.swift */; };
@@ -114,6 +114,7 @@
 		3BCD56A02A28C54500495460 /* TrendingMoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		3BD24C822B5165B300E438C2 /* WatchlistMoviesJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistMoviesJSON.swift; sourceTree = "<group>"; };
 		3BDE9D972A797C1A00E102C0 /* GenresMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresMoviesResponse.swift; sourceTree = "<group>"; };
+		3BE1A5902C05D61B00F98298 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		3BE328142B0F5F620054BB14 /* CastsJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastsJson.swift; sourceTree = "<group>"; };
 		3BE93E312A81FA8500DD9939 /* ListOfGenresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfGenresViewController.swift; sourceTree = "<group>"; };
 		3BE93E332A81FAA400DD9939 /* GenresTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresTableViewCell.swift; sourceTree = "<group>"; };
@@ -127,7 +128,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B481A5D2B1DDEF100C1A4B2 /* Kingfisher in Frameworks */,
 				3B66FEE929FAD35300D26C76 /* Alamofire in Frameworks */,
 				A560C83B2A30B69200B91411 /* AlamofireImage in Frameworks */,
 				3B806F142AE5A3C4005A6CE8 /* AlamofireImage in Frameworks */,
@@ -232,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				3B66FED029FAD14000D26C76 /* WKWebViewController.swift */,
+				3BE1A5902C05D61B00F98298 /* InitialViewController.swift */,
 			);
 			path = WKWebView;
 			sourceTree = "<group>";
@@ -386,7 +387,6 @@
 				3B66FEE829FAD35300D26C76 /* Alamofire */,
 				A560C83A2A30B69200B91411 /* AlamofireImage */,
 				3B806F132AE5A3C4005A6CE8 /* AlamofireImage */,
-				3B481A5C2B1DDEF100C1A4B2 /* Kingfisher */,
 			);
 			productName = "TMDB App";
 			productReference = 3B66FEC929FAD14000D26C76 /* TMDB App.app */;
@@ -419,7 +419,6 @@
 			packageReferences = (
 				3B66FEE729FAD35300D26C76 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A560C8392A30B69200B91411 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
-				3B481A5B2B1DDEF100C1A4B2 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 3B66FECA29FAD14000D26C76 /* Products */;
 			projectDirPath = "";
@@ -493,6 +492,7 @@
 				3B77ABFC2B0E232400357FDF /* CastCollectionViewCell.swift in Sources */,
 				3B940D162BCD78870080AFB1 /* FoundMoviesJSON.swift in Sources */,
 				3BE328152B0F5F620054BB14 /* CastsJson.swift in Sources */,
+				3BE1A5912C05D61C00F98298 /* InitialViewController.swift in Sources */,
 				3B66FECD29FAD14000D26C76 /* AppDelegate.swift in Sources */,
 				3BB818A42AD84DEF006C689E /* RateScreenViewController.swift in Sources */,
 				3B9E1F9B2BE5590B0096B9DF /* RatedMoviesViewController.swift in Sources */,
@@ -716,14 +716,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3B481A5B2B1DDEF100C1A4B2 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.10.0;
-			};
-		};
 		3B66FEE729FAD35300D26C76 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -743,11 +735,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3B481A5C2B1DDEF100C1A4B2 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3B481A5B2B1DDEF100C1A4B2 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
 		3B66FEE829FAD35300D26C76 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3B66FEE729FAD35300D26C76 /* XCRemoteSwiftPackageReference "Alamofire" */;

@@ -47,7 +47,7 @@ extension FoundMoviesCollectionViewController: UICollectionViewDelegate, UIColle
         cell.spinner.startAnimating()
        
         ImageManager.getImageForPosterName(posterName) { image in
-                cell.cellImage.image = image ?? UIImage(named: "AppIcon")
+                cell.cellImage.image = image ?? UIImage(named: "question_mark")
             
         }
        
@@ -73,7 +73,7 @@ extension FoundMoviesCollectionViewController: UICollectionViewDelegate, UIColle
         
         ImageManager.getImageForPosterName(posterName, completion: {
             image in
-            foundCell.cellImage.image = image ?? UIImage(named: "AppIcon")
+            foundCell.cellImage.image = image ?? UIImage(named: "question_mark")
         })
     }
 }

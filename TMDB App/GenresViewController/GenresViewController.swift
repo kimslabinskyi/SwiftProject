@@ -101,7 +101,7 @@ class GenresViewController: UIViewController {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imageView.contentMode = .scaleAspectFit
         imageView.isLoading = true
-        imageView.image = (UIImage(named: "AppIcon"))
+        imageView.image = (UIImage(named: "question_mark"))
         
         
         if let accountInfo = NetworkManager.shared.accountInfo {
@@ -185,6 +185,9 @@ class GenresViewController: UIViewController {
                     print("success")
                     destinationVC.receivedFavouriteValue = true
                 }
+                if WatchlistData.shared.watchlistData.contains(selectedTrendingMovie?.id ?? 0){
+                    destinationVC.receivedWatchlistValue = true
+                }
                 
             }
                          
@@ -196,6 +199,9 @@ class GenresViewController: UIViewController {
                 if ListOfFavouritesMovies.shared.listOfFavouritesMovies.contains(selectedTopRatedMovie?.id ?? 0){
                     destinationVC.receivedFavouriteValue = true
                 }
+                if WatchlistData.shared.watchlistData.contains(selectedTopRatedMovie?.id ?? 0){
+                    destinationVC.receivedWatchlistValue = true
+                }
                 
             }
             
@@ -206,6 +212,9 @@ class GenresViewController: UIViewController {
                 
                 if ListOfFavouritesMovies.shared.listOfFavouritesMovies.contains(selectedUpcomingMovie?.id ?? 0){
                     destinationVC.receivedFavouriteValue = true
+                }
+                if WatchlistData.shared.watchlistData.contains(selectedUpcomingMovie?.id ?? 0){
+                    destinationVC.receivedWatchlistValue = true
                 }
             }
         } else if segue.identifier == "moreTrending" {
@@ -271,7 +280,7 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             print("dataSourceTrendingMovies = \(dataSourceTrendingMovies[indexPath.row].title)")
             
             ImageManager.getImageForPosterName(posterName, completion: { image in
-                cell.trendingImage.image = image ?? UIImage(named: "AppIcon")
+                cell.trendingImage.image = image ?? UIImage(named: "question_mark")
             })
             
             func makePrint(){
@@ -290,7 +299,7 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             cell.topRatedLabel.text = dataSourceTopRatedMovies[indexPath.row].title
             
             ImageManager.getImageForPosterName(posterName, completion: { image in
-                cell.topRatedImage.image = image ?? UIImage(named: "AppIcon")
+                cell.topRatedImage.image = image ?? UIImage(named: "question_mark")
             })
             
             return cell
@@ -317,7 +326,7 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             cell.upcomingLabel.text = dataSourceUpcomingMovies[indexPath.row].title
             
             ImageManager.getImageForPosterName(posterName, completion: { image in
-                cell.upcomingImage.image = image ?? UIImage(named: "AppIcon")
+                cell.upcomingImage.image = image ?? UIImage(named: "question_mark")
             })
             
             return cell
@@ -331,7 +340,7 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
         if collectionView == dualCollectionView{
             mainDetailMovie = "trendingMovie"
             selectedTrendingMovie = dataSourceTrendingMovies[indexPath.row]
@@ -361,7 +370,7 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         trendingCell.trendingLabel.text = dataSourceTrendingMovies[indexPath.row].title
         
         ImageManager.getImageForPosterName(posterName, completion: { image in
-            trendingCell.trendingImage.image = image ?? UIImage(named: "AppIcon")
+            trendingCell.trendingImage.image = image ?? UIImage(named: "question_mark")
         })
     }
     
@@ -378,6 +387,8 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedMovieType = "moreGenres"
+        tableView.deselectRow(at: indexPath, animated: true)
+
         
         if indexPath.row == 0{
             selectedGenre = "Action"

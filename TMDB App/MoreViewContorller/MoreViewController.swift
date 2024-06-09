@@ -132,13 +132,7 @@ class MoreViewController: UIViewController {
         
     }
     
-//    @objc func buttonTapped() {
-//        // Блок кода, который выполнится через 2 секунды после нажатия на кнопку
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//            // Ваш код здесь
-//            print("Кнопка была нажата с задержкой в 2 секунды.")
-//        }
-//    }
+
     
     private func fetchMoreTrendingMovies() {
         NetworkManager.shared.getTrendingMovies(page: page, language: SelectedRegion.shared.region) {
@@ -275,8 +269,8 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.moreLabel.text = dataSourceTrendingMovies[indexPath.row].originalTitle
             cell.spinner.startAnimating()
             
-            ImageManager.getImageForPosterName(posterName) { image in
-                cell.moreImageView.image = image ?? UIImage(named: "AppIcon")}
+//            ImageManager.getImageForPosterName(posterName) { image in
+//                cell.moreImageView.image = image ?? UIImage(named: "question_mark")}
             return cell
             
         } else if movieType == "topRated" {
@@ -297,13 +291,11 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //            let posterName = dataSourceUpcomingMovies[indexPath.row].posterPath!
             
             if let posterPath = dataSourceUpcomingMovies[indexPath.row].posterPath {
-                // Используйте posterPath, так как он не равен nil
                 ImageManager.getImageForPosterName(posterPath) { image in
-                    cell.moreImageView.image = image ?? UIImage(named: "AppIcon")
+                    cell.moreImageView.image = image ?? UIImage(named: "question_mark")
                 }
             } else {
-                // Поставьте дефолтную картинку, так как posterPath равен nil
-                cell.moreImageView.image = UIImage(named: "AppIcon")
+                cell.moreImageView.image = UIImage(named: "question_mark")
             }
             
             cell.moreImageView.image = nil
@@ -367,7 +359,7 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             
             let optionalPosterName = dataSourceTrendingMovies[indexPath.row].posterPath
-            let posterName = optionalPosterName ?? ""
+            let posterName = optionalPosterName
             
             moreCell.moreImageView.image = nil
             moreCell.moreLabel.text = dataSourceTrendingMovies[indexPath.row].title
@@ -381,13 +373,13 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             
             let optionalPosterName = dataSourceTopRatedMovies[indexPath.row].posterPath
-            let posterName = optionalPosterName ?? ""
+            let posterName = optionalPosterName 
             
             moreCell.moreImageView.image = nil
             moreCell.moreLabel.text = dataSourceTopRatedMovies[indexPath.row].title
             
             ImageManager.getImageForPosterName(posterName, completion: { image in
-                moreCell.moreImageView.image = image ?? UIImage(named: "AppIcon")
+                moreCell.moreImageView.image = image ?? UIImage(named: "question_mark")
             })
         } else if movieType == "Upcoming" {
             
@@ -402,7 +394,7 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             moreCell.moreLabel.text = dataSourceUpcomingMovies[indexPath.row].title
             
             ImageManager.getImageForPosterName(posterName, completion: { image in
-                moreCell.moreImageView.image = image ?? UIImage(named: "AppIcon")
+                moreCell.moreImageView.image = image ?? UIImage(named: "question_mark")
             })
         } else if movieType == "moreGenres"{
             
@@ -417,7 +409,7 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             moreCell.moreLabel.text = GenresDataSource[indexPath.row].title
             
             ImageManager.getImageForPosterName(posterName, completion: { image in
-                moreCell.moreImageView.image = image ?? UIImage(named: "AppIcon")
+                moreCell.moreImageView.image = image ?? UIImage(named: "question_mark")
             })
             
         }

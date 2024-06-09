@@ -25,13 +25,6 @@ class AccountInfoViewController: UIViewController{
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? WatchlistViewController{
-
-        }
-
-    }
-    
     
     @IBAction func watchlistButton(_ sender: Any) {
         

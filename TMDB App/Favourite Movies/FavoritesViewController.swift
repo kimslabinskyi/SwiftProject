@@ -14,36 +14,38 @@ class FavoritesViewController: UIViewController{
     
     var dataSource: [FavouriteMovie] = []
     var selectedFavouriteMovie: FavouriteMovie?
+    let currentPage = 1
+
     
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         setUp()
-        ListOfFavouritesMovies.shared.getList()
-        
+        collectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        ListOfFavouritesMovies.shared.getList()
-        collectionView.reloadData()
-        setUp()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+            ListOfFavouritesMovies.shared.getList()
+            self.setUp()
+            self.collectionView.reloadData()
+            
+            if self.dataSource.isEmpty{
+                self.showAlert()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         collectionView.reloadData()
     }
     
-   
-    
-
-    
     
     
     func setUp(){
-        NetworkManager.shared.getFavoriteMovies { [weak self] movieResponse, arg  in
+        NetworkManager.shared.getFavoriteMovies() { [weak self] movieResponse, arg  in
             guard let self = self else { return }
             
             if let movieResponse = movieResponse {
@@ -53,6 +55,12 @@ class FavoritesViewController: UIViewController{
         }
     }
     
+    func showAlert(){
+        let alertController = UIAlertController(title: "Your list is empty", message: "You can add any movie to your favourites list! ", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -78,25 +86,27 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MoviesCollectionViewCell
         cell.spiner.startAnimating()
-        let posterName = dataSource[indexPath.row].posterPath 
+        let posterName = dataSource[indexPath.row].posterPath
         
         cell.movieImageView.image = nil
-
+        
         ImageManager.getImageForPosterName(posterName, completion: {
             image in
-            cell.movieImageView.image = image ?? UIImage(named: "AppIcon")
+            cell.movieImageView.image = image ?? UIImage(named: "question_mark")
         })
         
-
+        
         
         cell.movieLabel.text = dataSource[indexPath.row].title
         return cell
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedFavouriteMovie = dataSource[indexPath.row]
         performSegue(withIdentifier: SegueId.detailFavouriteMovieInfoSegue, sender: nil)
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? FoundMovieCollectionViewCell else {
@@ -110,8 +120,9 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.cellLabel.text = ListOfFavouritesMovies.shared.dataSourceFavouritesMovies[indexPath.row].title
         
         ImageManager.getImageForPosterName(posterName, completion: { image in
-            cell.cellImage.image = image ?? UIImage(named: "AppIcon") })
+            cell.cellImage.image = image ?? UIImage(named: "question_mark") })
     }
+    
 }
 
 extension FavoritesViewController: UICollectionViewDelegateFlowLayout {

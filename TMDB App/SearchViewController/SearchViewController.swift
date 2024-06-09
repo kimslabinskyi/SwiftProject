@@ -35,16 +35,6 @@ extension SearchViewController: UITextFieldDelegate {
         
         
         if let text = textField.text {
-            
-//            NetworkManager.shared.searchMovies(query: text) {  in
-//                if let error = error {
-//                    print("Error: \(error.localizedDescription)")
-//                } else if let response = response {
-//                    print("Response: \(response)")
-//                    self.useSegue()
-//                }
-//                
-//            }
             NetworkManager.shared.searchMovies(query: text) {
                 
                 [weak self] foundMoviesResponse in
@@ -67,5 +57,11 @@ extension SearchViewController: UITextFieldDelegate {
         
         textField.resignFirstResponder()
         return true
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.view.endEditing(true)
     }
 }
