@@ -22,9 +22,10 @@ class AccountInfoViewController: UIViewController{
         WatchlistData.shared.getData()
         RatedMoviesData.shared.getData(page: 1) 
         
-        
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        RatedMoviesData.shared.getData(page: 1)
+    }
     
     @IBAction func watchlistButton(_ sender: Any) {
         

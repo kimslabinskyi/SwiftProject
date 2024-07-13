@@ -11,21 +11,12 @@ class RatedMoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        previousPageButton.isHidden = true
-        previousPageButton.addTarget(self, action: #selector(previousPageButtonTapped), for: .touchUpInside)
-        nextPageButton.addTarget(self, action: #selector(nextPageButtonTapped), for: .touchUpInside)
-        tableView.showsVerticalScrollIndicator = false
-        
-        if WatchlistData.shared.watchlistMoviesDataSource.isEmpty{
-            let alertController = UIAlertController(title: "Your list is empty", message: "You can add rating to any movie!", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in }
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
+       setUp()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        WatchlistData.shared.getData()
+       // WatchlistData.shared.getData()
+        RatedMoviesData.shared.getData(page: 1)
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -41,6 +32,8 @@ class RatedMoviesViewController: UIViewController {
         
     }
     
+
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueId.changeRatingSegue{
             if let destinationVC = segue.destination as? RateScreenViewController{
@@ -50,6 +43,21 @@ class RatedMoviesViewController: UIViewController {
                 destinationVC.receivedLabel = selectedMovie?.title
             }
         }
+    }
+    
+    func setUp(){
+        previousPageButton.isHidden = true
+        previousPageButton.addTarget(self, action: #selector(previousPageButtonTapped), for: .touchUpInside)
+        nextPageButton.addTarget(self, action: #selector(nextPageButtonTapped), for: .touchUpInside)
+        tableView.showsVerticalScrollIndicator = false
+        
+        if WatchlistData.shared.watchlistMoviesDataSource.isEmpty{
+            let alertController = UIAlertController(title: "Your list is empty", message: "You can add rating to any movie!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -184,5 +192,28 @@ extension RatedMoviesViewController: UITableViewDelegate, UITableViewDataSource{
         100
     }
     
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            let movieId = RatedMoviesData.shared.dataSourceRatedMovies[indexPath.row].id
+
+            RatedMoviesData.shared.dataSourceRatedMovies.remove(at: indexPath.row)
+            NetworkManager.shared.deleteRatedMovie(movieID: movieId) { result in
+                switch result {
+                case .success (let response):
+                    print(response.statusCode)
+                    print(response.statusMessage)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.reloadData()
+            self.tableView.endUpdates()
+        }
+    }
     
 }

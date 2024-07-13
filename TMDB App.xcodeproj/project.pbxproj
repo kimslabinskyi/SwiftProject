@@ -50,6 +50,7 @@
 		3BB31E4D2A59AD6F0071D4EF /* imageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB31E4C2A59AD6E0071D4EF /* imageLoader.swift */; };
 		3BB4DDA72A3106F9003FACA5 /* UIImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB4DDA62A3106F9003FACA5 /* UIImageManager.swift */; };
 		3BB818A42AD84DEF006C689E /* RateScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB818A32AD84DEF006C689E /* RateScreenViewController.swift */; };
+		3BCC8BFB2C301361009A7248 /* DeleteRatingResponse .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCC8BFA2C301361009A7248 /* DeleteRatingResponse .swift */; };
 		3BCD569D2A27D10100495460 /* TrendingMoviesJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD569C2A27D10100495460 /* TrendingMoviesJSON.swift */; };
 		3BCD569F2A28C2B300495460 /* DetailGenresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD569E2A28C2B300495460 /* DetailGenresViewController.swift */; };
 		3BCD56A12A28C54500495460 /* TrendingMoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD56A02A28C54500495460 /* TrendingMoviesCollectionViewCell.swift */; };
@@ -109,6 +110,7 @@
 		3BB31E4C2A59AD6E0071D4EF /* imageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageLoader.swift; sourceTree = "<group>"; };
 		3BB4DDA62A3106F9003FACA5 /* UIImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageManager.swift; sourceTree = "<group>"; };
 		3BB818A32AD84DEF006C689E /* RateScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateScreenViewController.swift; sourceTree = "<group>"; };
+		3BCC8BFA2C301361009A7248 /* DeleteRatingResponse .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeleteRatingResponse .swift"; sourceTree = "<group>"; };
 		3BCD569C2A27D10100495460 /* TrendingMoviesJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMoviesJSON.swift; sourceTree = "<group>"; };
 		3BCD569E2A28C2B300495460 /* DetailGenresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGenresViewController.swift; sourceTree = "<group>"; };
 		3BCD56A02A28C54500495460 /* TrendingMoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMoviesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				3B9E1F9D2BE559BE0096B9DF /* RatedMoviesData.swift */,
 				3B9E1F982BE54B150096B9DF /* RatedMoviesJSON.swift */,
 				3B9E1F9F2BE7891C0096B9DF /* RatedMoviesTableViewCell.swift */,
+				3BCC8BFA2C301361009A7248 /* DeleteRatingResponse .swift */,
 			);
 			path = RatedMovies;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				3B66FEE129FAD1E300D26C76 /* NetworkManager.swift in Sources */,
 				3B66D71F2A002F02008EEA8A /* FavoritesViewController.swift in Sources */,
 				3BE93E322A81FA8500DD9939 /* ListOfGenresViewController.swift in Sources */,
+				3BCC8BFB2C301361009A7248 /* DeleteRatingResponse .swift in Sources */,
 				3BCD56A12A28C54500495460 /* TrendingMoviesCollectionViewCell.swift in Sources */,
 				3B77BEDB2A10CC12001F4E9F /* MoviesCollectionViewCell.swift in Sources */,
 				3B2264F62B2867D900103FD3 /* DetailGenresTableViewCell.swift in Sources */,

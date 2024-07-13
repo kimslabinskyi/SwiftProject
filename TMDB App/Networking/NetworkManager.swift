@@ -644,4 +644,28 @@ class NetworkManager {
     }
     
     
+    func deleteRatedMovie(movieID: Int, completion: @escaping (Result<DeleteRatingResponse, Error>) -> Void) {
+        let url = "https://api.themoviedb.org/3/movie/\(movieID)/rating"
+        let apiKey = apiKey
+        
+        let parameters: [String: Any] = [
+            "api_key": apiKey,
+            "session_id": sessionID ?? ""
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json;charset=utf-8"
+        ]
+        
+        AF.request(url, method: .delete, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
+            .responseDecodable(of: DeleteRatingResponse.self) { response in
+                switch response.result {
+                case .success(let deleteRatingResponse):
+                    completion(.success(deleteRatingResponse))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+    
 }

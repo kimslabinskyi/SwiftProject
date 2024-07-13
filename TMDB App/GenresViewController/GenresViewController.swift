@@ -96,6 +96,7 @@ class GenresViewController: UIViewController {
         topRatedCollectionView.showsHorizontalScrollIndicator = false
         upcomingCollectionView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
+        genresTableView.showsVerticalScrollIndicator = false
 
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
