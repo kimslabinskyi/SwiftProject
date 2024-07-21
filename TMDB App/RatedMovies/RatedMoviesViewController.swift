@@ -16,13 +16,21 @@ class RatedMoviesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
        // WatchlistData.shared.getData()
-        RatedMoviesData.shared.getData(page: 1)
-        
-        DispatchQueue.main.async {
+//        RatedMoviesData.shared.getData(page: 1)
+//        
+//        DispatchQueue.main.async {
+//            self.tableView.reloadData()
+//        }
+//        if RatedMoviesData.shared.dataSourceRatedMovies.count < 20 {
+//            nextPageButton.isHidden = true
+//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+            RatedMoviesData.shared.getData(page: 1)
             self.tableView.reloadData()
-        }
-        if RatedMoviesData.shared.dataSourceRatedMovies.count < 20 {
-            nextPageButton.isHidden = true
+            
+            if RatedMoviesData.shared.dataSourceRatedMovies.count < 20{
+                self.nextPageButton.isHidden = true
+            }
         }
     }
     

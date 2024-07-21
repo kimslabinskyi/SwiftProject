@@ -185,7 +185,8 @@ class DetailGenresViewController: UIViewController {
                 for actor in castResponse.cast {
                     self.castImages.append(actor.profilePath ?? "Empty")
                     if let profilePath = actor.profilePath {
-//                        let compressedImageUrl = self.compressImageBaseUrl(imagePath: profilePath, width: 200)
+
+
                         self.castNames.append(actor.name ?? "Empty")
                         self.characterNames.append(actor.character ?? "Empty")
                         

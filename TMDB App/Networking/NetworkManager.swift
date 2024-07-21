@@ -446,40 +446,46 @@ class NetworkManager {
         let baseUrl = "https://api.themoviedb.org/3"
         let endpoint = "/movie/\(movieID)/rating"
         
-        var components = URLComponents(string: baseUrl + endpoint)
-        components?.queryItems = [
-            URLQueryItem(name: "api_key", value: apiKey),
-            URLQueryItem(name: "session_id", value: sessionID),
-            URLQueryItem(name: "value", value: String(ratingValue))
+        let urlString = "\(baseUrl)\(endpoint)?api_key=\(apiKey)&session_id=\(sessionID)"
+        
+        guard let url = URL(string: urlString) else {
+            completion(false)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json;charset=utf-8", forHTTPHeaderField: "Content-Type")
+        
+        let parameters: [String: Any] = [
+            "value": ratingValue
         ]
         
-        if let url = components?.url {
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            
-            AF.request(request).response { response in
-                switch response.result {
-                case .success(_):
-                    if let statusCode = response.response?.statusCode, statusCode == 201 {
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                    
-                case .failure(_):
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+        } catch {
+            completion(false)
+            return
+        }
+        
+        AF.request(request).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                if let json = value as? [String: Any], let statusCode = json["status_code"] as? Int, statusCode == 1 {
+                    completion(true)
+                } else {
                     completion(false)
                 }
+            case .failure:
+                completion(false)
             }
-            
-            print(request)
         }
     }
     
     
     func markAsFavourite(movieId: String, value: Bool) {
         let accountId = accountInfo!.id
-        let url = "https://api.themoviedb.org/3/account//(accountId)/favorite?api_key=15ec7b54d43e199ced41a6e461173cee&session_id=\(sessionID!)"
+        let url = "https://api.themoviedb.org/3/account/\(accountId)/favorite?api_key=15ec7b54d43e199ced41a6e461173cee&session_id=\(sessionID!)"
         
         let parameters: [String: Any] = [
             "media_type": "movie",
