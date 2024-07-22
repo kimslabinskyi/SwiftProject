@@ -95,6 +95,9 @@ class DetailGenresViewController: UIViewController {
         voteAverageLabel.text = voteAverage
         voteCountLabel.text = voteCount
         releaseDateLabel.text = detailedMovie?.releaseDateString
+        descriptionOfMovie.showsVerticalScrollIndicator = false
+        descriptionOfMovie.isEditable = false
+        descriptionOfMovie.isScrollEnabled = false
         collectionView.showsHorizontalScrollIndicator = false
         
         favouritesButton.titleLabel?.textColor = .white
@@ -111,18 +114,13 @@ class DetailGenresViewController: UIViewController {
                 genresInfo.append(genreName)
             }
         }
-
-        
         
         if let url = detailedMovie?.imageURL {
-            
             NetworkManager.shared.loadImageUsingAlamofire(from: url) { image in
-                
                 self.backdrop.image = image
             }
         }
         
-
         if let dataToPass = detailedMovie?.posterURL {
             self.posterURLToPass = dataToPass
         }
@@ -175,34 +173,33 @@ class DetailGenresViewController: UIViewController {
     
 
     
-    
     func getMovieCast() {
-        NetworkManager.shared.getMovieCast(movieId: String(detailedMovie?.moviesIDS ?? 2)) { result in
-            switch result {
-            case .success(let castResponse):
-                print("Count  of casts = \(castResponse.cast.count)")
-                
-                for actor in castResponse.cast {
-                    self.castImages.append(actor.profilePath ?? "Empty")
-                    if let profilePath = actor.profilePath {
+            NetworkManager.shared.getMovieCast(movieId: String(detailedMovie?.moviesIDS ?? 2)) { result in
+                switch result {
+                case .success(let castResponse):
+                    print("Count of casts = \(castResponse.cast.count)")
 
-
+                    let numberOfElementsToAdd = min(6 - self.castNames.count, castResponse.cast.count)
+                    
+                    for i in 0..<numberOfElementsToAdd {
+                        let actor = castResponse.cast[i]
+                        self.castImages.append(actor.profilePath ?? "Empty")
                         self.castNames.append(actor.name ?? "Empty")
                         self.characterNames.append(actor.character ?? "Empty")
-                        
-                        
                     }
-                    print("name \(self.castNames) castImages =\(self.castImages)")
+                    
+                    if self.castNames.count == 6 {
+                        self.collectionView.reloadData()
+                    }
+                    
+                case .failure(let error):
+                    print("Error fetching movie cast: \(error)")
                 }
-
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            case .failure(let error):
-                print("Error: \(error)")
             }
+            
+            
+            
         }
-    }
     
    
     
@@ -320,7 +317,7 @@ extension DetailGenresViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CastCell", for: indexPath) as! CastCollectionViewCell
-
+        cell.imageView.image = UIImage(named: "question_mark")
         
         if indexPath.item < castNames.count{
             cell.nameOfActorLabel.text = castNames[indexPath.item]
@@ -335,8 +332,7 @@ extension DetailGenresViewController: UICollectionViewDelegate, UICollectionView
             let imageUrl = castImages[indexPath.item]
 
             if imageUrl != "Empty" {
-                //let url = URL(string: "https://image.tmdb.org/t/p/w200" + imageUrl)
-               // cell.imageView.kf.setImage(with: url)
+            
                 ImageManager.getImageForPosterName("https://image.tmdb.org/t/p/w200" + imageUrl) { image in
                     cell.imageView.image = image ?? UIImage(named: "question_mark")}
             } else {
@@ -348,6 +344,9 @@ extension DetailGenresViewController: UICollectionViewDelegate, UICollectionView
         
         return cell
     }
+    
+
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }

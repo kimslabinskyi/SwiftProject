@@ -53,14 +53,16 @@ class ImageManager {
         
         let urlRequest = URLRequest(url: url)
 
-        imageDownloader.download(urlRequest) { response in
+        imageDownloader.download(urlRequest, completion:  { response in
             if case .success(let image) = response.result {
                 completion(image)
                 return
             }
-            // Error
+            
             completion(nil)
-        }
+        })
+        
+        
     }
 
     
