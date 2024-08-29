@@ -5,7 +5,7 @@
 //  Created by KIm on 27.04.2023.
 //
 
-import UIKit
+import UIKit //
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
