@@ -118,12 +118,12 @@ class GenresViewController: UIViewController {
     func updateTabBarColors(){
         
         if traitCollection.userInterfaceStyle == .dark {
-                    self.tabBarController?.tabBar.tintColor = UIColor.systemMint
-                    self.tabBarController?.tabBar.barTintColor = UIColor.black
-                } else {
-                    self.tabBarController?.tabBar.tintColor = UIColor.systemMint
-                    self.tabBarController?.tabBar.barTintColor = UIColor.white
-                }
+            self.tabBarController?.tabBar.tintColor = UIColor.systemMint
+            self.tabBarController?.tabBar.barTintColor = UIColor.black
+        } else {
+            self.tabBarController?.tabBar.tintColor = UIColor.systemMint
+            self.tabBarController?.tabBar.barTintColor = UIColor.white
+        }
         
     }
     
@@ -410,7 +410,7 @@ extension GenresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
-    }
+    } 
     
 }
 
